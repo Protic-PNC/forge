@@ -143,18 +143,18 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   1. **Variabel Substitusi** (`{{NAMA_VARIABEL}}`): Ganti langsung dengan nilai yang sudah didapatkan dari wawancara Tahap 1-4. Contoh: `{{PROJECT_NAME}}` → "Manajemen Protik".
   2. **Blok Generasi Dinamis** (`<!-- GENERATION_DIRECTIVE: ... -->`): Bagian ini TIDAK BOLEH di-copy-paste. AI harus **MENULIS SENDIRI** isinya berdasarkan keputusan developer. Blok ini berisi instruksi struktur yang harus diikuti, tapi kontennya ditulis secara cerdas oleh AI. Contoh: Bagian MCP Policy di `MASTER_RULES.md` — karena kombinasi MCP terlalu variatif untuk satu variabel.
 
-- **Urutan Injeksi:**
-  1. Cetak `DEVELOPMENT_ROADMAP.md` (Hasil Tahap 2). Tunggu izin.
-  2. Cetak `MASTER_RULES.md` (termasuk menulis bagian MCP Policy dari Generation Directive). Tunggu izin.
-  3. Cetak `ARCHITECTURE.md`. Tunggu izin.
-  4. Cetak `GIT_WORKFLOW.md`. Tunggu izin.
-  5. Cetak `mcp_config.json` (Konfigurasi MCP berdasarkan keputusan Fase 4.1). Tunggu izin.
-  6. Cetak `ONBOARDING.md` (Instruksi setup manual Token & MCP pihak ketiga berdasarkan keputusan Fase 4.4). Tunggu izin.
-  7. Cetak file `skills/project-edeate/SKILL.md`. Tunggu izin.
-  8. Cetak file `skills/project-grill-me/SKILL.md`. Tunggu izin.
-  9. Cetak file `skills/project-plan/SKILL.md`. Tunggu izin.
-  10. Cetak file `skills/project-tdd/SKILL.md`. Tunggu izin.
-  11. Cetak file `skills/project-execute/SKILL.md`. Tunggu izin.
-  12. Cetak file `skills/project-audit/SKILL.md`. Tunggu izin.
-  13. Cetak file `skills/project-debug/SKILL.md`. Tunggu izin.
+- **Urutan Injeksi (Pastikan path menggunakan standar Antigravity Workspace Customizations):**
+  1. Cetak `DEVELOPMENT_ROADMAP.md` (di *root* proyek). Tunggu izin.
+  2. Cetak `.agents/rules/MASTER_RULES.md`. Tunggu izin.
+  3. Cetak `.agents/rules/ARCHITECTURE.md`. Tunggu izin.
+  4. Cetak `.agents/rules/GIT_WORKFLOW.md`. Tunggu izin.
+  5. Cetak `.agents/mcp_config.json`. Tunggu izin.
+  6. Cetak `ONBOARDING.md` (di *root* proyek). Tunggu izin.
+  7. Cetak file `.agents/skills/project-edeate/SKILL.md`. Tunggu izin.
+  8. Cetak file `.agents/skills/project-grill-me/SKILL.md`. Tunggu izin.
+  9. Cetak file `.agents/skills/project-plan/SKILL.md`. Tunggu izin.
+  10. Cetak file `.agents/skills/project-tdd/SKILL.md`. Tunggu izin.
+  11. Cetak file `.agents/skills/project-execute/SKILL.md`. Tunggu izin.
+  12. Cetak file `.agents/skills/project-audit/SKILL.md`. Tunggu izin.
+  13. Cetak file `.agents/skills/project-debug/SKILL.md`. Tunggu izin.
 
