@@ -132,7 +132,11 @@ description: >-
 
 Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
 
-- **Aturan Injeksi:** AI TIDAK BOLEH mencetak semua file sekaligus. AI harus membaca file dari direktori `blueprints/` global, menyuntikkan variabel domain, dan mencetak **SATU FILE PER RESPONS** ke repositori lokal.
+- **Aturan Injeksi & Analisis Celah (Gap Analysis):** 
+  1. AI TIDAK BOLEH mencetak semua file sekaligus. AI harus membaca template, menyuntikkan variabel, dan mencetak **SATU FILE PER RESPONS** ke repositori lokal.
+  2. **Wawancara Celah Keputusan (Micro-Decisions):** Di setiap *loop* sebelum mencetak sebuah file, AI **WAJIB** mengevaluasi: *"Apakah ada informasi teknis mikro yang belum saya ketahui untuk merender file ini dengan spesifik?"*
+  3. Jika ada celah (contoh: belum tahu UI Component Library yang digunakan, atau Testing Framework spesifik antara Jest vs Vitest), Anda **DILARANG** mencetak file tersebut. Anda wajib melakukan wawancara singkat terlebih dahulu dengan memberikan opsi dan rekomendasi *best-practice* (misal: merekomendasikan `shadcn/ui` atau `Vitest`).
+  4. Anda baru boleh mencetak file tersebut setelah developer menjawab pertanyaan wawancara celah informasi Anda.
 
 - **Dua Jenis Konten di Template:**
   AI harus memahami bahwa template berisi 2 jenis instruksi:
