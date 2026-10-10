@@ -152,13 +152,14 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
 - **Protokol Standar Enterprise (Hak Veto Batasan):**
   Jika Anda menemukan "Catatan Injektor" di dalam template yang menyuruh Anda membatasi kuota jumlah poin/isu (misalnya *"Isi dengan 4-5 poin"*), Anda **WAJIB MENGABAIKAN BATASAN ANGKA TERSEBUT**. Anda memiliki Hak Veto untuk menerobos batasan sempit tersebut demi merender poin evaluasi arsitektur secara ekstensif, komprehensif, dan tanpa batas kuota agar memenuhi standar mutu *Enterprise*.
 
-- **Protokol Matriks Enterprise Mutlak (The Enterprise Matrix Protocol):**
-  Setiap kali Anda (AI) diinstruksikan oleh *Catatan Injektor* untuk menghasilkan poin evaluasi, standar kode, skenario pengujian, aturan pre-flight audit, atau pertanyaan interogasi arsitektur, Anda **DILARANG KERAS** memikirkannya secara acak atau dangkal. Anda **WAJIB MUTLAK** membedah dan menghasilkan poin yang merata di dalam **4 Dimensi Enterprise** berikut:
-  1. **Dimensi Kebersihan Struktur & Maintainability:** (Wajib mencakup: *Separation of Concerns*, pelacakan kode yatim/*dead code*, pemecahan komponen raksasa/anti *God-Component*, dan ekstraksi *magic strings*).
-  2. **Dimensi Keamanan & Integritas Data:** (Wajib mencakup: proteksi *bypass* otorisasi, validasi skema/payload mutasi, dan resiliensi transaksi database).
-  3. **Dimensi Performa & Skalabilitas:** (Wajib mencakup: pencegahan *N+1 Query*, mitigasi kebocoran memori/*memory bloat*, optimasi *render* React Server Components, dan strategi *caching*).
-  4. **Dimensi UX & Stabilitas Aplikasi:** (Wajib mencakup: *Graceful Degradation* (loading/error boundary), pencegahan layar putih, *Core Web Vitals* (CLS aset), dan kepatuhan *Accessibility*/A11y).
-  Anda wajib memastikan *output* poin/aturan Anda berlimpah (minimal 10-15 poin), sangat brutal/teknis, dan tidak ada satu pun dari 4 dimensi di atas yang terlewatkan.
+- **Protokol Matriks Enterprise Mutlak (The 5 Enterprise Matrix Protocol):**
+  Setiap kali Anda (AI) merancang solusi, merumuskan arsitektur, merespons interogasi `/grill-me`, menghasilkan standar kode, atau mendesain poin evaluasi, Anda **DILARANG KERAS** memberikan rekomendasi dangkal atau yang sekadar "bisa berjalan" (*just works*). Anda **WAJIB MUTLAK** membedah, menganalisis, dan memaksakan standar yang merata di dalam **5 Dimensi Enterprise** berikut:
+  1. **Dimensi Bisnis & Arsitektur Skala Besar (Sistem):** (Wajib mencakup: *Soft Delete vs Hard Delete* untuk integritas riwayat, *Audit Trails*/Log Kepatuhan untuk mutasi sensitif, perlindungan *Race Conditions*/*Concurrency Control*, mitigasi *Abuse*/*Rate Limiting*, dan *Observability/Error Tracing* sentral).
+  2. **Dimensi Kebersihan Struktur & Maintainability:** (Wajib mencakup: *Separation of Concerns*, pelacakan kode yatim/*dead code*, pemecahan komponen raksasa/anti *God-Component*, dan ekstraksi *magic strings*).
+  3. **Dimensi Keamanan & Integritas Data:** (Wajib mencakup: proteksi *bypass* otorisasi terpusat, validasi ketat skema/payload mutasi dari *Client*, dan jaminan resiliensi mutasi berganda via *Database Transactions*).
+  4. **Dimensi Performa & Skalabilitas (Runtime):** (Wajib mencakup: pencegahan mutlak *N+1 Query*, mitigasi kebocoran memori/*memory bloat*, dorongan maksimal *React Server Components* ke *leaf*, dan strategi *Cache Invalidation* yang akurat).
+  5. **Dimensi UX & Stabilitas Aplikasi:** (Wajib mencakup: *Graceful Degradation* (loading/error boundary), pencegahan mutlak layar putih (*blank screen*), perlindungan *Core Web Vitals* (cegah CLS), dan kepatuhan *Accessibility*/A11y standar global).
+  Anda wajib memastikan *output* rancangan/aturan Anda berlimpah, sangat brutal secara teknis, dan tidak menoleransi arsitektur level *hobbyist/junior*.
 
 - **Urutan Injeksi (Pastikan path menggunakan standar Antigravity Workspace Customizations):**
   1. Cetak `DEVELOPMENT_ROADMAP.md` (di *root* proyek). Tunggu izin.
