@@ -54,7 +54,9 @@ description: >-
   2. **Spektrum Opsi:** Sajikan 2-3 opsi solusi arsitektur.
   3. **Trade-off Analysis:** Bedah pro-kontra secara objektif dan kontekstual sesuai dengan masalah yang dibahas (jangan paksakan matriks yang tidak relevan).
   4. **Pertanyaan:** Tunggu developer memilih. Lanjut ke poin berikutnya hanya setelah dijawab.
-- **Output Hard File:** Setelah loop selesai, segera cetak dan simpan file fisik `DEVELOPMENT_ROADMAP.md` (Daftar Epik Level 1) ke root direktori proyek. Ingatkan developer bahwa setiap Epik di roadmap ini WAJIB melalui pintu `/edeate`.
+- **Output Hard File:** Setelah loop selesai, segera cetak dan simpan file fisik `DEVELOPMENT_ROADMAP.md` (Daftar Epik Level 1) ke root direktori proyek. 
+  - **Penting (Format Checkbox):** Pastikan setiap sub-poin (fitur) di dalam Epik menggunakan format kotak centang Markdown (`- [ ]`) agar progres pelacakan lebih mudah.
+  - Ingatkan developer bahwa setiap Epik di roadmap ini WAJIB melalui pintu `/edeate`.
 
 ---
 
