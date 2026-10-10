@@ -141,10 +141,13 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
 - **Protokol Wajib Baca Template (Anti-Halusinasi):**
   Sebelum merender dan mencetak sebuah file, AI **DILARANG KERAS** menebak isi struktur file dari ingatannya sendiri. AI **WAJIB** secara eksplisit menggunakan *tools* (seperti `view_file` atau membaca file secara programatik) untuk membaca file `.template.md` yang bersangkutan di dalam direktori `blueprints/` terlebih dahulu. Jika AI langsung mencetak file tanpa membaca *blueprint* aslinya, itu adalah pelanggaran tingkat fatal.
 
-- **Dua Jenis Konten di Template:**
-  AI harus memahami bahwa template berisi 2 jenis instruksi:
-  1. **Variabel Substitusi** (`{{NAMA_VARIABEL}}`): Ganti langsung dengan nilai yang sudah didapatkan dari wawancara Tahap 1-4. Contoh: `{{PROJECT_NAME}}` → "Manajemen Protik".
-  2. **Blok Generasi Dinamis** (`<!-- GENERATION_DIRECTIVE: ... -->`): Bagian ini TIDAK BOLEH di-copy-paste. AI harus **MENULIS SENDIRI** isinya berdasarkan keputusan developer. Blok ini berisi instruksi struktur yang harus diikuti, tapi kontennya ditulis secara cerdas oleh AI. Contoh: Bagian MCP Policy di `MASTER_RULES.md` — karena kombinasi MCP terlalu variatif untuk satu variabel.
+- **Pagar Pembatas Konten (Strict Bounding Box):**
+  AI harus memahami bahwa template *blueprint* terdiri dari 2 zona absolut:
+  1. **Zona Statis & Variabel Substitusi (`{{VAR}}`):** Semua teks Markdown di luar tag direktif generasi **WAJIB DISALIN 100% APA ADANYA**. Anda **DILARANG KERAS** meringkas, merombak, atau memotong hukum statis (seperti protokol *Anti-Strawman*) yang ada di template. Ganti variabel langsung dengan nilai dari Tahap 1-4.
+  2. **Zona Generasi Dinamis** (`<!-- GENERATION_DIRECTIVE: ... -->`): Anda HANYA diizinkan berkreasi dan menyusun kalimat sendiri tepat di area yang diapit oleh tag ini (berdasarkan keputusan developer). Di luar tag ini, bias peringkasan (*summarization bias*) bawaan LLM Anda **HARUS DIMATIKAN**.
+
+- **Protokol Audit Integritas Pascakopi (Self-Correction):**
+  Setelah Anda mencetak sebuah file, lakukan Audit Integritas internal: *"Apakah ada klausa, aturan, tabel spektrum, atau paragraf peringatan dari blueprint asli yang tidak sengaja saya ringkas atau hapus?"* Jika ada narasi asli yang menguap, Anda telah melanggar Konstitusi. Anda **WAJIB** membatalkan hasil tersebut dan mencetak ulang file dengan struktur statis yang 100% utuh.
 
 - **Urutan Injeksi (Pastikan path menggunakan standar Antigravity Workspace Customizations):**
   1. Cetak `DEVELOPMENT_ROADMAP.md` (di *root* proyek). Tunggu izin.
