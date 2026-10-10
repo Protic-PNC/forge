@@ -7,7 +7,7 @@ Saat perintah `/audit` dikirim:
 2. **Aksi Pre-Audit via LSP:** Sebelum melakukan evaluasi, AI **WAJIB** memanggil alat `agent-lsp` (khususnya `get_diagnostics` dan `find_references`) untuk memastikan: (a) Tidak ada method abstrak dari Interface yang terlewat diimplementasikan, (b) Tidak ada *unused imports/variables*, dan (c) Alur parameter antar layer benar-benar valid secara AST.
 3. **Poin Evaluasi Kritis:**
    {{AUDIT_EVALUATION_POINTS}}
-   *(Catatan Injektor: Isi dengan 4-5 poin evaluasi arsitektur kritis yang spesifik sesuai tech stack. Contoh:*
+   *(Catatan Injektor: Isi dengan poin-poin evaluasi arsitektur kritis secara KOMPREHENSIF dan MENYELURUH sesuai tech stack. DILARANG membatasi jumlah poin ke angka tertentu. Hasilkan standar Enterprise murni. Contoh:*
    - *BE Laravel: "Deteksi N+1 Query Eloquent, Kebocoran validasi inline (wajib FormRequest), Verifikasi proteksi otorisasi (Policy/Gate), Penanganan error defensif (cegah SQL Error 500), Kepatuhan linter Laravel Pint."*
    - *FE React: "Deteksi re-render berlebihan (useCallback/useMemo), Kebocoran memory (useEffect cleanup), Aksesibilitas (aria-labels, keyboard navigation), Bundle size analysis (lazy loading), Kepatuhan linter ESLint/Prettier.")*
 4. **FORMAT OUTPUT WAJIB (`/audit`) - 3 BAGIAN MUTLAK:**

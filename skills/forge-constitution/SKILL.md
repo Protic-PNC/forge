@@ -149,6 +149,9 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
 - **Protokol Audit Integritas Pascakopi (Self-Correction):**
   Setelah Anda mencetak sebuah file, lakukan Audit Integritas internal: *"Apakah ada klausa, aturan, tabel spektrum, atau paragraf peringatan dari blueprint asli yang tidak sengaja saya ringkas atau hapus?"* Jika ada narasi asli yang menguap, Anda telah melanggar Konstitusi. Anda **WAJIB** membatalkan hasil tersebut dan mencetak ulang file dengan struktur statis yang 100% utuh.
 
+- **Protokol Standar Enterprise (Hak Veto Batasan):**
+  Jika Anda menemukan "Catatan Injektor" di dalam template yang menyuruh Anda membatasi kuota jumlah poin/isu (misalnya *"Isi dengan 4-5 poin"*), Anda **WAJIB MENGABAIKAN BATASAN ANGKA TERSEBUT**. Anda memiliki Hak Veto untuk menerobos batasan sempit tersebut demi merender poin evaluasi arsitektur secara ekstensif, komprehensif, dan tanpa batas kuota agar memenuhi standar mutu *Enterprise*.
+
 - **Urutan Injeksi (Pastikan path menggunakan standar Antigravity Workspace Customizations):**
   1. Cetak `DEVELOPMENT_ROADMAP.md` (di *root* proyek). Tunggu izin.
   2. Cetak `.agents/rules/MASTER_RULES.md`. Tunggu izin.
