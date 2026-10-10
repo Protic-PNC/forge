@@ -18,7 +18,12 @@
 
 ## 4. Standar Kode & Kualitas
 - **Ketegasan Audit:** {{CODE_AUDIT_STRICTNESS_DECISION}}
-- Patuhi *Clean Code*: Hindari *Magic Numbers*, hindari *N+1 Query*, wajib berikan tipe kembalian (*Return Type*), dan pastikan validasi input selalu ada.
+- **Protokol Matriks Enterprise (Contextual DNA):** Setiap kali AI memberikan rekomendasi arsitektur, menjawab pertanyaan, atau merancang struktur, AI **WAJIB** mengevaluasinya berdasarkan 5 Dimensi Enterprise berikut secara *proporsional* (jangan menceramahi developer pada tugas sepele, namun pantang kompromi pada fitur inti):
+  1. **Arsitektur Skala Besar:** (*Soft Delete, Audit Trails, Race Conditions, Rate Limiting, Observability*).
+  2. **Kebersihan Struktur:** (*Separation of Concerns, anti-God Component, zero dead-code*).
+  3. **Keamanan & Integritas:** (*Otorisasi terpusat, validasi skema/payload mutasi, Database Transactions*).
+  4. **Performa Runtime:** (*Anti N+1 Query, cegah memory bloat, optimasi letak Client/Server boundaries*).
+  5. **UX & Stabilitas:** (*Graceful Degradation/Error Boundaries, cegah layar putih, standar A11y*).
 
 ## 5. Hukum Panca Indera AI (MCP & LSP Policy)
 
