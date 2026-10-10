@@ -33,9 +33,8 @@ Agar AI di komputer Anda mengenali perintah `/forge-constitution`, Anda harus me
 Cukup buka **PowerShell** atau Terminal di VSCode Anda, lalu *copy-paste* perintah sakti ini dan tekan Enter:
 
 ```powershell
-New-Item -ItemType Directory -Force -Path "$HOME\.gemini\config\plugins"; git clone https://github.com/ORGANISASI_ANDA/forge.git "$HOME\.gemini\config\plugins\forge"
+New-Item -ItemType Directory -Force -Path "$HOME\.gemini\config\plugins"; git clone https://github.com/Protic-PNC/forge.git "$HOME\.gemini\config\plugins\forge"
 ```
-*(Catatan: Sesuaikan URL GitHub di atas dengan link repositori Forge kalian).*
 
 ### Cara 2: Manual (Tanpa Coding/Terminal)
 Jika Anda pusing melihat terminal, ikuti langkah *drag-and-drop* ini:
