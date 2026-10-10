@@ -48,7 +48,21 @@ Jika Anda pusing melihat terminal, ikuti langkah *drag-and-drop* ini:
 ---
 **⚠️ LAKUKAN INI SETELAH SELESAI:**
 Tutup (Close) aplikasi IDE Anda sepenuhnya, lalu buka kembali agar sistem membaca "kekuatan" baru yang baru saja Anda pasang.
-l
+
+## 🔄 Pembaruan (Update) Plugin
+Jika ada versi terbaru dari Forge dan Anda ingin memperbaruinya, lakukan langkah ini:
+
+### Cara 1: Lewat Terminal
+Buka PowerShell, lalu jalankan perintah ini untuk menarik (*pull*) pembaruan terbaru dari GitHub:
+```powershell
+Set-Location "$HOME\.gemini\config\plugins\forge"; git pull
+```
+
+### Cara 2: Manual
+1. Hapus folder `forge` lama di dalam `C:\Users\NAMA_USER_KOMPUTER_ANDA\.gemini\config\plugins\`.
+2. Ulangi **Cara 2 (Manual)** pada bagian Instalasi di atas.
+*(Catatan: Jangan lupa *restart* IDE Anda setelah melakukan pembaruan).*
+
 ## ⚙️ Cara Penggunaan (The Injection)
 
 1. Buka proyek/repositori baru Anda (yang masih kosong atau butuh regulasi).

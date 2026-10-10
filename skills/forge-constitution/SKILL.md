@@ -115,9 +115,14 @@ description: >-
 - **Pertanyaan Keputusan:** *"Apakah Anda bisa memvisualisasikan alur ini? Adakah yang terasa terlalu birokratis?"*
 - **Kritikal:** Jika developer ragu/bingung, JANGAN LANJUT. Berikan analogi sederhana hingga mereka paham.
 
-**Fase 4.4: Penguncian Komitmen (The Architect's Oath)**
+**Fase 4.4: Penyusunan Panduan Onboarding & Setup MCP (The Setup Guide)**
+- **Pedagogi:** File konfigurasi saja tidak cukup jika anggota tim lain tidak tahu cara melakukan setup *environment* (seperti token GitHub atau instalasi MCP pihak ketiga).
+- **Coaching Aktif:** Jelaskan: *"Karena setup token dan MCP harus dilakukan secara lokal oleh masing-masing developer (demi keamanan), kita wajib membuat satu dokumen panduan instalasi."*
+- **Pertanyaan Keputusan:** Tanyakan: *"Apakah Anda ingin saya membuatkan file `ONBOARDING.md` nantinya, yang berisi panduan *copy-paste* langkah demi langkah bagi tim PROTIC tentang cara setup LSP, mendaftarkan Token GitHub, dan menginstal MCP pihak ketiga (seperti Figma) saat mereka baru melakukan clone repositori ini?"*
+
+**Fase 4.5: Penguncian Komitmen (The Architect's Oath)**
 - **Aksi:** Rangkum seluruh kesepakatan (Tahap 1-4). Tegaskan bahwa kedisiplinan ini akan mengunci repositori.
-- **Pertanyaan Keputusan:** *"Apakah Anda siap memberikan otorisasi kepada saya untuk memulai TAHAP 5 (Injeksi Fisik), di mana saya akan menciptakan seluruh file konstitusi secara nyata ke repositori Anda?"*
+- **Pertanyaan Keputusan:** *"Apakah Anda siap memberikan otorisasi kepada saya untuk memulai TAHAP 5 (Injeksi Fisik), di mana saya akan menciptakan seluruh file konstitusi dan onboarding secara nyata ke repositori Anda?"*
 
 ---
 
@@ -138,11 +143,12 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   3. Cetak `ARCHITECTURE.md`. Tunggu izin.
   4. Cetak `GIT_WORKFLOW.md`. Tunggu izin.
   5. Cetak `mcp_config.json` (Konfigurasi MCP berdasarkan keputusan Fase 4.1). Tunggu izin.
-  6. Cetak file `skills/project-edeate/SKILL.md`. Tunggu izin.
-  7. Cetak file `skills/project-grill-me/SKILL.md`. Tunggu izin.
-  8. Cetak file `skills/project-plan/SKILL.md`. Tunggu izin.
-  9. Cetak file `skills/project-tdd/SKILL.md`. Tunggu izin.
-  10. Cetak file `skills/project-execute/SKILL.md`. Tunggu izin.
-  11. Cetak file `skills/project-audit/SKILL.md`. Tunggu izin.
-  12. Cetak file `skills/project-debug/SKILL.md`. Tunggu izin.
+  6. Cetak `ONBOARDING.md` (Instruksi setup manual Token & MCP pihak ketiga berdasarkan keputusan Fase 4.4). Tunggu izin.
+  7. Cetak file `skills/project-edeate/SKILL.md`. Tunggu izin.
+  8. Cetak file `skills/project-grill-me/SKILL.md`. Tunggu izin.
+  9. Cetak file `skills/project-plan/SKILL.md`. Tunggu izin.
+  10. Cetak file `skills/project-tdd/SKILL.md`. Tunggu izin.
+  11. Cetak file `skills/project-execute/SKILL.md`. Tunggu izin.
+  12. Cetak file `skills/project-audit/SKILL.md`. Tunggu izin.
+  13. Cetak file `skills/project-debug/SKILL.md`. Tunggu izin.
 
