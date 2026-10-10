@@ -138,6 +138,9 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   3. Jika ada celah (contoh: belum tahu UI Component Library yang digunakan, atau Testing Framework spesifik antara Jest vs Vitest), Anda **DILARANG** mencetak file tersebut. Anda wajib melakukan wawancara singkat terlebih dahulu dengan memberikan opsi dan rekomendasi *best-practice* (misal: merekomendasikan `shadcn/ui` atau `Vitest`).
   4. Anda baru boleh mencetak file tersebut setelah developer menjawab pertanyaan wawancara celah informasi Anda.
 
+- **Protokol Wajib Baca Template (Anti-Halusinasi):**
+  Sebelum merender dan mencetak sebuah file, AI **DILARANG KERAS** menebak isi struktur file dari ingatannya sendiri. AI **WAJIB** secara eksplisit menggunakan *tools* (seperti `view_file` atau membaca file secara programatik) untuk membaca file `.template.md` yang bersangkutan di dalam direktori `blueprints/` terlebih dahulu. Jika AI langsung mencetak file tanpa membaca *blueprint* aslinya, itu adalah pelanggaran tingkat fatal.
+
 - **Dua Jenis Konten di Template:**
   AI harus memahami bahwa template berisi 2 jenis instruksi:
   1. **Variabel Substitusi** (`{{NAMA_VARIABEL}}`): Ganti langsung dengan nilai yang sudah didapatkan dari wawancara Tahap 1-4. Contoh: `{{PROJECT_NAME}}` → "Manajemen Protik".
