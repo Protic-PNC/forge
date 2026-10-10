@@ -14,7 +14,7 @@ Ini adalah **"Fase Spesifikasi"**, BUKAN fase implementasi. AI dan developer HAN
 ### 2. 🎯 RUANG LINGKUP WAJIB (MANDATORY TEST SCOPE)
 AI **WAJIB** membuat 2 jenis tes untuk setiap fitur/tiket:
 {{MANDATORY_TEST_SCOPE}}
-*(Catatan Injektor: Isi dengan 2 jenis tes yang relevan sesuai tech stack. Contoh:*
+*(Catatan Injektor: Isi dengan jenis-jenis tes secara komprehensif dan berlapis (tanpa batas kuota) yang relevan sesuai standar Enterprise tech stack. Contoh:*
 - *BE Laravel: "1. Feature Test (HTTP/E2E): Simulasi request HTTP ke endpoint, periksa respons JSON termasuk FormRequest validasi 422, verifikasi mutasi database (assertDatabaseHas). 2. Unit Test (Service Isolation): Tes class Service secara murni terisolasi dengan Mocking dependensi."*
 - *FE React: "1. Integration Test (React Testing Library): Render komponen secara utuh, simulasi interaksi user (click, input), verifikasi perubahan DOM. 2. Unit Test (Hook/Store Isolation): Tes custom hook atau state store secara terisolasi dengan mock API response.")*
 

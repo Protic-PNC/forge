@@ -13,7 +13,7 @@ Saat pengguna mengetik `/grill-me` atau `/interview`:
      * **Protokol Tool Audit Fisik Komprehensif (Pre-Flight Tool Invocation):** Sebelum menuliskan satu kalimat analisis atau menyajikan Peta Masalah, AI **WAJIB secara fisik mengeksplorasi kode dengan memprioritaskan integrasi MCP `agent-lsp` (seperti `find_symbol`, `get_references`) secara ekstensif**. (`grep_search` hanya digunakan sebagai alternatif logis). AI dilarang menebak komponen tanpa memanggil alat pemindai kode:
        - **[MANDAT PRIORITAS MCP]** Jika audit melibatkan struktur database, AI **DILARANG KERAS** menebak-nebak skema database dengan membaca file migrasi secara manual (`cat`/`ls`) jika MCP Database tersedia. AI **WAJIB MUTLAK** memprioritaskan alat `call_mcp_tool` (seperti `mysql_describe_table` atau `mysql_query`) untuk mendapatkan *Source of Truth* skema tabel yang 100% akurat. Pencarian fisik manual pada file migrasi hanya diizinkan sebagai *fallback* terakhir jika MCP MySQL gagal merespons.
        {{DYNAMIC_AUDIT_PATTERNS}}
-       *(Catatan Injektor: Saat mengeksekusi Tahap 5, AI bertugas mendesain 3-4 aturan pre-flight audit fisik yang sangat spesifik dan mematikan sesuai dengan Tech Stack proyek ini. Misalnya jika proyek ini React FE: "Wajib cek struktur Redux/Zustand untuk manajemen state", jika Go Backend: "Wajib cek struct validasi dan interface handler").*
+       *(Catatan Injektor: Saat mengeksekusi Tahap 5, AI bertugas mendesain aturan pre-flight audit fisik secara ekstensif dan mematikan (tanpa batasan kuota) sesuai dengan Tech Stack proyek ini. Misalnya jika proyek ini React FE: "Wajib cek struktur Redux/Zustand untuk manajemen state", jika Go Backend: "Wajib cek struct validasi dan interface handler").*
      * **Bukti Fisik Audit (Physical Audit Citation):** Di baris teratas respons Peta Masalah (*The Agenda Map*), AI **WAJIB** mencantumkan blok bukti fisik audit nyata berupa tautan berkas dan rentang baris kode:
        ```markdown
        ### 🔍 Bukti Audit Pola Modul Saudara (Repo-Wide Pattern Evidence)
@@ -25,7 +25,7 @@ Saat pengguna mengetik `/grill-me` atau `/interview`:
    - *Langkah 2 (Satu Masalah per Pesan):* Bahas HANYA 1 masalah arsitektur per giliran:
      * **Pertanyaan Interogasi Wajib (The Mandatory Grill):** AI WAJIB mencecar pengguna berdasarkan pilar arsitektur utama Tech Stack ini:
        {{DYNAMIC_GRILL_QUESTIONS}}
-       *(Catatan Injektor: Saat Tahap 5, AI bertugas mendesain 3 poin pertanyaan kritis sesuai tech stack. Misal jika FE: "Bagaimana re-render behavior-nya? Bagaimana strategi caching state-nya?", jika BE: "Bagaimana strategi Indexing dan keamanan Race Condition-nya?").*
+       *(Catatan Injektor: Saat Tahap 5, AI bertugas mendesain poin-poin pertanyaan kritis secara komprehensif dan mendalam (tanpa batasan kuota) sesuai tech stack. Misal jika FE: "Bagaimana re-render behavior-nya? Bagaimana strategi caching state-nya?", jika BE: "Bagaimana strategi Indexing dan keamanan Race Condition-nya?").*
      * **Protokol Detektor Blindspot Tiket (Strict Guard Tingkat 2):**
        Jika terdapat instruksi tiket yang mengandung anti-pattern atau risiko laten (misal: Full Table Scan, N+1 Query, Race Condition, Celah Keamanan, Data Corruption, atau Memory Bloat), AI **WAJIB**:
        1. Menolak opsi mentah tiket tersebut dan melabelinya sebagai *"Anti-Pattern yang Ditolak Arsitektur"*.
