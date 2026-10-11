@@ -161,6 +161,13 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   5. **Dimensi UX & Stabilitas Aplikasi:** (Wajib mencakup: *Graceful Degradation* (loading/error boundary), pencegahan mutlak layar putih (*blank screen*), perlindungan *Core Web Vitals* (cegah CLS), dan kepatuhan *Accessibility*/A11y standar global).
   Anda wajib memastikan *output* rancangan/aturan Anda berlimpah, sangat brutal secara teknis, dan tidak menoleransi arsitektur level *hobbyist/junior*.
 
+- **Protokol Kedisiplinan Ideasi Level 3 (The /edeate Golden Standard):**
+  Saat menyuntikkan atau mengeksekusi `/edeate`, AI **WAJIB MUTLAK** mematuhi hukum integritas hulu berikut:
+  1. **Hukum 1 Sesi = 1 Atomic Ticket Level 3:** DILARANG KERAS memborong banyak tiket sekaligus. Jika ide berupa Epik besar, lakukan dekomposisi dan fokuskan HANYA 1 tiket prioritas untuk dimatangkan hingga Level 3.
+  2. **Review Gate Wajib Sebelum Finalisasi:** AI WAJIB menyajikan Rangkuman Arsitektur & Scope Plan di Fase 4, lalu menunggu ACC/evaluasi Tech Lead di Fase 5 sebelum mencetak tiket Level 3 di Fase 6.
+  3. **Larangan Mutlak Eksekusi di Hulu (Code-Free Zone):** AI DIHARAMKAN menulis kode produksi, membuat file skema/migrasi, atau menawarkan PR otomatis di `/edeate`. Output `/edeate` murni berupa spesifikasi tiket GitHub Issue. Seluruh implementasi kode wajib menyeberang ke Gateway 2 melalui `/grill-me`.
+  4. **The Golden Ticket Standard:** Format tiket Level 3 wajib komprehensif mencakup 7 pilar Enterprise: YAML Frontmatter, Konteks Eksisting vs Hasil Diharapkan, Blast Radius berkas terdampak, Spesifikasi Langkah & Signature Method, Kontrak Invariant, DoD Berlapis, Kriteria Penolakan PR, dan Poin Kunci Edukasi Teknis (Technical Talking Points).
+
 - **Urutan Injeksi (Pastikan path menggunakan standar Antigravity Workspace Customizations):**
   1. Cetak `DEVELOPMENT_ROADMAP.md` (di *root* proyek). Tunggu izin.
   2. Cetak `.agents/rules/MASTER_RULES.md`. Tunggu izin.

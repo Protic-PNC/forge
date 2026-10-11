@@ -71,11 +71,11 @@ Sebelum menjalankan `/edeate`, AI dan developer harus memahami target kematangan
 
 ## 🔬 PROTOKOL `/edeate` — ALUR IDE DARI HULU KE TIKET
 
-> 🚨 **PROTOKOL ITERASI WAJIB:** 
-> - AI **DILARANG KERAS** memborong seluruh Fase atau semua pertanyaan sekaligus dalam satu respons. 
-> - AI **WAJIB** membahas HANYA 1 Fase/Pilar per giliran. 
-> - AI **DILARANG** pindah ke pertanyaan/Fase berikutnya sebelum mendapat persetujuan, keputusan, atau jawaban eksplisit dari Tech Lead di tahap sebelumnya.
-> - Tiket Final hanya boleh dicetak setelah Fase 1-3 tuntas didiskusikan satu per satu.
+> 🚨 **PROTOKOL ITERASI & INTEGRITAS GERBANG WAJIB:** 
+> - **Satu Fase Per Respons:** AI **DILARANG KERAS** memborong seluruh Fase atau semua pertanyaan sekaligus dalam satu respons. AI **WAJIB** membahas HANYA 1 Fase per giliran dan berhenti menunggu jawaban Tech Lead.
+> - **Hukum 1 Sesi = Tepat 1 Atomic Ticket Level 3:** AI **DILARANG KERAS** mencetak atau mematangkan lebih dari 1 tiket Level 3 dalam satu sesi `/edeate`. Jika ide yang dibawa developer adalah sebuah Epik besar, AI bertugas memetakan dekomposisi daftarnya, lalu menyepakati **HANYA SATU TIKET PRIORITAS** yang dituntaskan hingga Level 3 dalam sesi ini. Tiket lainnya tetap berada di backlog/roadmap untuk sesi `/edeate` berikutnya.
+> - **Gate Review Wajib Sebelum Tiket Dicetak:** Di akhir ideasi, AI **DILARANG LANGSUNG** mencetak tiket Level 3. AI **WAJIB** menjabarkan Rangkuman Konsensus Arsitektur & Scope Plan terlebih dahulu di Fase 4, lalu meminta ACC dari Tech Lead di Fase 5. Tiket Level 3 HANYA boleh dicetak setelah mendapatkan ACC resmi.
+> - **Larangan Mutlak Eksekusi Kode di Hulu (Gateway 1 is Code-Free):** AI **DIHARAMKAN KERAS** menulis kode produksi, membuat file skema/migrasi, atau menawarkan pembuatan Pull Request otomatis di dalam sesi `/edeate`. Output `/edeate` murni berupa spesifikasi tiket GitHub Issue. Seluruh eksekusi implementasi WAJIB menyeberang ke Gateway 2 melalui perintah `/grill-me`.
 
 ### FASE 0 — Penerimaan & Klasifikasi Awal (AI)
 
@@ -160,67 +160,143 @@ AI mengajukan pertanyaan berikut, **satu per giliran**, menunggu jawaban sebelum
 
 ---
 
-### FASE 4 — SINTESIS & PEMBUATAN DRAFT TIKET LEVEL 3
+### FASE 4 — RANGKUMAN KONSENSUS ARSITEKTUR & SCOPE PLAN (The Scope Pitch)
 
-Setelah ketiga pilar terjawab, AI **WAJIB** menyusun Draft Tiket Level 3 menggunakan format berikut:
+Setelah Pilar 1, 2, dan 3 tuntas dijawab, AI **DILARANG KERAS LANGSUNG MENCETAK TIKET FINAL**.
+AI **WAJIB** terlebih dahulu menyajikan **Rangkuman Konsensus Arsitektur & Rencana Pemecahan Tiket** untuk disetujui Tech Lead:
 
 ```markdown
-## 🎫 DRAFT TIKET LEVEL 3
+## 📋 RANGKUMAN KONSENSUS ARSITEKTUR & TICKET PLAN
 
-**Prefix & Judul:** `[FEAT/FIX/REFACTOR] Nama Fitur yang Jelas`
-**Estimasi Kompleksitas:** S / M / L / XL
+### 1. Konsensus Keputusan Arsitektur
+* **Masalah Bisnis Nyata:** [Rangkuman mengapa fitur ini ada dan siapa aktor utamanya]
+* **Fakta Repositori Aktual:** [Kutipan temuan Pre-Flight Audit dari Fase 0]
+* **Strategi Arsitektur:** [Pola arsitektur, pemisahan layer Controller-Service-Request, dan mitigasi risiko]
 
----
+### 2. Rencana Dekomposisi & Pemilihan Tiket
+* **Status Ide:** [Atomic Feature / Bagian dari Epik Besar]
+* **Daftar Pemecahan Tiket (Jika Epik):**
+  - [ ] Tiket 1: [Nama Tiket 1]
+  - [ ] Tiket 2: [Nama Tiket 2]
+  - [ ] Tiket 3: [Nama Tiket 3]
+* **Tiket yang Difokuskan pada Sesi Ini:** ⭐ **[Nama Tiket yang Dipilih]** (Hanya 1 tiket yang dimatangkan hingga Level 3!)
 
-### Latar Belakang (The "Why")
-[1-2 kalimat tentang masalah bisnis nyata yang diselesaikan, bukan deskripsi teknis]
+### 3. Batasan Cakupan (Scope Boundaries)
+* **✅ Scope IN:** [Daftar berkas dan modul spesifik yang akan disentuh]
+* **❌ Scope OUT:** [Hal-hal yang secara sadar ditunda ke tiket berikutnya agar tidak terjadi scope creep]
 
-### Scope & Definisi of Done (DoD)
-
-**✅ Yang HARUS dikerjakan:**
-- [ ] [Aksi konkret 1, misal: "Tambahkan endpoint `POST /api/events/{id}/committees/sync`"]
-- [ ] [Aksi konkret 2, misal: "Buat FormRequest `SyncEventCommitteeRequest` dengan validasi file CSV"]
-- [ ] [Aksi konkret 3, misal: "Implement `EventCommitteeService::syncFromCsv()` dengan `Cache::lock` + `DB::transaction`"]
-
-**❌ Yang TIDAK termasuk scope (Out of Scope):**
-- [Hal yang dengan sengaja dikecualikan agar scope tidak melebar]
-
-### Invariant yang Harus Dijaga (Contract)
-> *Ini adalah kondisi yang harus selalu BENAR, dibuktikan oleh Feature Test.*
-
-1. `INVARIANT-1:` [misal: "Tidak boleh ada duplikasi NIM dalam satu event committee"]
-2. `INVARIANT-2:` [misal: "Jika proses sync gagal di baris mana pun, TIDAK ADA data yang berubah (full rollback)"]
-3. `INVARIANT-3:` [misal: "Hanya user dengan role `admin` yang dapat memicu endpoint ini"]
-
-### Kriteria Penolakan (Rejection Criteria)
-> *Kondisi yang menyebabkan PR WAJIB ditolak saat review.*
-
-- PR ditolak jika: tidak ada Feature Test yang membuktikan semua INVARIANT di atas.
-- PR ditolak jika: ada query Eloquent di dalam loop (N+1).
-- PR ditolak jika: tidak ada `Cache::lock` pada operasi write data massal.
-
-### Referensi Pola Arsitektur
-- Ikuti pola: [`XyzController@syncFromCsv`](file:///...) (baris A–B) sebagai referensi implementasi.
+### 4. Rencana Invariant & Keamanan Data
+* [Daftar kondisi absolut yang wajib dipertahankan]
 ```
 
 ---
 
-### FASE 5 — VERIFIKASI & PENGESAHAN DRAFT
+### FASE 5 — REVIEW GATE, EVALUASI, & ACC TECH LEAD (Interactive Alignment Gate)
 
-Setelah draft disajikan, AI mengajukan satu pertanyaan penutup:
+Setelah menyajikan Rangkuman & Plan di Fase 4, AI **WAJIB BERHENTI** dan mengajukan pertanyaan persetujuan:
 
-> *"Draft tiket di atas sudah merangkum semua yang kita diskusikan. Ada poin yang perlu direvisi, ditambahkan, atau dihapus sebelum kita buat sebagai GitHub Issue resmi?"*
+> *"Rangkuman Konsensus Arsitektur dan Scope Plan tiket di atas siap dievaluasi. Apakah rencana arsitektur dan batasan ruang lingkup ini sudah disetujui untuk kita rumuskan menjadi 1 Tiket Level 3 Sempurna? Jika ada evaluasi, koreksi, atau pertanyaan arsitektural, silakan sampaikan. Kita akan selesaikan diskusi ini sebelum tiket Level 3 difinalisasi."*
 
-Jika developer menyetujui → **Draft Tiket dinyatakan SAH**. Developer membuat GitHub Issue menggunakan draft tersebut, mendapatkan nomor Issue, lalu memulai Gateway 2 dengan `/grill-me #<nomor>`.
+> 🛑 **HARD STOP MACRO:**
+> AI **DILARANG KERAS** mencetak Tiket Level 3 sebelum Tech Lead memberikan persetujuan eksplisit.
+> - Jika Tech Lead mengajukan revisi, evaluasi, atau pertanyaan: AI **WAJIB** merespons, merevisi plan, dan mengonfirmasi ulang.
+> - HANYA setelah Tech Lead menyatakan **"ACC"**, **"Setuju"**, atau **"Lanjut"**, AI diizinkan melanjutkan ke Fase 6.
+
+---
+
+### FASE 6 — SINTESIS 1 TIKET LEVEL 3 SEMPURNA & HANDOVER GATEWAY 2
+
+Setelah otorisasi ACC diberikan di Fase 5, AI mencetak **TEPAT SATU (1) TIKET LEVEL 3 SEMPURNA** menggunakan format standar Enterprise berikut:
+
+````markdown
+```yaml
+---
+name: "[TIPE_TIKET]: [Nama Tiket yang Jelas]"
+about: "Spesifikasi tugas teknis arsitektur Enterprise"
+title: "[TIPE_TIKET]: [Nama Tiket yang Jelas]"
+labels: ["[kompleksitas: s/m/l/xl]", "[domain/layer]"]
+assignees: ""
+---
+
+### 1. Konteks & Masalah Teknis
+* **Domain / Modul:** [Nama modul, Controller/Service/Model utama yang menjadi pusat masalah]
+* **Kondisi Eksisting (Hasil Pre-Flight Audit):** 
+  - [Temuan fisik 1 dari repositori nyata: misal Fat Controller / Query N+1 / Celah kebocoran raw error]
+  - [Temuan fisik 2: misal Ketiadaan validasi FormRequest / Kurang Index / Beban agregasi belum di-cache]
+* **Hasil yang Diharapkan:** 
+  - [Transformasi arsitektur yang diinginkan secara konkret dan terukur]
+
+---
+
+### 2. Peta Berkas Terdampak (Blast Radius)
+* **Entry Points (Controllers / Handlers / Routes):**
+  - `path/to/FileController.ext`
+* **Core Logic (Services / Actions / Repositories):**
+  - `path/to/FileService.ext` *(BARU / OPTIMASI)*
+* **Data Contracts (Requests / DTO / Schemas / Migrations):**
+  - `path/to/ValidationOrSchema.ext` *(BARU)*
+* **Automated Tests:**
+  - `tests/.../FeatureTest.ext`
+
+---
+
+### 3. Spesifikasi Teknis & Langkah Implementasi
+- [ ] 1. [Langkah 1: Signature method/fungsi baru, parameter input, dan return type yang konkret]
+- [ ] 2. [Langkah 2: Pemindahan logika bisnis dari Controller ke Service & perampingan Controller]
+- [ ] 3. [Langkah 3: Pembuatan FormRequest / Schema validasi input dengan aturan ketat]
+- [ ] 4. [Langkah 4: Pemasangan mekanisme proteksi: Cache::remember / DB::transaction / Cache::lock]
+
+---
+
+### 4. Kontrak Invariant (Contract & Data Integrity)
+> *Properti data yang HARUS SELALU BENAR dalam kondisi apa pun, wajib dibuktikan oleh Automated Test.*
+1. `INV-1:` [Kondisi absolut integritas data, misal: Unik, format email kampus terisolasi]
+2. `INV-2:` [Kondisi rollback jika proses gagal di tengah jalan]
+3. `INV-3:` [Kondisi proteksi otorisasi / access control]
+
+---
+
+### 5. Kriteria Kelayakan (Definition of Done)
+- [ ] **Linter & Standar Gaya:** Lolos 100% format linter proyek (`./vendor/bin/pint` atau `npm run lint`) tanpa peringatan.
+- [ ] **Automated Test:** Jalankan perintah test spesifik `[Perintah test --filter=...]` dan wajib 100% Pass.
+- [ ] **Keamanan Error:** Response tidak pernah mengekspos nomor baris kode internal atau trace database.
+- [ ] **Batas Kompleksitas Kode:** [Misal: Controller berkurang menjadi <= 30 baris, tanpa query di dalam loop].
+
+---
+
+### 6. Kriteria Penolakan PR (Rejection Criteria)
+- PR ditolak jika: Tidak ada automated test yang membuktikan semua INVARIANT di atas.
+- PR ditolak jika: Mengubah berkas di luar daftar **Peta Berkas Terdampak (Blast Radius)** tanpa izin Tech Lead.
+- PR ditolak jika: Ada N+1 query atau tidak ada transaksi atomik pada mutasi sensitif.
+
+---
+
+### 7. Poin Kunci Pemahaman Teknis (Technical Talking Points)
+* **Mengapa Arsitektur Ini Dipilih?** [Edukasi prinsip Separation of Concerns / Single Responsibility di balik tiket ini].
+* **Bahaya Laten yang Dicegah:** [Penjelasan risiko fatal seperti Information Disclosure atau Race Condition jika dikerjakan serampangan].
+* **Dampak Performa / Skalabilitas:** [Penjelasan optimasi query, efisiensi memori, atau peran cache].
+```
+````
+
+#### 🛑 LARANGAN MUTLAK EKSEKUSI DI HULU (Anti-Bypass Gateway 2):
+Setelah mencetak Tiket Level 3 di atas, AI **DIHARAMKAN KERAS** menawarkan untuk membuat skema, menulis kode, atau membuat Pull Request otomatis!
+AI **WAJIB** menutup sesi dengan kalimat mandat pemindahan gerbang:
+
+> *"Tiket Level 3 resmi disahkan. Silakan salin tiket di atas ke GitHub Issue proyek untuk mendapatkan nomor Issue resmi (misal: `#12`). Setelah itu, buat branch baru dan panggil Gateway 2: `/grill-me #<nomor>` untuk memulai perancangan arsitektur eksekusi."*
 
 ---
 
 ## ⚠️ PENJAGA KUALITAS (Anti-Pattern yang Harus Ditolak AI)
 
-| Anti-Pattern | Dampak | Tindakan AI |
+| Anti-Pattern | Dampak | Tindakan Wajib AI |
 |---|---|---|
+| **Multi-Ticket Dumping** (Mencetak lebih dari 1 tiket Level 3 dalam 1 sesi) | Fokus buyar, *blast radius* membengkak, pengujian bias dan campur aduk | AI WAJIB membatasi hanya 1 tiket Level 3 yang difinalisasi per sesi. Sisanya dicatat di roadmap backlog. |
+| **Premature Ticket Synthesis** (Langsung mencetak tiket tanpa ACC plan) | Resiko rework besar jika asumsi dasar arsitektur atau boundary salah | AI WAJIB menyajikan rangkuman & scope plan di Fase 4 dan menunggu ACC Tech Lead di Fase 5. |
+| **Hulu Code Execution / Auto-PR Offer** (Menawarkan eksekusi kode/PR di `/edeate`) | Melanggar batas gerbang, membypass TDD, Plan, dan Code Audit Hilir | AI DIHARAMKAN menulis kode atau menawarkan PR di Hulu. AI WAJIB menyerahkan tiket ke Gateway 2 via `/grill-me`. |
 | **Tiket Terlalu Luas** ("Bikin fitur manajemen event lengkap") | Scope tak terbatas, sprint berantakan | AI WAJIB meminta developer memecah menjadi tiket-tiket kecil yang independen |
-| **DoD Ambigu** ("Berhasil dijalankan") | Developer dan reviewer punya definisi sukses yang berbeda | AI WAJIB mendesak definisi yang terukur (angka, waktu, kondisi boolean) |
+| **DoD Ambigu** ("Berhasil dijalankan") | Developer dan reviewer punya definisi sukses yang berbeda | AI WAJIB mendesak definisi yang terukur (angka, waktu, kondisi boolean, perintah test) |
+| **Tiket Tanpa Blast Radius** | Developer/AI mengedit file liar di luar cakupan tugas | AI WAJIB memetakan daftar berkas entry point, service, schema, dan test |
 | **Tiket Tanpa Invariant** | Tidak ada kontrak yang bisa diuji → Feature Test menjadi formalitas dangkal | AI WAJIB menggali minimal 2-3 invariant sebelum draft disahkan |
-| **Asumsi Tanpa Audit Kode** | AI berbicara dari imaginasi, bukan realita repositori | AI WAJIB menjalankan Pre-Flight Audit (Fase 0) sebelum sesi dimulai |
+| **Asumsi Tanpa Audit Kode** | AI berbicara dari imajinasi, bukan realita repositori | AI WAJIB menjalankan Pre-Flight Audit (Fase 0) sebelum sesi dimulai |
 | **Langsung Lompat ke Solusi** | Masalah bisnis inti tidak dipahami | AI WAJIB menyelesaikan Pilar Bisnis (Fase 1) terlebih dahulu |
+

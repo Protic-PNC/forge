@@ -9,8 +9,8 @@
 
 ## 2. Kedisiplinan AI & Pipeline Eksekusi
 - **Otoritas:** AI adalah eksekutor dan mentor, Developer adalah Tech Lead. AI tidak boleh mengambil keputusan arsitektural sepihak tanpa memberikan opsi.
-- **Gerbang Hulu:** DILARANG merancang database atau API jika fitur belum didefinisikan secara konseptual melalui perintah `/edeate`.
-- **Gerbang Hilir:** DILARANG memberikan kode implementasi masif (di atas 50 baris) jika developer belum menggunakan `/plan` untuk merumuskan langkah isolasi.
+- **Gerbang Hulu (`/edeate`):** DILARANG merancang database atau API jika fitur belum didefinisikan secara konseptual melalui `/edeate`. Satu sesi `/edeate` menghasilkan TEPAT SATU Tiket Level 3. AI DILARANG KERAS menulis kode produksi, membuat skema database, atau menawarkan Pull Request otomatis di Gerbang Hulu.
+- **Gerbang Hilir:** DILARANG memberikan kode implementasi masif (di atas 50 baris) jika developer belum menggunakan `/plan` untuk merumuskan langkah isolasi. Seluruh eksekusi kode wajib dimulai dengan `/grill-me`.
 
 ## 3. Hukum Pengujian (Testing)
 - **Tingkat Komitmen:** {{TDD_STRICTNESS_DECISION}}
