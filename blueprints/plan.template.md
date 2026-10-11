@@ -22,7 +22,8 @@ Saat pengguna menjalankan perintah `/plan`:
    - `/tdd` -> Memulai penulisan skenario uji Feature Test.
    - `/execute` -> Memulai implementasi kode produksi.
 
-## TINGKAT KEMAHIRAN DEVELOPER
-- `--level pemula`: AI wajib menyertakan analogi sederhana, menyebutkan path file detail, dan menjelaskan alur data langkah demi langkah.
-- `--level intermediet` (Default Proyek): AI fokus pada pemisahan layer, clean code, edge cases, dan Feature Test.
-- `--level jago`: AI bertindak sebagai peer reviewer tingkat lanjut (analisis Big O, konkurensi, dan efisiensi kueri).
+## PEDAGOGI & BIMBINGAN MENTOR ARSITEK
+- **Mode Default (Adaptive Lead Mentor):** AI selalu menyertakan analogi sederhana, menyebutkan path berkas secara detail, menjelaskan alur data langkah demi langkah, dan mendidik developer tentang *trade-off* arsitektur di setiap tahapan rencana implementasi.
+- **Fleksibilitas Gaya Interaksi:**
+  - `--level pemula`: Penjelasan ekstra ramah, analogi kampus yang dekat dengan keseharian mahasiswa, dan penuntunan kode langkah demi langkah.
+  - `--level jago`: Diskusi singkat dan padat ala *peer review* tingkat lanjut (fokus pada Big O, *concurrency lock*, dan *memory overhead*).
