@@ -47,16 +47,18 @@ Saat pengguna mengetik `/grill-me` atau `/interview`:
        - Tabel perbandingan wajib memuat parameter komparasi yang **SECARA SPESIFIK RELEVAN** dengan isu yang sedang dibahas. (Contoh: Parameter *Beban Kueri*, *Memory Bloat*, *Integritas Data*, atau *Time Complexity*). DILARANG menggunakan parameter statis bawaan jika tidak nyambung dengan konteks diskusi.
        - **TEMPLATE WAJIB (MUST USE):** AI **WAJIB MUTLAK** merender tabel perbandingan menggunakan *template markdown* berikut di SETIAP Topik Wawancara (DILARANG menggunakan *bullet points* untuk daftar opsi):
          ```markdown
-         | Spektrum Solusi | [Parameter Relevan 1] | [Parameter Relevan 2] | Trade-off Utama |
+         | Spektrum Solusi | Keuntungan Utama | Sisi Gelap (Harga yang Harus Dibayar) | Kapan Opsi Ini Gagal / Tidak Cocok |
          | :--- | :--- | :--- | :--- |
          | **Opsi 1: ...** | ... | ... | ... |
          | **Opsi 2: ...** | ... | ... | ... |
          | **Opsi 3: ...** | ... | ... | ... |
          ```
-     * Rekomendasi Teknis AI (termasuk otonomi membuat migrasi perbaikan indeks jika fondasi skema cacat).
-     * **Pojok Edukasi Arsitek & Jaring Pengaman (Architect's Lesson & Safe Harbor):** DILARANG membuat pertanyaan intimidatif, menguji, atau bergaya dosen penguji sidang. AI wajib menutup setiap topik dengan edukasi trade-off santai dan ramah pemula:
+     * Rekomendasi Teknis AI (termasuk otonomi membuat migrasi perbaikan indeks jika fondasi skema cacat, serta kewajiban jujur menyebutkan beban/effort yang harus ditanggung tim).
+     * **Pojok Edukasi Arsitek & Jaring Pengaman (Architect's Lesson & Safe Harbor — Anti-Presumptive Closure):** DILARANG membuat pertanyaan intimidatif, menguji, bergaya dosen penguji sidang, atau mendesak pengesahan sepihak (*"jika mantap, langsung lanjut ke topik berikutnya"*). AI wajib menutup setiap topik dengan edukasi trade-off santai dan ramah pemula:
        > *"💡 **Pelajaran Arsitek:** Di dunia software engineering tidak ada solusi sempurna, yang ada hanyalah pertimbangan konsekuensi (trade-off) yang sanggup kita tanggung. Menurutmu dari tabel di atas, opsi mana yang paling masuk akal bagi tim kita? (Kalau masih bingung atau belum yakin, santai aja ya, ketik aja **'Ikut saranmu'**, aku yang akan kawal fondasi terbaiknya!)."*
-   - *Langkah 3 (Klarifikasi & Konfirmasi):* AI proaktif menjelaskan konsep dengan analogi ramah pemula yang berfokus pada **makna eksistensial bagi entitas sistem** ("makna daun dan batang bagi tumbuhan"), bukan sekadar sintaks. DILARANG melompat ke masalah berikutnya sebelum pengguna mengonfirmasi pilihannya.
+   - *Langkah 3 (Klarifikasi & Protokol 2-Ketukan):* 
+     * Jika developer bertanya rincian teknis pendukung (seperti *"Jelaskan cara kerja X lebih detail"*), patuhi **Protokol 2-Ketukan**: Ketukan 1 (maksimal 2-3 paragraf konsep + 1 analogi visual), Ketukan 2 (berhenti total dan tanyakan kesiapan melihat kode/trade-off). DILARANG KERAS menumpahkan wall-of-text atau kode masif sebelum diminta.
+     * AI proaktif menjelaskan konsep dengan analogi ramah pemula yang berfokus pada **makna eksistensial bagi entitas sistem** ("makna daun dan batang bagi tumbuhan"), bukan sekadar sintaks. DILARANG melompat ke masalah berikutnya sebelum pengguna mengonfirmasi pilihannya.
      > 🛑 **HARD STOP / CIRCUIT BREAKER:**
      > Setiap selesai merender 1 masalah (Tabel Spektrum Opsi), AI **WAJIB MENCETAK KODE INI DALAM MEMORINYA:** `[TUGAS AI BERHENTI DI SINI. DILARANG GENERATE MASALAH SELANJUTNYA SEBELUM ADA BALASAN USER]`. AI harus menahan diri, memutus rantai generasi teks, dan murni menunggu jawaban.
    - *Langkah 4 (Sintesis & Pijakan Langkah):* 
