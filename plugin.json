@@ -1,5 +1,34 @@
 {
   "name": "forge-constitution",
   "description": "Enterprise Constitution Scaffolder Plugin",
-  "version": "1.0.0"
+  "version": "1.1.0",
+  "skills": [
+    "forge-constitution",
+    "forge-update"
+  ],
+  "releases": {
+    "1.1.0": {
+      "updated_blueprints": [
+        "master_rules.template.md",
+        "grill-me.template.md",
+        "edeate.template.md"
+      ],
+      "summary": "Pembaruan protokol pedagogi mentor, penambahan tabel spektrum opsi anti-strawman, penambahan skill /forge-update, dan sistem declarative re-render via forge_manifest.json"
+    },
+    "1.0.0": {
+      "updated_blueprints": [
+        "architecture.template.md",
+        "audit.template.md",
+        "debug.template.md",
+        "edeate.template.md",
+        "execute.template.md",
+        "git_workflow.template.md",
+        "grill-me.template.md",
+        "master_rules.template.md",
+        "plan.template.md",
+        "tdd.template.md"
+      ],
+      "summary": "Rilis inisial Forge Constitution Scaffolder"
+    }
+  }
 }

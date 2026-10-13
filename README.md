@@ -36,9 +36,9 @@ Hermes Agent adalah platform *command-line* paling optimal untuk menjalankan For
 1. Buka **PowerShell** di Windows Anda.
 2. Jalankan perintah satu baris ini untuk mengunduh Forge dan mengaktifkannya sebagai *Global Skill* di Hermes:
    ```powershell
-   git clone https://github.com/Protic-PNC/forge.git "$env:LOCALAPPDATA\hermes\forge"; New-Item -ItemType Junction -Path "$env:LOCALAPPDATA\hermes\skills\forge-constitution" -Value "$env:LOCALAPPDATA\hermes\forge\skills\forge-constitution"
+   git clone https://github.com/Protic-PNC/forge.git "$env:LOCALAPPDATA\hermes\forge"; New-Item -ItemType Junction -Path "$env:LOCALAPPDATA\hermes\skills\forge-constitution" -Value "$env:LOCALAPPDATA\hermes\forge\skills\forge-constitution"; New-Item -ItemType Junction -Path "$env:LOCALAPPDATA\hermes\skills\forge-update" -Value "$env:LOCALAPPDATA\hermes\forge\skills\forge-update"
    ```
-3. Selesai! Anda bisa langsung membuka terminal di folder proyek mana pun, ketik `hermes`, lalu jalankan `/forge-constitution`.
+3. Selesai! Anda bisa langsung membuka terminal di folder proyek mana pun, ketik `hermes`, lalu jalankan `/forge-constitution` atau `/forge-update`.
 
 ### Opsi B: Instalasi untuk Antigravity IDE
 
@@ -65,6 +65,20 @@ Jika ada versi terbaru dari Forge dan Anda ingin memperbaruinya, cukup buka Powe
 
 *(Catatan untuk pengguna Antigravity: Jangan lupa *restart* IDE Anda setelah melakukan pembaruan).*
 
+### Sinkronisasi Konstitusi Lokal (`/forge-update`)
+
+Setelah melakukan `git pull` pada plugin Forge global, proyek-proyek Anda yang sudah di-forge sebelumnya **TIDAK** otomatis ter-update. Untuk menyinkronkan konstitusi lokal proyek dengan versi Forge terbaru:
+
+1. Buka repositori proyek yang ingin diperbarui.
+2. Panggil *slash command* berikut di chat agen AI:
+   > `/forge-update`
+3. AI akan menjalankan **Declarative Re-render**:
+   - Membaca target pembaruan dari `plugin.json` rilis terbaru (hanya memproses berkas yang berubah, hemat 70%+ token).
+   - Mengambil data keputusan DNA proyek secara deterministik dari `.agents/forge_manifest.json`.
+   - Menampilkan rangkuman rilis dan meminta checkpoint git.
+   - Merender ulang berkas blueprint yang terdampak secara terisolasi satu per satu.
+   - Memberikan kendali penuh kepada Git (`git diff`) untuk meninjau perubahan teks nyata.
+
 ## ⚙️ Cara Penggunaan (The Injection)
 
 1. Buka proyek/repositori baru Anda (yang masih kosong atau butuh regulasi).
@@ -75,7 +89,7 @@ Jika ada versi terbaru dari Forge dan Anda ingin memperbaruinya, cukup buka Powe
    - Tahap 2: Pembentukan Visi Jangka Panjang
    - Tahap 3: Pembuatan Hukum & Aturan Bermain
    - Tahap 4: Konfigurasi Panca Indera (MCP)
-   - Tahap 5: Injeksi Fisik (Pencetakan File ke dalam folder `.agents/` proyek Anda)
+   - Tahap 5: Injeksi Fisik (Pencetakan Brankas DNA `.agents/forge_manifest.json` dan seluruh file konstitusi ke dalam folder `.agents/` proyek Anda)
 
 ---
 

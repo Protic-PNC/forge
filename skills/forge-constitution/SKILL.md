@@ -134,6 +134,57 @@ description: >-
 
 Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
 
+- **Artefak Ke-0 Mutlak: Brankas DNA Fisik (`.agents/forge_manifest.json`):**
+  Sebelum mencetak berkas Markdown apa pun, AI **WAJIB MUTLAK** mencetak file `.agents/forge_manifest.json` ke disk lokal. File ini adalah *Physical Source of Truth* permanen yang menyimpan 100% keputusan DNA hasil wawancara Tahap 1–4, sehingga pembaruan di masa depan (`/forge-update`) tidak memerlukan AI menebak-nebak atau mengingat riwayat obrolan.
+  Format wajib `.agents/forge_manifest.json`:
+  ```json
+  {
+    "forge_version": "1.1.0",
+    "forged_at": "YYYY-MM-DD",
+    "project_name": "{{PROJECT_NAME}}",
+    "dna": {
+      "BUSINESS_DOMAIN_SUMMARY": "...",
+      "TECH_STACK_SUMMARY": "...",
+      "ACTORS_AND_ROLES_DESCRIPTION": "...",
+      "SYSTEM_ARCHITECTURE_APPROACH": "...",
+      "FRONTEND_BACKEND_SEPARATION_STRATEGY": "...",
+      "SECURITY_AND_AUTHENTICATION_STRATEGY": "...",
+      "BUSINESS_GAPS_AND_RESOLUTIONS": "...",
+      "INFRASTRUCTURE_AND_3RD_PARTY_INTEGRATIONS": "...",
+      "TDD_STRICTNESS_DECISION": "...",
+      "CODE_AUDIT_STRICTNESS_DECISION": "...",
+      "GIT_BRANCHING_STRATEGY_DECISION": "...",
+      "PULL_REQUEST_APPROVAL_POLICY": "..."
+    },
+    "directives": {
+      "MCP_POLICY_SECTION": "...",
+      "DYNAMIC_AUDIT_PATTERNS": "...",
+      "EXECUTION_HIERARCHY": "...",
+      "ENTERPRISE_CODE_STANDARDS": "...",
+      "AUDIT_EVALUATION_POINTS": "...",
+      "CROSS_TEAM_NOTIFICATION_TEMPLATE": "...",
+      "PRODUCTION_CODE_LAYERS": "...",
+      "MANDATORY_TEST_SCOPE": "...",
+      "TEST_DATA_FIXTURE_STRATEGY": "..."
+    }
+  }
+  ```
+
+- **Protokol Metadata Versi (Version Stamping):**
+  Setiap file konstitusi yang dicetak oleh AI **WAJIB** menyertakan blok front-matter YAML di baris paling atas file (sebelum heading `#`). Format wajib:
+  ```yaml
+  ---
+  forge_version: "X.X.X"
+  forged_at: "YYYY-MM-DD"
+  project_name: "NamaProyek"
+  ---
+  ```
+  - `forge_version`: Diambil dari field `version` di file `plugin.json` Forge global.
+  - `forged_at`: Tanggal hari ini saat injeksi dilakukan.
+  - `project_name`: Nama proyek yang didapatkan dari Tahap 1.
+  
+  Metadata ini digunakan oleh `/forge-update` untuk mendeteksi apakah konstitusi lokal perlu disinkronkan dengan versi Forge terbaru. **DILARANG** melewatkan front-matter ini pada file mana pun.
+
 - **Aturan Injeksi & Analisis Celah (Gap Analysis):** 
   1. AI TIDAK BOLEH mencetak semua file sekaligus. AI harus membaca template, menyuntikkan variabel, dan mencetak **SATU FILE PER RESPONS** ke repositori lokal.
   2. **Wawancara Celah Keputusan (Micro-Decisions):** Di setiap *loop* sebelum mencetak sebuah file, AI **WAJIB** mengevaluasi: *"Apakah ada informasi teknis mikro yang belum saya ketahui untuk merender file ini dengan spesifik?"*
@@ -171,6 +222,7 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   4. **The Golden Ticket Standard:** Format tiket Level 3 wajib komprehensif mencakup 7 pilar Enterprise: YAML Frontmatter, Konteks Eksisting vs Hasil Diharapkan, Blast Radius berkas terdampak, Spesifikasi Langkah & Signature Method, Kontrak Invariant, DoD Berlapis, Kriteria Penolakan PR, dan Poin Kunci Edukasi Teknis (Technical Talking Points).
 
 - **Urutan Injeksi (Pastikan path menggunakan standar Antigravity Workspace Customizations):**
+  0. Cetak `.agents/forge_manifest.json` (Brankas DNA Fisik). Tunggu izin.
   1. Cetak `DEVELOPMENT_ROADMAP.md` (di *root* proyek). Tunggu izin.
   2. Cetak `.agents/rules/MASTER_RULES.md`. Tunggu izin.
   3. Cetak `.agents/rules/ARCHITECTURE.md`. Tunggu izin.
