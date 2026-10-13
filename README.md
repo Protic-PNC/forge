@@ -1,6 +1,6 @@
-# 🛡️ Antigravity Plugin: Forge
+# 🛡️ Antigravity & Hermes Plugin: Forge
 
-**Forge** adalah sebuah meta-plugin (Scaffolder) yang dirancang untuk menginjeksi "Mentalitas Mentor Arsitek Senior" ke dalam AI Antigravity pada proyek baru mana pun. 
+**Forge** adalah sebuah meta-plugin (Scaffolder) yang dirancang untuk menginjeksi "Mentalitas Mentor Arsitek Senior" ke dalam AI Antigravity IDE maupun Hermes Agent CLI pada proyek baru mana pun.
 
 Dengan menjalankan *Forge Constitution*, Anda dapat secara otomatis membangun regulasi arsitektur, prosedur, dan rantai komando (Skill & Rules) standar Enterprise tanpa harus menulis ulang protokol dari nol.
 
@@ -25,48 +25,50 @@ Setelah Forge diinjeksikan ke sebuah proyek, proyek tersebut akan memiliki 6 *Sl
 - `/execute` → Mengeksekusi kode produksi dengan *Blast-Radius Assessment*.
 - `/audit` → Evaluasi statis dengan LSP dan pembuatan Pull Request via MCP GitHub.
 
-## 💻 Instalasi (Super Mudah untuk Pemula)
+## 💻 Instalasi & Konfigurasi
 
-Agar AI di komputer Anda mengenali perintah `/forge-constitution`, Anda harus memasang folder ini ke dalam "otak" Antigravity Anda. Pilih salah satu cara di bawah ini:
+Forge didukung secara penuh untuk pengguna **Antigravity IDE** (berbasis editor) maupun **Hermes Agent** (berbasis terminal). Silakan pilih lingkungan kerja yang Anda gunakan:
 
-### Cara 1: Lewat Terminal (Paling Cepat)
-Cukup buka **PowerShell** atau Terminal di VSCode Anda, lalu *copy-paste* perintah sakti ini dan tekan Enter:
+### Opsi A: Instalasi untuk Hermes Agent (Native CLI)
 
-```powershell
-New-Item -ItemType Directory -Force -Path "$HOME\.gemini\config\plugins"; git clone https://github.com/Protic-PNC/forge.git "$HOME\.gemini\config\plugins\forge"
-```
+Hermes Agent adalah platform *command-line* paling optimal untuk menjalankan Forge karena dukungannya yang kuat terhadap *persistent memory* dan *prompt caching*.
 
-### Cara 2: Manual (Tanpa Coding/Terminal)
-Jika Anda pusing melihat terminal, ikuti langkah *drag-and-drop* ini:
-1. Di halaman GitHub ini, klik tombol hijau **Code** lalu pilih **Download ZIP**.
-2. Ekstrak (Unzip) file yang baru saja didownload.
-3. Ubah nama foldernya menjadi `forge` (huruf kecil semua).
-4. Pindahkan folder `forge` tersebut ke dalam direktori tersembunyi ini di komputer Anda:
-   👉 `C:\Users\NAMA_USER_KOMPUTER_ANDA\.gemini\config\plugins\`
-   *(Jika folder `plugins` belum ada, buat saja foldernya secara manual).*
+1. Buka **PowerShell** di Windows Anda.
+2. Jalankan perintah satu baris ini untuk mengunduh Forge dan mengaktifkannya sebagai *Global Skill* di Hermes:
+   ```powershell
+   git clone https://github.com/Protic-PNC/forge.git "$env:LOCALAPPDATA\hermes\forge"; New-Item -ItemType Junction -Path "$env:LOCALAPPDATA\hermes\skills\forge-constitution" -Value "$env:LOCALAPPDATA\hermes\forge\skills\forge-constitution"
+   ```
+3. Selesai! Anda bisa langsung membuka terminal di folder proyek mana pun, ketik `hermes`, lalu jalankan `/forge-constitution`.
 
----
-**⚠️ LAKUKAN INI SETELAH SELESAI:**
-Tutup (Close) aplikasi IDE Anda sepenuhnya, lalu buka kembali agar sistem membaca "kekuatan" baru yang baru saja Anda pasang.
+### Opsi B: Instalasi untuk Antigravity IDE
+
+1. Buka **PowerShell** atau Terminal di dalam VS Code Anda.
+2. Jalankan perintah di bawah ini untuk mengkloning repositori Forge ke dalam direktori *plugin* internal Antigravity:
+   ```powershell
+   New-Item -ItemType Directory -Force -Path "$HOME\.gemini\config\plugins"; git clone https://github.com/Protic-PNC/forge.git "$HOME\.gemini\config\plugins\forge"
+   ```
+3. **PENTING:** Tutup (Close) aplikasi IDE Anda sepenuhnya, lalu buka kembali agar sistem membaca "kekuatan" baru yang baru saja Anda pasang.
 
 ## 🔄 Pembaruan (Update) Plugin
-Jika ada versi terbaru dari Forge dan Anda ingin memperbaruinya, lakukan langkah ini:
 
-### Cara 1: Lewat Terminal
-Buka PowerShell, lalu jalankan perintah ini untuk menarik (*pull*) pembaruan terbaru dari GitHub:
-```powershell
-Set-Location "$HOME\.gemini\config\plugins\forge"; git pull
-```
+Jika ada versi terbaru dari Forge dan Anda ingin memperbaruinya, cukup buka PowerShell dan jalankan perintah *pull* sesuai lingkungan yang Anda instal:
 
-### Cara 2: Manual
-1. Hapus folder `forge` lama di dalam `C:\Users\NAMA_USER_KOMPUTER_ANDA\.gemini\config\plugins\`.
-2. Ulangi **Cara 2 (Manual)** pada bagian Instalasi di atas.
-*(Catatan: Jangan lupa *restart* IDE Anda setelah melakukan pembaruan).*
+* **Pengguna Hermes Agent:**
+  ```powershell
+  Set-Location "$env:LOCALAPPDATA\hermes\forge"; git pull
+  ```
+
+* **Pengguna Antigravity IDE:**
+  ```powershell
+  Set-Location "$HOME\.gemini\config\plugins\forge"; git pull
+  ```
+
+*(Catatan untuk pengguna Antigravity: Jangan lupa *restart* IDE Anda setelah melakukan pembaruan).*
 
 ## ⚙️ Cara Penggunaan (The Injection)
 
 1. Buka proyek/repositori baru Anda (yang masih kosong atau butuh regulasi).
-2. Panggil agen Antigravity dan langsung panggil *slash command* berikut di chat:
+2. Panggil agen AI (Hermes / Antigravity) dan langsung panggil *slash command* berikut di chat:
    > `/forge-constitution`
 3. AI akan bertransformasi menjadi **The Forge Master**. Cukup ikuti wawancara 5 tahap yang ia berikan:
    - Tahap 1: Penggalian DNA Proyek
@@ -76,4 +78,5 @@ Set-Location "$HOME\.gemini\config\plugins\forge"; git pull
    - Tahap 5: Injeksi Fisik (Pencetakan File ke dalam folder `.agents/` proyek Anda)
 
 ---
+
 *Ditempa dengan kedisiplinan tingkat tinggi untuk melahirkan kode skala Enterprise.*
