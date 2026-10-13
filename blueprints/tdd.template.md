@@ -1,3 +1,11 @@
+---
+name: project-tdd
+description: >-
+  SOP Test-Driven Development (/tdd). Fase spesifikasi pengujian berlapis sebelum kode produksi.
+forge_version: "{{FORGE_VERSION}}"
+forged_at: "{{FORGED_AT}}"
+project_name: "{{PROJECT_NAME}}"
+---
 # SOP TEST-DRIVEN DEVELOPMENT (`/tdd`)
 # DOMAIN: {{PROJECT_NAME}}
 
@@ -7,22 +15,40 @@ Saat pengguna menjalankan perintah `/tdd`:
 Ini adalah **"Fase Spesifikasi"**, BUKAN fase implementasi. AI dan developer HANYA fokus menyusun skenario pengujian berdasarkan *Plan* hingga tes tersebut dipastikan gagal (*Red*).
 
 ### 1. 🛑 LARANGAN MUTLAK KODE PRODUKSI (STRICT RED PHASE)
-- Di dalam sesi `/tdd`, AI **DILARANG KERAS** menyajikan atau menulis kode produksi ({{PRODUCTION_CODE_LAYERS}}).
-  *(Catatan Injektor: Isi dengan layer produksi sesuai tech stack. Misal BE Laravel: "Controller, Service, Model, FormRequest". Misal FE React: "Component, Hook, Store, API Client").*
+- Di dalam sesi `/tdd`, AI **DILARANG KERAS** menyajikan atau menulis kode produksi:
+<!-- GENERATION_DIRECTIVE: PRODUCTION_CODE_LAYERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+Isi dengan layer produksi sesuai tech stack yang dilarang ditulis di fase TDD.
+Misal BE: "Controller, Service, Model, FormRequest".
+Misal FE: "Komponen React, API Routes, Server Actions, Schema ORM".
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
 - Jika pengguna meminta kode produksi untuk memperbaiki tes yang gagal, AI **WAJIB MENOLAK** dan mengarahkan mereka secara tegas: *"Tes kita sudah berhasil gagal (Red) sesuai ekspektasi. Silakan panggil perintah `/execute` untuk mulai menulis kode produksi agar tes ini menjadi hijau (Green)."*
 
 ### 2. 🎯 RUANG LINGKUP WAJIB (MANDATORY TEST SCOPE)
-AI **WAJIB** membuat 2 jenis tes untuk setiap fitur/tiket:
-{{MANDATORY_TEST_SCOPE}}
-*(Catatan Injektor: Isi dengan jenis-jenis tes secara komprehensif dan berlapis (tanpa batas kuota) yang relevan sesuai standar Enterprise tech stack. Contoh:*
-- *BE Laravel: "1. Feature Test (HTTP/E2E): Simulasi request HTTP ke endpoint, periksa respons JSON termasuk FormRequest validasi 422, verifikasi mutasi database (assertDatabaseHas). 2. Unit Test (Service Isolation): Tes class Service secara murni terisolasi dengan Mocking dependensi."*
-- *FE React: "1. Integration Test (React Testing Library): Render komponen secara utuh, simulasi interaksi user (click, input), verifikasi perubahan DOM. 2. Unit Test (Hook/Store Isolation): Tes custom hook atau state store secara terisolasi dengan mock API response.")*
+AI **WAJIB** membuat jenis tes yang relevan untuk setiap fitur/tiket:
+<!-- GENERATION_DIRECTIVE: MANDATORY_TEST_SCOPE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+Isi dengan jenis-jenis tes secara komprehensif dan berlapis (tanpa batas kuota)
+yang relevan sesuai standar Enterprise tech stack.
+Contoh BE: 1. Feature Test (HTTP/E2E), 2. Unit Test (Service Isolation).
+Contoh FE: 1. Integration Test (Component RTL), 2. Unit Test (Hook/Store).
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
 
 ### 3. 🏭 MANDAT DATA DUMMY (DATA FIXTURE YANG SEHAT)
 - AI **DILARANG** menggunakan data statis/manual untuk *setup* data tes.
 - AI **WAJIB** menggunakan mekanisme *data fixture* standar tech stack ini:
-  {{TEST_DATA_FIXTURE_STRATEGY}}
-  *(Catatan Injektor: Isi sesuai tech stack. Misal BE Laravel: "Gunakan Factory (User::factory()->create()). Jika Factory belum ada, tugas pertama di sesi /tdd adalah menulis Factory tersebut." Misal FE React: "Gunakan MSW (Mock Service Worker) untuk mock API response dan fixture JSON untuk data dummy.")*
+<!-- GENERATION_DIRECTIVE: TEST_DATA_FIXTURE_STRATEGY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+Isi sesuai mekanisme fixture standar tech stack.
+Misal BE: Factory (User::factory()->create()).
+Misal FE: MSW (Mock Service Worker) dan fixture JSON dummy.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
 
 ### 4. 🚑 PENANGANAN ERROR (DIRECT SOLUTION)
 - Jika tes yang sudah ditulis dijalankan oleh pengguna dan mengalami *error* konfigurasi/teknis, AI **WAJIB langsung menyodorkan kode perbaikan/jawaban yang benar**.

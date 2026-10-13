@@ -1,3 +1,11 @@
+---
+name: project-audit
+description: >-
+  SOP Audit Kode (/audit). Evaluasi kepatuhan arsitektur dan penyerahan handoff PR dengan filosofi kakak tingkat.
+forge_version: "{{FORGE_VERSION}}"
+forged_at: "{{FORGED_AT}}"
+project_name: "{{PROJECT_NAME}}"
+---
 # SOP AUDIT KODE (`/audit`)
 # DOMAIN: {{PROJECT_NAME}}
 
@@ -6,10 +14,15 @@ Saat perintah `/audit` dikirim:
 1. **Default Behavior:** Jika tanpa target file, AI otomatis mengaudit seluruh file yang baru disentuh pada sesi /execute terakhir.
 2. **Aksi Pre-Audit via LSP:** Sebelum melakukan evaluasi, AI **WAJIB** memanggil alat `agent-lsp` (khususnya `get_diagnostics` dan `find_references`) untuk memastikan: (a) Tidak ada method abstrak dari Interface yang terlewat diimplementasikan, (b) Tidak ada *unused imports/variables*, dan (c) Alur parameter antar layer benar-benar valid secara AST.
 3. **Poin Evaluasi Kritis:**
-   {{AUDIT_EVALUATION_POINTS}}
-   *(Catatan Injektor: Isi dengan poin-poin evaluasi arsitektur kritis secara KOMPREHENSIF dan MENYELURUH sesuai tech stack. DILARANG membatasi jumlah poin ke angka tertentu. Hasilkan standar Enterprise murni. Contoh:*
-   - *BE Laravel: "Deteksi N+1 Query Eloquent, Kebocoran validasi inline (wajib FormRequest), Verifikasi proteksi otorisasi (Policy/Gate), Penanganan error defensif (cegah SQL Error 500), Kepatuhan linter Laravel Pint."*
-   - *FE React: "Deteksi re-render berlebihan (useCallback/useMemo), Kebocoran memory (useEffect cleanup), Aksesibilitas (aria-labels, keyboard navigation), Bundle size analysis (lazy loading), Kepatuhan linter ESLint/Prettier.")*
+   <!-- GENERATION_DIRECTIVE: AUDIT_EVALUATION_POINTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+   Isi dengan poin-poin evaluasi arsitektur kritis secara KOMPREHENSIF dan
+   MENYELURUH sesuai tech stack. DILARANG membatasi jumlah poin ke angka tertentu.
+   Misal BE: N+1 Query, Validasi FormRequest, Policy/Gate, Defensive Error, Linter.
+   Misal FE: Re-render liar, Memory leak cleanup, A11y, Bundle size, ESLint.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   -->
 4. **FORMAT OUTPUT WAJIB (`/audit`) - 3 BAGIAN MUTLAK:**
    DILARANG menutup respons audit dengan salam santai atau kalimat umum seperti "silakan buat PR dan kabari tech lead". AI WAJIB menyajikan 3 bagian terstruktur berikut:
    - **Bagian 1: 📋 Tabel Audit Berkas:** Tabel komparasi seluruh berkas yang disentuh, status evaluasi (PASS/WARN/FAIL), dan catatan teknis spesifik.
@@ -19,8 +32,13 @@ Saat perintah `/audit` dikirim:
      * *Draf Pull Request Siap Salin:* Judul PR & Deskripsi PR lengkap (mengintegrasikan ringkasan fitur, trade-off, dan checklist DoD). AI **WAJIB** mengekstrak nomor issue dari nama branch aktif (`issue-<nomor>`) atau artefak plan dan mencantumkan `Closes #<nomor-issue>` di baris teratas deskripsi PR untuk otomasi penutupan tiket dan pergerakan kartu kanban dari `In Progress` ke `Done` saat PR di-merge. Draf PR ini WAJIB disajikan sepenuhnya di dalam blok kode markdown (` ```markdown `) agar mudah disalin utuh oleh pengguna.
      * *Pelayanan Proaktif & Aturan Mutlak PR:* DILARANG melakukan `git merge` lokal ke `main`. Di akhir sesi, AI **WAJIB** mengambil alih beban kognitif pengguna dengan menawarkan secara elegan: *"Audit telah lulus dengan predikat Enterprise. Apakah Anda ingin saya membuat Pull Request-nya menggunakan MCP GitHub sekarang agar Anda bisa langsung bersantai?"*
      * *Template Notifikasi Tim:* Jika pengerjaan melibatkan perubahan API/kontrak data, teks pesan WAJIB memuat peringatan kepada tim lain yang terdampak. (Sajikan dalam blok ` ```text `).
-       {{CROSS_TEAM_NOTIFICATION_TEMPLATE}}
-       *(Catatan Injektor: Isi sesuai konteks tim. Misal Full-Stack: "Ada perubahan struktur API, tolong tim UI segera jalankan npm run typegen di lokal ya". Misal Monorepo: "Ada perubahan shared types, tolong pull latest dan rebuild.")*
+       <!-- GENERATION_DIRECTIVE: CROSS_TEAM_NOTIFICATION_TEMPLATE
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+       Isi template pesan notifikasi tim jika ada perubahan API/kontrak data/skema.
+       Misal: "Ada perubahan skema database baru, tolong pull dan jalankan db migrate".
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       -->
      * *Action Hook (Pertanyaan Pancingan Aksi Selanjutnya):* AI wajib memancing aksi berikutnya dengan menanyakan apakah developer ingin lanjut mengambil tiket berikutnya atau ada bagian teknis yang ingin didalami.
 
 ## 🎓 PEDAGOGI & BIMBINGAN MENTOR ARSITEK (`/audit`)

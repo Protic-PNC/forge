@@ -67,6 +67,7 @@ description: >-
 2. Kumpulkan seluruh `updated_blueprints` secara unik (deduplikasi).
 3. Kumpulkan seluruh `summary` pembaruan dari versi-versi terkait.
 4. Petakan nama blueprint ke jalur berkas lokal menggunakan **Tabel Mapping** di atas.
+5. **Deteksi Berkas Baru (New File Ingestion):** Periksa apakah berkas target lokal sudah ada di disk. Jika berkas fisik target belum ada (misal ada blueprint baru yang ditambahkan di rilis Forge global), tandai statusnya sebagai `[BERKAS BARU]`. Jika sudah ada, tandai sebagai `[PEMBARUAN]`.
 
 ---
 
@@ -81,11 +82,12 @@ description: >-
    - [Rangkuman dari summary release terkait]
    
    ### 🎯 Berkas Blueprint yang Terdampak ({{JUMLAH_BERKAS}} Berkas):
-   | # | Blueprint Asal | Target Berkas Lokal |
-   |:--|:---|:---|
-   | 1 | `master_rules.template.md` | `.agents/rules/MASTER_RULES.md` |
-   | 2 | `grill-me.template.md` | `.agents/skills/project-grill-me/SKILL.md` |
-   | 3 | `edeate.template.md` | `.agents/skills/project-edeate/SKILL.md` |
+   | # | Blueprint Asal | Target Berkas Lokal | Status |
+   |:--|:---|:---|:---|
+   | 1 | `master_rules.template.md` | `.agents/rules/MASTER_RULES.md` | [PEMBARUAN] |
+   | 2 | `grill-me.template.md` | `.agents/skills/project-grill-me/SKILL.md` | [PEMBARUAN] |
+   | 3 | `debug.template.md` | `.agents/skills/project-debug/SKILL.md` | [PEMBARUAN] |
+   | 4 | `arsip.template.md` | `.agents/rules/ARSIP.md` | [BERKAS BARU] |
    
    *(Berkas lainnya tidak terdampak dan akan diabaikan demi efisiensi).*
    ```
@@ -110,20 +112,23 @@ description: >-
 AI memproses berkas yang terdampak **SATU PER SATU PER RESPONS**. 
 Di setiap iterasi:
 1. Baca berkas template terbaru dari direktori global: `blueprints/{{NAMA_BLUEPRINT}}`.
-2. Baca data dari `.agents/forge_manifest.json` (lokal):
+2. **Preservasi Zona Kustom (Anti-Data Loss):**
+   Jika berkas target lokal sudah ada di disk, AI **WAJIB** memeriksa apakah berkas tersebut memuat zona riwayat dinamis (misalnya `<!-- ADR_LOG_START -->` hingga `<!-- ADR_LOG_END -->` pada `ARCHITECTURE.md`). Jika ada entri catatan yang dibuat developer/tim di dalamnya, ekstrak dan simpan teks tersebut agar tidak hilang saat ditimpa.
+3. **Penanganan Berkas Baru & Celah Variabel (Micro-Interview):**
+   Jika berkas berstatus `[BERKAS BARU]`:
+   - AI memeriksa apakah template berkas baru tersebut memuat placeholder variabel `{{VAR}}` atau `<!-- GENERATION_DIRECTIVE: ... -->` yang belum terdaftar di dalam `dna` atau `directives` manifest lokal.
+   - Jika ada variabel baru yang belum diketahui: AI **WAJIB BERHENTI** dan mengajukan 1 pertanyaan wawancara terarah (disertai 3 spektrum opsi + rekomendasi) kepada developer. Setelah disetujui, simpan nilai tersebut ke `.agents/forge_manifest.json` sebelum melanjutkan render.
+4. Baca data dari `.agents/forge_manifest.json` (lokal):
+   - Metadata Front-Matter (sudah ada di template):
+     - `{{FORGE_VERSION}}` ➔ `{{GLOBAL_VERSION}}`
+     - `{{FORGED_AT}}` ➔ `{{FORGED_AT_DARI_MANIFEST}}`
+     - `{{PROJECT_NAME}}` ➔ `{{PROJECT_NAME_DARI_MANIFEST}}`
+     - Sisipkan baris `updated_at: "{{TANGGAL_HARI_INI}}"` tepat di bawah `forged_at` pada blok front-matter.
    - Variabel `dna`: substitusikan langsung ke seluruh placeholder `{{VAR}}` di template.
    - Blok `directives`: gantikan blok `<!-- GENERATION_DIRECTIVE: NAMA_DIRECTIVE ... -->` dengan konten string yang tersimpan di field `directives.NAMA_DIRECTIVE` manifest.
-3. Tambahkan front-matter YAML di baris paling atas:
-   ```yaml
-   ---
-   forge_version: "{{GLOBAL_VERSION}}"
-   forged_at: "{{FORGED_AT_DARI_MANIFEST}}"
-   updated_at: "{{TANGGAL_HARI_INI}}"
-   project_name: "{{PROJECT_NAME_DARI_MANIFEST}}"
-   ---
-   ```
-4. Tulis ulang berkas target ke disk lokal (misal: `.agents/rules/MASTER_RULES.md`).
-5. Berikan laporan bahwa berkas tersebut telah selesai dirender, lalu minta konfirmasi developer sebelum melanjutkan ke berkas berikutnya dalam antrean.
+   - Zona Kustom yang diekstrak: tempelkan kembali ke dalam blok tag yang sesuai (misal di antara `<!-- ADR_LOG_START -->` dan `<!-- ADR_LOG_END -->`).
+5. Tulis atau buat berkas target di disk lokal (misal: `.agents/rules/MASTER_RULES.md`).
+6. Berikan laporan bahwa berkas tersebut telah selesai dirender, lalu minta konfirmasi developer sebelum melanjutkan ke berkas berikutnya dalam antrean.
 
 `[TUGAS AI BERHENTI DI SINI. DILARANG MERENDER FASE SELANJUTNYA SEBELUM ADA BALASAN USER]`
 

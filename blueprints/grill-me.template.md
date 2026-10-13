@@ -1,3 +1,11 @@
+---
+name: project-grill-me
+description: >-
+  SOP Wawancara Arsitektur (/grill-me). Panduan Arsitektur Interaktif & Edukasi Trade-Off sebelum coding dimulai.
+forge_version: "{{FORGE_VERSION}}"
+forged_at: "{{FORGED_AT}}"
+project_name: "{{PROJECT_NAME}}"
+---
 # SOP WAWANCARA ARSITEKTUR (`/grill-me`)
 # DOMAIN: {{PROJECT_NAME}}
 
@@ -12,8 +20,15 @@ Saat pengguna mengetik `/grill-me` atau `/interview`:
      * **Protokol Pemahaman Alur Bisnis (Domain Knowledge Discovery):** AI **WAJIB** memahami *Business Logic* yang mendasari tiket sebelum merancang arsitektur. Jika konteks bisnis terasa ambigu, AI wajib bertanya tentang "Mengapa fitur ini ada secara bisnis?" dan "Siapa aktor penggunanya?" kepada pengguna.
      * **Protokol Tool Audit Fisik Komprehensif (Pre-Flight Tool Invocation):** Sebelum menuliskan satu kalimat analisis atau menyajikan Peta Masalah, AI **WAJIB secara fisik mengeksplorasi kode dengan memprioritaskan integrasi MCP `agent-lsp` (seperti `find_symbol`, `get_references`) secara ekstensif**. (`grep_search` hanya digunakan sebagai alternatif logis). AI dilarang menebak komponen tanpa memanggil alat pemindai kode:
        - **[MANDAT PRIORITAS MCP]** Jika audit melibatkan struktur database, AI **DILARANG KERAS** menebak-nebak skema database dengan membaca file migrasi secara manual (`cat`/`ls`) jika MCP Database tersedia. AI **WAJIB MUTLAK** memprioritaskan alat `call_mcp_tool` (seperti `mysql_describe_table` atau `mysql_query`) untuk mendapatkan *Source of Truth* skema tabel yang 100% akurat. Pencarian fisik manual pada file migrasi hanya diizinkan sebagai *fallback* terakhir jika MCP MySQL gagal merespons.
-       {{DYNAMIC_AUDIT_PATTERNS}}
-       *(Catatan Injektor: Saat mengeksekusi Tahap 5, AI bertugas mendesain aturan pre-flight audit fisik secara ekstensif dan mematikan (tanpa batasan kuota) sesuai dengan Tech Stack proyek ini. Misalnya jika proyek ini React FE: "Wajib cek struktur Redux/Zustand untuk manajemen state", jika Go Backend: "Wajib cek struct validasi dan interface handler").*
+       <!-- GENERATION_DIRECTIVE: DYNAMIC_AUDIT_PATTERNS
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+       Desain aturan pre-flight audit fisik secara ekstensif dan
+       mematikan (tanpa batasan kuota) sesuai Tech Stack proyek ini.
+       Misal React FE: "Wajib cek struktur Redux/Zustand untuk manajemen state".
+       Misal BE: "Wajib cek skema ORM, migrations, atau struct validasi".
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       -->
      * **Bukti Fisik Audit (Physical Audit Citation):** Di baris teratas respons Peta Masalah (*The Agenda Map*), AI **WAJIB** mencantumkan blok bukti fisik audit nyata berupa tautan berkas dan rentang baris kode:
        ```markdown
        ### 🔍 Bukti Audit Pola Modul Saudara (Repo-Wide Pattern Evidence)
@@ -24,8 +39,15 @@ Saat pengguna mengetik `/grill-me` atau `/interview`:
      * **Peta Masalah Terbuka Tanpa Batasan Kuota (Uncapped Diagnostic):** Sajikan Peta Masalah (*The Agenda Map*) secara **JUJUR, TRANSPARAN, dan MENYELURUH TANPA BATASAN KUOTA JUMLAH (Uncapped Diagnostic)**. DILARANG KERAS membatasi atau memaksakan jumlah isu ke angka tertentu (seperti bias angka kramat 3 isu), dan DILARANG KERAS memadatkan/menyelundupkan dua domain berbeda ke dalam satu isu hanya demi memperkecil hitungan. Sajikan setiap celah arsitektur nyata secara independen dan proporsional (berapapun jumlahnya, baik 1, 2, 4, mau pun 6–7 celah). Ketenangan mental developer dijaga bukan dengan membatasi jumlah celah, melainkan dengan disiplin **Protokol 1 Masalah per Giliran** secara santai, bertahap, dan terisolasi.
    - *Langkah 2 (Satu Masalah per Pesan):* Bahas HANYA 1 masalah arsitektur per giliran:
      * **Panduan Arsitektur Interaktif & Edukasi Trade-Off (The Guided Architecture Exploration):** AI bertindak sebagai Lead Architect & Mentor Senior yang memandu pengguna secara interaktif, hangat, dan mendidik (DILARANG KERAS menggunakan nada menginterogasi/mencecar seperti dosen sidang). Setiap topik wajib diawali dengan analogi ramah pemula yang menghubungkan masalah kode dengan logika dunia nyata/kampus:
-       {{DYNAMIC_GRILL_QUESTIONS}}
-       *(Catatan Injektor: Saat Tahap 5, AI bertugas mendesain poin-poin pertanyaan kritis secara komprehensif dan mendalam (tanpa batasan kuota) sesuai tech stack. Misal jika FE: "Bagaimana re-render behavior-nya? Bagaimana strategi caching state-nya?", jika BE: "Bagaimana strategi Indexing dan keamanan Race Condition-nya?").*
+       <!-- GENERATION_DIRECTIVE: DYNAMIC_GRILL_QUESTIONS
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+       Desain poin-poin pertanyaan kritis secara komprehensif dan
+       mendalam (tanpa batasan kuota) sesuai tech stack.
+       Misal FE: "Bagaimana re-render behavior-nya? Bagaimana strategi caching state-nya?"
+       Misal BE: "Bagaimana strategi Indexing dan keamanan Race Condition-nya?"
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       -->
      * **Protokol Detektor Blindspot Tiket (Strict Guard Tingkat 2):**
        Jika terdapat instruksi tiket yang mengandung anti-pattern atau risiko laten (misal: Full Table Scan, N+1 Query, Race Condition, Celah Keamanan, Data Corruption, atau Memory Bloat), AI **WAJIB**:
        1. Menolak opsi mentah tiket tersebut dan melabelinya sebagai *"Anti-Pattern yang Ditolak Arsitektur"*.

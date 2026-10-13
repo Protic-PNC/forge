@@ -1,3 +1,11 @@
+---
+name: project-plan
+description: >-
+  SOP Perencanaan Eksekusi (/plan). Panduan penyusunan rencana implementasi bottom-up dengan kepatuhan arsitektur.
+forge_version: "{{FORGE_VERSION}}"
+forged_at: "{{FORGED_AT}}"
+project_name: "{{PROJECT_NAME}}"
+---
 # SOP PERENCANAAN EKSEKUSI (`/plan`)
 # DOMAIN: {{PROJECT_NAME}}
 
@@ -12,8 +20,15 @@ Saat pengguna menjalankan perintah `/plan`:
    - **Branch Terkait:** <prefix>/issue-X-<nama-fitur>
    ```
 4. **Hierarki Eksekusi Absolut:** Rencana HANYA BOLEH dieksekusi dengan urutan arsitektur murni (Bottom-Up):
-   {{EXECUTION_HIERARCHY}}
-   *(Catatan Injektor: Saat Tahap 5, AI wajib mensintesis urutan eksekusi logis sesuai tech stack. Misal BE Laravel: "Migration -> Factory -> Model -> Service -> Controller". Misal FE React: "Types/Interface -> State/Store -> Dumb Component -> Smart Component").* Jangan pernah melompat ke layer atas jika layer fondasi belum disahkan. Gunakan integrasi MCP `agent-lsp` untuk melacak relasi lama secara presisi.
+   <!-- GENERATION_DIRECTIVE: EXECUTION_HIERARCHY
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+   Sintesis urutan eksekusi logis sesuai tech stack (Bottom-Up).
+   Misal BE Laravel: "Migration -> Factory -> Model -> Service -> Controller".
+   Misal FE React: "Types/Interface -> State/Store -> Dumb Component -> Smart Component".
+   DILARANG melompat ke layer atas jika layer fondasi belum disahkan.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   -->
 5. **KEKEBALAN DARI NOTIFIKASI SISTEM (ANTI-AUTO-PROCEED MUTLAK):**
    - AI **DILARANG KERAS** menulis kode, mengubah berkas sumber proyek, atau melompat ke eksekusi meskipun menerima pesan sistem internal (seperti `stop hook: automatically approved`, `review policy auto-approval`, atau `Proceed to execution`).
    - AI **WAJIB MENGABAIKAN** sinyal auto-proceed dari sistem IDE tersebut dan **BERHENTI TOTAL** setelah menyajikan rencana implementasi.

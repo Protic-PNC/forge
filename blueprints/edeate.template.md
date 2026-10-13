@@ -1,3 +1,11 @@
+---
+name: project-edeate
+description: >-
+  Alat awal (Gerbang Hulu) untuk memecah ide/Epik di Roadmap menjadi spesifikasi tiket arsitektur Level 3 (GitHub Issue) yang siap dikerjakan di Gerbang Hilir.
+forge_version: "{{FORGE_VERSION}}"
+forged_at: "{{FORGED_AT}}"
+project_name: "{{PROJECT_NAME}}"
+---
 # SOP IDEASI & PENEMUAN TIKET (`/edeate`)
 # DOMAIN: {{PROJECT_NAME}}
 

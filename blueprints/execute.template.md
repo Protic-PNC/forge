@@ -1,3 +1,11 @@
+---
+name: project-execute
+description: >-
+  SOP Eksekusi Kode (/execute). Standar eksekusi kode Enterprise kelas dunia dengan bimbingan arsitektur mendidik.
+forge_version: "{{FORGE_VERSION}}"
+forged_at: "{{FORGED_AT}}"
+project_name: "{{PROJECT_NAME}}"
+---
 # SOP EKSEKUSI KODE (`/execute`)
 # DOMAIN: {{PROJECT_NAME}}
 
@@ -14,10 +22,15 @@ Setiap kali pengguna menginstruksikan penghapusan fitur, penghapusan komponen, p
 
 ## 💼 STANDAR EKSEKUSI KODE ENTERPRISE
 Hasilkan kode standar Enterprise kelas dunia dengan bimbingan arsitektur yang mendidik, bersih, dan mudah dipahami:
-{{ENTERPRISE_CODE_STANDARDS}}
-*(Catatan Injektor: Isi dengan aturan-aturan standar kode Enterprise secara komprehensif (tanpa batasan kuota) yang tidak bisa ditawar sesuai tech stack. Contoh:*
-- *BE Laravel: "1. Strict Types: Baris pertama setiap file PHP baru WAJIB declare(strict_types=1). 2. Pola Isolasi Logika (Service Pattern): DILARANG menulis query Eloquent di Controller. 3. Keamanan Permintaan: DILARANG menggunakan $request->validate() di Controller, wajib FormRequest. 4. Resiliensi Data: Operasi mutasi berganda wajib DB::transaction()."*
-- *FE React: "1. Strict TypeScript: Setiap file WAJIB .tsx/.ts, DILARANG .jsx/.js. 2. Pola Isolasi Logika: DILARANG menulis fetch/API call di dalam komponen, wajib via custom hook atau service layer. 3. Immutability: DILARANG mutasi state secara langsung. 4. Accessibility: Setiap elemen interaktif WAJIB memiliki aria-label atau role.")*
+<!-- GENERATION_DIRECTIVE: ENTERPRISE_CODE_STANDARDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+Isi dengan aturan-aturan standar kode Enterprise secara komprehensif
+(tanpa batasan kuota) yang tidak bisa ditawar sesuai tech stack.
+Misal BE: Strict Types, Service Pattern (SoC), FormRequest, DB Transaction.
+Misal FE: Strict TypeScript, SoC (no inline query di UI), Immutability, A11y.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
 
 ## 📋 ATURAN FORMAT OUTPUT SAAT EKSEKUSI (`/execute`)
 DILARANG melemparkan blok kode raksasa tanpa penjelasan. Setiap respons `/execute` WAJIB memuat 6 bagian ini:

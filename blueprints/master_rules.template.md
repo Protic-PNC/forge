@@ -1,3 +1,8 @@
+---
+forge_version: "{{FORGE_VERSION}}"
+forged_at: "{{FORGED_AT}}"
+project_name: "{{PROJECT_NAME}}"
+---
 # MASTER RULES: {{PROJECT_NAME}}
 
 > 🚨 **HUKUM TERTINGGI REPOSITORI INI**

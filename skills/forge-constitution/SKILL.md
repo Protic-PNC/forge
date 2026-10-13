@@ -139,7 +139,7 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   Format wajib `.agents/forge_manifest.json`:
   ```json
   {
-    "forge_version": "1.1.0",
+    "forge_version": "1.2.0",
     "forged_at": "YYYY-MM-DD",
     "project_name": "{{PROJECT_NAME}}",
     "dna": {
@@ -159,6 +159,7 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
     "directives": {
       "MCP_POLICY_SECTION": "...",
       "DYNAMIC_AUDIT_PATTERNS": "...",
+      "DYNAMIC_GRILL_QUESTIONS": "...",
       "EXECUTION_HIERARCHY": "...",
       "ENTERPRISE_CODE_STANDARDS": "...",
       "AUDIT_EVALUATION_POINTS": "...",
@@ -170,20 +171,13 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   }
   ```
 
-- **Protokol Metadata Versi (Version Stamping):**
-  Setiap file konstitusi yang dicetak oleh AI **WAJIB** menyertakan blok front-matter YAML di baris paling atas file (sebelum heading `#`). Format wajib:
-  ```yaml
-  ---
-  forge_version: "X.X.X"
-  forged_at: "YYYY-MM-DD"
-  project_name: "NamaProyek"
-  ---
-  ```
-  - `forge_version`: Diambil dari field `version` di file `plugin.json` Forge global.
-  - `forged_at`: Tanggal hari ini saat injeksi dilakukan.
-  - `project_name`: Nama proyek yang didapatkan dari Tahap 1.
+- **Protokol Metadata Versi (Version Stamping Terintegrasi):**
+  Seluruh berkas blueprint di direktori `blueprints/` kini telah memiliki blok front-matter YAML bawaan di baris paling atas. Saat melakukan injeksi, AI **WAJIB** mensubstitusikan variabel metadata tersebut secara deterministik:
+  - `{{FORGE_VERSION}}`: Diambil dari field `version` di file `plugin.json` Forge global.
+  - `{{FORGED_AT}}`: Tanggal hari ini saat injeksi dilakukan (format `YYYY-MM-DD`).
+  - `{{PROJECT_NAME}}`: Nama proyek yang didapatkan dari Tahap 1.
   
-  Metadata ini digunakan oleh `/forge-update` untuk mendeteksi apakah konstitusi lokal perlu disinkronkan dengan versi Forge terbaru. **DILARANG** melewatkan front-matter ini pada file mana pun.
+  Metadata ini digunakan oleh `/forge-update` untuk mendeteksi apakah konstitusi lokal perlu disinkronkan dengan versi Forge terbaru. AI **DILARANG KERAS** menghapus blok front-matter ini saat mencetak berkas apa pun.
 
 - **Aturan Injeksi & Analisis Celah (Gap Analysis):** 
   1. AI TIDAK BOLEH mencetak semua file sekaligus. AI harus membaca template, menyuntikkan variabel, dan mencetak **SATU FILE PER RESPONS** ke repositori lokal.

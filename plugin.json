@@ -1,12 +1,27 @@
 {
   "name": "forge-constitution",
   "description": "Enterprise Constitution Scaffolder Plugin",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "skills": [
     "forge-constitution",
     "forge-update"
   ],
   "releases": {
+    "1.2.0": {
+      "updated_blueprints": [
+        "architecture.template.md",
+        "audit.template.md",
+        "debug.template.md",
+        "edeate.template.md",
+        "execute.template.md",
+        "git_workflow.template.md",
+        "grill-me.template.md",
+        "master_rules.template.md",
+        "plan.template.md",
+        "tdd.template.md"
+      ],
+      "summary": "Perombakan total blueprint /debug (Scientific Debugging Pipeline), penanaman front-matter YAML fisik di seluruh 10 blueprint, standardisasi blok GENERATION_DIRECTIVE deklaratif, penambahan protokol ADR pada architecture, penguatan git_workflow (Branch Retention & Main Protection), eliminasi redundansi AGENTS.md demi native AGY, serta penyempurnaan declarative re-render forge-update (New File Ingestion & Custom Data Preservation)."
+    },
     "1.1.0": {
       "updated_blueprints": [
         "master_rules.template.md",

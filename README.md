@@ -13,7 +13,7 @@ Forge mengatasi 3 masalah utama dalam kolaborasi AI-Developer:
 3. **Halusinasi Kode:** Memaksa AI menggunakan Panca Indera (MCP Database & Agent-LSP) sebelum menulis/menganalisis masalah.
 
 ## 🚀 Fitur & Senjata (The Two-Gateway Pipeline)
-Setelah Forge diinjeksikan ke sebuah proyek, proyek tersebut akan memiliki 6 *Slash Commands* absolut:
+Setelah Forge diinjeksikan ke sebuah proyek, proyek tersebut akan memiliki 7 *Slash Commands* absolut:
 
 **Gateway 1: Hulu (Ideasi)**
 - `/edeate` → Merumuskan ide mentah menjadi Spesifikasi Arsitektur (Tiket Level 3).
@@ -24,6 +24,7 @@ Setelah Forge diinjeksikan ke sebuah proyek, proyek tersebut akan memiliki 6 *Sl
 - `/tdd` → Menulis skenario gagal (Strict Red Phase).
 - `/execute` → Mengeksekusi kode produksi dengan *Blast-Radius Assessment*.
 - `/audit` → Evaluasi statis dengan LSP dan pembuatan Pull Request via MCP GitHub.
+- `/debug` → Investigasi anomali/akar masalah berbasis AST dan bukti sebelum penulisan patch.
 
 ## 💻 Instalasi & Konfigurasi
 
