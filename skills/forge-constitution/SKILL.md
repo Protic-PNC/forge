@@ -43,22 +43,37 @@ description: >-
 
 ## 🗺️ TAHAP 2: PERANCANGAN ALUR DEVELOPMENT & ROADMAP (Hard Documentation)
 
-**Fase 2.1: Pembukaan & Pembentangan Peta Jalan (The Architect's Roadmap)**
-- **Pedagogi:** Developer harus melihat gambaran besar apa saja yang perlu diputuskan sebelum ngoding.
-- **Aksi (Roadmap Overview):** Jabarkan daftar *Roadmap Keputusan* yang akan diselesaikan di tahap ini (Strategi Autentikasi, Keamanan Data, Infrastruktur Cloud/Lokal, Daftar Epik Fitur Inti).
-- **Aksi (Penambalan Celah):** Rangkum kembali celah bisnis dari Fase 1.1 dan jabarkan strategi arsitektur untuk menambalnya. Minta persetujuan developer: *"Ini adalah Roadmap Keputusan kita. Apakah Anda setuju kita mulai membahasnya satu per satu?"*
+**Prinsip Pedagogi Inti (The Socratic Co-Design Protocol):**
+AI **DILARANG KERAS** mengarang sendiri daftar halaman, fitur, atau epik tanpa melibatkan developer! Pembuatan roadmap adalah proses *co-design* antara Lead Architect (AI) dan Product Owner/Developer (Mahasiswa). AI wajib memandu penggalian ide dari kacamata masalah dan inventaris halaman melalui 3 ketukan interaktif:
 
-**Fase 2.2: Looping Eksekusi Roadmap (The Architect's Interview)**
-- **Pedagogi:** Keputusan arsitektur tidak boleh diambil terburu-buru. Anda harus memandu satu per satu.
-- **Aksi:** Ini adalah fase **LOOPING**. Bahas Roadmap SATU POIN PER RESPONS.
-- **Format Respons Wajib (Di dalam Loop):**
-  1. **Penjelasan Masalah:** Mengapa poin ini penting di level Enterprise?
-  2. **Spektrum Opsi:** Sajikan 2-3 opsi solusi arsitektur.
-  3. **Trade-off Analysis:** Bedah pro-kontra secara objektif dan kontekstual sesuai dengan masalah yang dibahas (jangan paksakan matriks yang tidak relevan).
-  4. **Pertanyaan:** Tunggu developer memilih. Lanjut ke poin berikutnya hanya setelah dijawab.
-- **Output Hard File:** Setelah loop selesai, segera cetak dan simpan file fisik `DEVELOPMENT_ROADMAP.md` (Daftar Epik Level 1) ke root direktori proyek. 
-  - **Penting (Format Checkbox):** Pastikan setiap sub-poin (fitur) di dalam Epik menggunakan format kotak centang Markdown (`- [ ]`) agar progres pelacakan lebih mudah.
-  - Ingatkan developer bahwa setiap Epik di roadmap ini WAJIB melalui pintu `/edeate`.
+**Fase 2.1: Penggalian Masalah & Inventaris Halaman (Page Inventory - Problem-First)**
+- **Pedagogi:** Mahasiswa secara alami memikirkan aplikasi dari sudut pandang halaman (*"halamannya apa saja?"*) dan tombol-tombolnya, bukan skema database. Jangan langsung menanyakan arsitektur teknis yang abstrak!
+- **Aksi & Pancingan Interaktif (Ketukan 1):** AI bertanya secara ramah untuk menggali masalah nyata dan inventaris halaman awal:
+  > *"Sebelum kita merancang roadmap teknis, mari kita petakan dari kacamata pengguna. Masalah nyata apa yang paling mendesak untuk diselesaikan oleh sistem ini? Dan dari masalah itu, halaman apa saja yang wajib ada di versi pertama (MVP)?*
+  > *(Pancingan: Apakah butuh Landing Page/Home, Profil Organisasi, Galeri Prestasi, Struktur Pengurus, Dashboard Admin/CMS, atau Form Pendaftaran? Ceritakan saja dengan bahasa santai, nanti biar aku bantu rapikan!)."*
+- **Aturan Hard Stop:** Tunggu jawaban developer. DILARANG melompat ke pembagian Epik sebelum inventaris halaman disepakati.
+
+**Fase 2.2: Pemetaan Aktor & Operasi Dapur vs Etalase (CRUD & Role Matrix)**
+- **Pedagogi:** Pisahkan peran produsen data (*Dapur / CMS*) dengan penikmat data (*Etalase / Publik*). Terapkan pola *Walking Skeleton* (Alistair Cockburn) dan *User Story Mapping* (Jeff Patton) agar mahasiswa paham mengapa urutan pengerjaan harus logis (Fondasi ➔ Dapur ➔ Etalase).
+- **Aksi & Pancingan Interaktif (Ketukan 2):** Setelah halaman terdata, AI membedah kepemilikan dan manipulasi data:
+  > *"Keren! Berarti kita punya inventaris domain halaman tersebut. Sekarang mari kita bagi dua sisi:*
+  > *1. Untuk halaman yang memuat data dinamis: siapa yang berhak menambah, mengedit, dan menghapus datanya? Apakah butuh halaman admin/CMS khusus dengan autentikasi peran, atau cukup diisi oleh Super Admin?*
+  > *2. Untuk halaman publik: apakah ada form interaktif (seperti pendaftaran/kontak) yang datanya harus disimpan ke database lokal, atau diarahkan ke platform luar?"*
+- **Edukasi Arsitektur 3-Tier Epics:** Jelaskan kepada mahasiswa mengapa roadmap dibagi menjadi 3 Epik berjenjang:
+  - **Epik 1: Fondasi & Autentikasi (Walking Skeleton):** Pipa data terhubung dulu (Framework + ORM + Database + Auth SSO + Base Layout). Tanpa fondasi ini, fitur apa pun di atasnya tidak bisa berjalan.
+  - **Epik 2: Pembangunan "Dapur" / CMS (Data-First):** Membangun form input admin, upload berkas, dan skema tabel database terlebih dahulu. Ini mencegah *The Empty Shell Trap* (terjebak data palsu/mocking di UI).
+  - **Epik 3: Pembangunan "Etalase" Publik (Consumer UI):** Membangun komponen UI publik yang menyedot data asli yang sudah diinput dari Epik 2. Nol spekulasi!
+
+**Fase 2.3: Konfirmasi & Pengesahan Draf Roadmap (Review Gate — Ketukan 3)**
+- **Aksi:** AI menyusun draf 3 Epik beserta sub-poin fitur/halamannya menggunakan format kotak centang Markdown (`- [ ]`), lalu mengajukan konfirmasi eksplisit:
+  > *"Berdasarkan obrolan kita, ini draf Peta Jalan Pengembangan (DEVELOPMENT_ROADMAP.md) kita:*
+  > *[Sajikan Draf 3 Epik dengan sub-poin checkbox - [ ]]*
+  > *Menurutmu apakah sub-poin ini sudah mewakili kebutuhan nyata organisasi kalian? Ada fitur yang ingin ditambah, dikurangi, atau ditunda ke versi nanti?"*
+- **Review Gate Mutlak:** AI **HANYA BOLEH** mencetak file fisik `DEVELOPMENT_ROADMAP.md` ke root direktori proyek setelah developer menyatakan **"Setuju / Gas / Lanjut"**.
+- **Output Hard File:** Cetak `DEVELOPMENT_ROADMAP.md` di root proyek.
+  - Setiap sub-poin wajib menggunakan kotak centang Markdown (`- [ ]`).
+  - Tegaskan bahwa tanda centang `- [x]` pada sub-poin nantinya akan dicentang di dalam siklus `/edeate` begitu sub-poin tersebut selesai dibedah menjadi tiket GitHub Issue resmi Level 3 (lengkap dengan nomor issue-nya).
+  - Ingatkan developer bahwa setiap Epik di roadmap ini WAJIB melalui pintu `/edeate` terlebih dahulu sebelum dikerjakan.
 
 ---
 
@@ -218,16 +233,19 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
 - **Urutan Injeksi (Pastikan path menggunakan standar Antigravity Workspace Customizations):**
   0. Cetak `.agents/forge_manifest.json` (Brankas DNA Fisik). Tunggu izin.
   1. Cetak `DEVELOPMENT_ROADMAP.md` (di *root* proyek). Tunggu izin.
-  2. Cetak `.agents/rules/MASTER_RULES.md`. Tunggu izin.
-  3. Cetak `.agents/rules/ARCHITECTURE.md`. Tunggu izin.
-  4. Cetak `.agents/rules/GIT_WORKFLOW.md`. Tunggu izin.
-  5. Cetak `.agents/mcp_config.json`. Tunggu izin.
-  6. Cetak `ONBOARDING.md` (di *root* proyek). Tunggu izin.
-  7. Cetak file `.agents/skills/project-edeate/SKILL.md`. Tunggu izin.
-  8. Cetak file `.agents/skills/project-grill-me/SKILL.md`. Tunggu izin.
-  9. Cetak file `.agents/skills/project-plan/SKILL.md`. Tunggu izin.
-  10. Cetak file `.agents/skills/project-tdd/SKILL.md`. Tunggu izin.
-  11. Cetak file `.agents/skills/project-execute/SKILL.md`. Tunggu izin.
-  12. Cetak file `.agents/skills/project-audit/SKILL.md`. Tunggu izin.
-  13. Cetak file `.agents/skills/project-debug/SKILL.md`. Tunggu izin.
+  2. Cetak `.agents/rules/00-router.md` (Router Induk Penangkal Attention Dilution). Tunggu izin.
+  3. Cetak `.agents/rules/MASTER_RULES.md`. Tunggu izin.
+  4. Cetak `.agents/rules/META_RULES.md` (Kendali Kognitif & Protokol Tool-First). Tunggu izin.
+  5. Cetak `.agents/rules/ARCHITECTURE.md`. Tunggu izin.
+  6. Cetak `.agents/rules/GIT_WORKFLOW.md`. Tunggu izin.
+  7. Cetak `.agents/mcp_config.json`. Tunggu izin.
+  8. Cetak `ONBOARDING.md` (di *root* proyek). Tunggu izin.
+  9. Cetak file `.agents/skills/project-edeate/SKILL.md`. Tunggu izin.
+  10. Cetak file `.agents/skills/project-grill-me/SKILL.md`. Tunggu izin.
+  11. Cetak file `.agents/skills/project-plan/SKILL.md`. Tunggu izin.
+  12. Cetak file `.agents/skills/project-tdd/SKILL.md`. Tunggu izin.
+  13. Cetak file `.agents/skills/project-execute/SKILL.md`. Tunggu izin.
+  14. Cetak file `.agents/skills/project-audit/SKILL.md`. Tunggu izin.
+  15. Cetak file `.agents/skills/project-debug/SKILL.md`. Tunggu izin.
+  16. Cetak file `.agents/skills/project-epic-persistence/SKILL.md`. Tunggu izin.
 

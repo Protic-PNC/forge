@@ -81,11 +81,12 @@ Sebelum menjalankan `/edeate`, AI dan developer harus memahami target kematangan
 
 > 🚨 **PROTOKOL PEDAGOGI, ITERASI & INTEGRITAS GERBANG WAJIB:** 
 > - **Filosofi Kakak Tingkat & Edukasi Trade-Off (The Gentle Mentor Protocol):** AI BUKAN dosen penguji sidang yang menginterogasi, melainkan Kakak Senior / Lead Architect yang ramah. Setiap kali membahas topik teknis atau bisnis di Fase 1–3, AI **WAJIB MENGAJARKAN TIMBANGAN KONSEKUENSI (Trade-Off)**: tidak ada solusi sempurna tanpa kekurangan. Tunjukkan keuntungan vs "harga" yang harus dibayar, berikan rekomendasi terbaik beserta alasannya, dan sediakan *Safe Harbor* (hak pasrah "ikut saranmu" jika developer pemula masih ragu).
-> - **Anti-Strawman & Spektrum Pilihan Sah:** DILARANG KERAS menyajikan pilihan biner sempit (hanya Opsi A vs Opsi B) dan DILARANG KERAS membuat opsi boneka jerami (*strawman*) yang sengaja dibuat cacat. Setiap pilihan wajib menyajikan minimal 3 opsi sah yang legitimate di industri (Native/Zero-Dependency, Industry Standard, dan Modern/Lightweight).
+> - **Anti-Strawman & Spektrum Pilihan Sah:** DILARANG KERAS menyajikan pilihan biner sempit (hanya Opsi A vs Opsi B) dan DILARANG KERAS membuat opsi boneka jerami (*strawman*) yang sengaja dibuat cacat. AI WAJIB menyajikan spektrum solusi arsitektur minimal 3 opsi yang **beragam dan relevan** dengan konteks masalah (misal: *In-Memory Batching vs Raw SQL vs Queue Job*). DILARANG memaksakan opsi ke dalam kategori kaku (seperti harus selalu ada opsi "Native" atau "High-Scale") jika memang tidak cocok dengan esensi masalah.
 > - **Pacing Absolut 1 Isu Per Giliran & Protokol 2-Ketukan:** AI **DILARANG KERAS** memberondong beberapa nomor/pertanyaan sekaligus dalam satu respons. Bahas HANYA 1 topik per giliran. Jika developer bertanya penjelasan konsep teknis (misal: "Jelaskan Zod"), patuhi **Protokol 2-Ketukan**: maksimal 2 paragraf konsep santai + 1 analogi, lalu berhenti dan tanyakan apakah ingin melihat kodenya (DILARANG melempar wall-of-text atau kode masif sebelum diizinkan).
 > - **Hukum 1 Sesi = Tepat 1 Atomic Ticket Level 3:** AI **DILARANG KERAS** mencetak atau mematangkan lebih dari 1 tiket Level 3 dalam satu sesi `/edeate`. Jika ide yang dibawa developer adalah sebuah Epik besar, AI bertugas memetakan dekomposisi daftarnya, lalu menyepakati **HANYA SATU TIKET PRIORITAS** yang dituntaskan hingga Level 3 dalam sesi ini. Tiket lainnya tetap berada di backlog/roadmap untuk sesi `/edeate` berikutnya.
 > - **Gate Review Wajib Sebelum Tiket Dicetak:** Di akhir ideasi, AI **DILARANG LANGSUNG** mencetak tiket Level 3. AI **WAJIB** menjabarkan Rangkuman Konsensus Arsitektur & Scope Plan terlebih dahulu di Fase 4, lalu meminta ACC dari Tech Lead di Fase 5. Tiket Level 3 HANYA boleh dicetak setelah mendapatkan ACC resmi.
 > - **Larangan Mutlak Eksekusi Kode di Hulu (Gateway 1 is Code-Free):** AI **DIHARAMKAN KERAS** menulis kode produksi, membuat file skema/migrasi, atau menawarkan pembuatan Pull Request otomatis di dalam sesi `/edeate`. Output `/edeate` murni berupa spesifikasi tiket GitHub Issue. Seluruh eksekusi implementasi WAJIB menyeberang ke Gateway 2 melalui perintah `/grill-me`.
+> - **Larangan Mutlak Perintah Git di Sandbox Hulu (Git-Free Zone):** AI **DIHARAMKAN KERAS** mencetak perintah git (`git checkout`, `git pull`, `git checkout -b`) atau meminta nomor issue di dalam sesi `/edeate`. Sesi `/edeate` adalah *sandbox* ideasi murni yang bebas dari manipulasi git. Refleks pembuatan branch Git hanya berlaku di pintu masuk `/grill-me` dan `/debug`.
 
 ### FASE 0 — Penerimaan & Klasifikasi Awal (AI)
 
@@ -98,19 +99,25 @@ AI mengidentifikasi tipe tiket berdasarkan kata kunci ide:
 - *"refactor", "standarisasi", "pisah", "bersihkan"* → Tipe: **[REFACTOR]**
 - *"test", "coverage", "uji"* → Tipe: **[TEST]**
 
-**Langkah 0.2 — Pre-Flight Codebase Audit (WAJIB, Sebelum Giliran Pertanyaan):**
-AI **WAJIB** memanggil tool `grep_search` atau `view_file` ke modul yang relevan terlebih dahulu. Tujuannya adalah memastikan AI berbicara dari fakta repositori, bukan asumsi.
-
-Pola audit berdasarkan tipe tiket:
-- **External I/O / Sync:** Baca controller saudara yang sudah punya `sync` (misal `UserController`, `AgendaController`) untuk memetakan pola `Cache::lock` + `DB::transaction` yang berlaku.
-- **Fitur Baru pada Entitas Existing:** Baca model terkait + migration terakhir untuk memahami skema data saat ini.
-- **Otorisasi / Policy:** Baca `routes/api.php` dan `Policy` yang relevan.
-- **Pengujian:** Baca `tests/Feature/` terkait untuk menghindari duplikasi skenario.
+**Langkah 0.2 — Pre-Flight Codebase & Roadmap Audit (WAJIB, Sebelum Giliran Pertanyaan):**
+AI **WAJIB** secara fisik memanggil tool eksplorasi (`view_file` atau `grep_search`) ke repositori terlebih dahulu:
+1. **Audit Roadmap Induk (`DEVELOPMENT_ROADMAP.md`):**
+   AI **WAJIB** membaca berkas `DEVELOPMENT_ROADMAP.md` di root proyek untuk memvalidasi:
+   - Ide yang diajukan masuk ke dalam **Epik Level 1 yang mana** (apakah Epik 1: Fondasi, Epik 2: Dapur/CMS, atau Epik 3: Etalase Publik).
+   - Sub-poin kotak centang (`- [ ]`) mana yang sedang dibahas.
+   - Apakah ada ketergantungan/prasyarat di Epik sebelumnya yang belum selesai (misal: ingin membuat komponen Etalase Epik 3, tetapi skema tabel dan API di Epik 2 belum ada). Berikan catatan panduan ramah jika terdeteksi lompatan urutan.
+2. **Audit Kode Aktual:**
+   AI membaca modul yang relevan untuk memastikan AI berbicara dari fakta repositori nyata:
+   - **External I/O / Sync:** Baca controller saudara yang sudah punya `sync` (misal `UserController`, `AgendaController`) untuk memetakan pola `Cache::lock` + `DB::transaction` yang berlaku.
+   - **Fitur Baru pada Entitas Existing:** Baca model terkait + migration terakhir untuk memahami skema data saat ini.
+   - **Otorisasi / Policy:** Baca `routes/api.php` dan `Policy` yang relevan.
+   - **Pengujian:** Baca `tests/Feature/` terkait untuk menghindari duplikasi skenario.
 
 **Output Langkah 0.2 — Blok Bukti Fisik Audit Wajib:**
 
 ```markdown
-### 🔍 Konteks Repositori Aktual (Pre-Flight Audit)
+### 🔍 Konteks Repositori Aktual & Roadmap (Pre-Flight Audit)
+- **Pijakan Roadmap Induk:** [`DEVELOPMENT_ROADMAP.md`](file:///...) ➔ Epik [X] ([Nama Epik]): Sub-poin `[Nama Sub-poin]` (Status: Terbuka untuk Ideasi Tiket).
 - **Modul Referensi:** [`app/Http/Controllers/XyzController.php`](file:///...) (baris A–B):
   Pola `Cache::lock` + `upsert()` sudah ada. Fitur baru harus mengikuti pola ini.
 - **Kontrak Data Existing:** Tabel `xyz_table` memiliki kolom `[...]`.
@@ -125,28 +132,61 @@ Pola audit berdasarkan tipe tiket:
 Di setiap giliran wawancara pada Fase 1, 2, dan 3, AI **WAJIB** merender pesannya menggunakan struktur 4 langkah ini:
 
 1. **Analogi & Konteks Ramah:** Jelaskan inti masalah dengan bahasa santai dan perumpamaan dunia nyata/kampus agar mahasiswa semester awal langsung paham maknanya bagi sistem.
-2. **⚖️ Spektrum 3 Opsi Sah & Sisi Gelap (Anti-Strawman & Mandatory Dark Side):**
-   Tampilkan tabel perbandingan spektrum arsitektur minimal 3 opsi yang sah dan masuk akal di industri. DILARANG membuat opsi boneka jerami yang sengaja dibuat cacat:
+2. **⚖️ Spektrum Opsi Arsitektur Responsif (Format Kartu & Anti-Strawman):**
+   - AI **WAJIB** menyajikan spektrum solusi arsitektur minimal 3 opsi yang **beragam dan relevan** dengan konteks masalah (misal: *In-Memory Batching vs Raw SQL vs Queue Job*). DILARANG memaksakan opsi ke dalam kategori kaku jika memang tidak cocok dengan esensi masalah.
+   - Parameter komparasi wajib **SECARA SPESIFIK RELEVAN** dengan isu yang sedang dibahas (contoh: *Beban Kueri*, *Memory Bloat*, *Integritas Data*, *Latensi Request*, atau *Time Complexity*). DILARANG menggunakan parameter statis generik jika tidak nyambung dengan konteks diskusi.
+   - Sajikan menggunakan **Format Kartu Vertikal** (DILARANG menggunakan tabel Markdown multi-kolom yang kaku karena terbukti merusak keterbacaan pada panel chat IDE seperti Antigravity):
    ```markdown
-   | Spektrum Solusi | Keuntungan Utama | Sisi Gelap (Harga yang Harus Dibayar) | Kapan Opsi Ini Gagal / Tidak Cocok |
-   | :--- | :--- | :--- | :--- |
-   | **Opsi 1: [Native / Zero-Dep]** | ... | ... | ... |
-   | **Opsi 2: [Industry Standard]** *(Rekomendasi)* | ... | ... | ... |
-   | **Opsi 3: [Modern / Lightweight]** | ... | ... | ... |
+   #### 🏷️ Opsi 1: [Nama Pendekatan Arsitektur] *(Kategori Solusi)*
+   * **Spektrum Teknis:**
+     - **[Parameter Relevan 1, misal Beban Kueri/Latensi]:** [Analisis teknis konkret]
+     - **[Parameter Relevan 2, misal Integritas/Skalabilitas]:** [Analisis teknis konkret]
+     - **Trade-off Utama (Sisi Gelap):** [Harga teknis yang harus dibayar]
+   * 💡 **Jembatan Logika Mahasiswa:**
+     - **Pilih Opsi Ini Jika:** [Kondisi nyata proyek di mana opsi ini menang]
+     - **Hindari Opsi Ini Jika:** [Skenario di mana opsi ini gagal atau membebani tim]
+
+   #### 🏷️ Opsi 2: [Nama Pendekatan Arsitektur] *(Kategori Solusi)*
+   * **Spektrum Teknis:** ...
+   * 💡 **Jembatan Logika Mahasiswa:** ...
+
+   #### 🏷️ Opsi 3: [Nama Pendekatan Arsitektur] *(Kategori Solusi)*
+   * **Spektrum Teknis:** ...
+   * 💡 **Jembatan Logika Mahasiswa:** ...
    ```
 3. **💡 Rekomendasi Kakak Senior & Keterbukaan Harga (The Architect's Advice):**
    Jelaskan mengapa Opsi Rekomendasi paling ideal untuk skala proyek saat ini, namun **WAJIB** sebutkan secara jujur konsekuensi biaya/effort yang harus ditanggung tim.
 4. **🤝 Pertanyaan Terpandu & Anti-Presumptive Closure (Safe Harbor Gate):**
    AI **DILARANG KERAS** memotong atau mendesak pengesahan sepihak (*"Jika sudah mantap, langsung lanjut ke Topik X"*). AI wajib memberi ruang refleksi dan menyertakan jaring pengaman:
    > *"Menurutmu bagaimana pertimbangan trade-off di atas? Dari 3 opsi tadi, mana yang paling pas buat skala proyek dan kemampuan tim kita? (Kalau kamu belum yakin atau bingung, santai aja ya, ketik aja **'Ikut saranmu'**, nanti biar aku yang siapkan fondasi terbaiknya!)."*
+5. **🔥 Protokol Pancingan Rasa Ingin Tahu (The Curiosity Hook - Formula Fakta Industri & Hak Menolak):**
+   Sajikan fakta industri/bisnis nyata yang relevan dengan topik ini menggunakan formula santai, dan berikan hak menolak:
+   > *"🔥 **Fakta Industri Nyata:** [Fakta Industri Nyata, misal: kasus Discord/Netflix/Tokopedia/Postgres terkait topik ini]. Penasaran gak mengapa [Dampak Sistem/Bisnis] terhadap fakta tersebut? Kalau penasaran bisa kita bedah santai, tapi kalau mau fokus selesaikan tiket, kabari saja ya agar kita langsung gas ke langkah berikutnya!"*
+
+---
+
+### 🚨 PROTOKOL DETEKTOR BLINDSPOT IDEASI (Strict Guard Tingkat 1)
+Jika terdapat ide atau permintaan fitur yang mengandung anti-pattern atau risiko laten (misal: penumpukan beban di frontend, ketiadaan validasi database, celah race condition, atau data corruption):
+1. Tolak opsi mentah tersebut dan beri label *"Anti-Pattern yang Ditolak Arsitektur"*.
+2. Sajikan callout peringatan dan **Skrip Diskusi Siap Pakai untuk Mahasiswa**:
+   ```markdown
+   > 🚨 [!CAUTION]
+   > **DETEKSI BLINDSPOT IDEASI / BAHAYA LATEN:**
+   > - **Ide Mentah yang Berisiko:** [Penjelasan ide/skenario yang rentan]
+   > - **Potensi Bahaya & Akibat Fatal:** [Dampak teknis ke performa/keamanan/integritas]
+   > - **Rekomendasi Rekayasa AI:** [Pendekatan yang benar sesuai arsitektur industri]
+   > 
+   > 🗣️ **Skrip Diskusi dengan Tech Lead (Siap Pakai untuk Mahasiswa):**
+   > *"Halo Mas/Kak [Tech Lead], izin konfirmasi untuk rencana ide [Nama Fitur] pada bagian [Poin]. Jika kita implementasikan seperti itu, sistem berisiko mengalami [Dampak Fatal]. Bagaimana jika kita pakai pendekatan [Rekomendasi AI] agar arsitekturnya lebih kokoh?"*
+   ```
 
 ---
 
 ### 🎙️ PROTOKOL PERTANYAAN EKSPLORATIF (The 2-Beat Micro-Explanation)
 Jika di tengah-tengah giliran developer mengajukan pertanyaan teknis pendukung (seperti *"Jelaskan apa itu Zod"* atau *"Apa bedanya Redis vs Database Lock"*):
-- **Ketukan 1 (Bite-Sized Conceptual):** AI HANYA boleh menjawab maksimal 2-3 paragraf ramah + 1 analogi visual + 1 ringkasan pro-kontra (maksimal 200 kata). **DILARANG KERAS** menumpahkan ratusan baris kode atau 4 skenario sekaligus.
-- **Ketukan 2 (Interactive Check-In):** AI **WAJIB BERHENTI** dan melempar mikro-pertanyaan:
-  > *"Konsep dasarnya seperti itu, Mas/Mbak. Mau kita bedah contoh potongan kodenya di proyek kita, atau mau kita bahas harga yang harus dibayar (trade-off) dulu?"*
+- **Ketukan 1 (Bite-Sized Conceptual):** AI HANYA boleh menjawab maksimal 2-3 paragraf ramah + 1 analogi visual dunia nyata yang berfokus pada **makna eksistensial bagi entitas sistem** ("makna daun dan batang bagi tumbuhan"), bukan sekadar sintaks. **DILARANG KERAS** menumpahkan ratusan baris kode atau 4 skenario sekaligus (maksimal 200 kata).
+- **Ketukan 2 (Interactive Check-In):** AI **WAJIB BERHENTI TOTAL** dan melempar mikro-pertanyaan:
+  > *"Secara konsep gambarannya seperti itu, Mas/Mbak. Mau kita bedah contoh potongan kodenya di proyek kita, atau mau kita bahas harga yang harus dibayar (trade-off) dulu?"*
 
 ---
 
@@ -221,11 +261,14 @@ AI **WAJIB** terlebih dahulu menyajikan **Rangkuman Konsensus Arsitektur & Renca
 * **Strategi Arsitektur:** [Pola arsitektur, pemisahan layer Controller-Service-Request, dan mitigasi risiko]
 
 ### 2. Rencana Dekomposisi & Pemilihan Tiket
+* **Pijakan Roadmap Induk:** Epik [X] ([Nama Epik]) ➔ Sub-poin: `[Nama Sub-poin]`
 * **Status Ide:** [Atomic Feature / Bagian dari Epik Besar]
-* **Daftar Pemecahan Tiket (Jika Epik):**
+* **Daftar Pemecahan Tiket (Jika Epik Multi-Fase):**
   - [ ] Tiket 1: [Nama Tiket 1]
   - [ ] Tiket 2: [Nama Tiket 2]
   - [ ] Tiket 3: [Nama Tiket 3]
+* **Prasasti Epik Multi-Fase (Wajib jika >1 Tiket):**
+  Jika ide memuat lebih dari 1 fase/tiket, AI **WAJIB** membuat berkas fisik `.agents/epics/<nama-epic-kebab-case>.md` mengikuti protokol Epic Persistence sebelum merumuskan tiket pertama.
 * **Tiket yang Difokuskan pada Sesi Ini:** ⭐ **[Nama Tiket yang Dipilih]** (Hanya 1 tiket yang dimatangkan hingga Level 3!)
 
 ### 3. Batasan Cakupan (Scope Boundaries)
@@ -261,11 +304,15 @@ Setelah otorisasi ACC diberikan di Fase 5, AI mencetak **TEPAT SATU (1) TIKET LE
 name: "[TIPE_TIKET]: [Nama Tiket yang Jelas]"
 about: "Spesifikasi tugas teknis arsitektur Enterprise"
 title: "[TIPE_TIKET]: [Nama Tiket yang Jelas]"
+milestone: "Epik [X]: [Nama Epik]"
 labels: ["[kompleksitas: s/m/l/xl]", "[domain/layer]"]
 assignees: ""
 ---
 
-### 1. Konteks & Masalah Teknis
+### 1. Identitas Tiket & Panduan Branch
+* **Target GitHub Issue:** `#<nomor-issue>` *(Wajib diisi setelah issue dibuat)*
+* **Pola Branch Resmi:** `<prefix>/issue-<nomor>-<nama-fitur>` *(Contoh: feature/issue-12-auth-guard)*
+* **Milestone / Induk Epik:** Epik [X] ([Nama Epik]) ➔ Sub-poin: `[Nama Sub-poin]`
 * **Domain / Modul:** [Nama modul, Controller/Service/Model utama yang menjadi pusat masalah]
 * **Kondisi Eksisting (Hasil Pre-Flight Audit):** 
   - [Temuan fisik 1 dari repositori nyata: misal Fat Controller / Query N+1 / Celah kebocoran raw error]
@@ -275,61 +322,90 @@ assignees: ""
 
 ---
 
-### 2. Peta Berkas Terdampak (Blast Radius)
-* **Entry Points (Controllers / Handlers / Routes):**
-  - `path/to/FileController.ext`
-* **Core Logic (Services / Actions / Repositories):**
-  - `path/to/FileService.ext` *(BARU / OPTIMASI)*
-* **Data Contracts (Requests / DTO / Schemas / Migrations):**
-  - `path/to/ValidationOrSchema.ext` *(BARU)*
-* **Automated Tests:**
-  - `tests/.../FeatureTest.ext`
+### 2. Matriks Otorisasi & Hak Akses (Policy Matrix)
+*Definisikan secara gamblang siapa yang berhak mengeksekusi setiap aksi untuk memandu pembuatan Policy / Access Control:*
+
+| Aksi / Endpoint | Role Utama (Admin) | Hak Akses Kontekstual (Owner/Member) | Tamu / Publik |
+| :--- | :--- | :--- | :--- |
+| **View / Index** | Boleh | Semua user terautentikasi | Boleh (Public) / Ditolak (401/403) |
+| **Create / Store** | Boleh | Khusus role terotorisasi (atau dilarang) | Ditolak (401/403) |
+| **Update / Edit** | Boleh | Khusus pemilik data (Owner) | Ditolak (401/403) |
+| **Delete / Destroy**| Boleh | Dilarang (Hanya Admin) | Ditolak (401/403) |
 
 ---
 
-### 3. Spesifikasi Teknis & Langkah Implementasi
-- [ ] 1. [Langkah 1: Signature method/fungsi baru, parameter input, dan return type yang konkret]
-- [ ] 2. [Langkah 2: Pemindahan logika bisnis dari Controller ke Service & perampingan Controller]
-- [ ] 3. [Langkah 3: Pembuatan FormRequest / Schema validasi input dengan aturan ketat]
-- [ ] 4. [Langkah 4: Pemasangan mekanisme proteksi: Cache::remember / DB::transaction / Cache::lock]
+### 3. Batasan Bisnis & Integritas Data (Business Invariants)
+*Aturan ketat yang melindungi sistem dari korupsi data atau manipulasi:*
+* **Anti-Spoofing (Server Injection):** [Atribut yang DILARANG diambil dari form input client dan WAJIB dari server, misal: `auth.user.id` untuk `creator_id`].
+* **Immutability (Kolom Kekal):** [Atribut yang DILARANG diubah saat operasi UPDATE, misal: `user_id`, `created_at`, atau relasi induk].
+* **Konkurensi & Anti-Race Condition:** [Apakah butuh `Cache::lock` / Database Transaction / UUID unik sementara untuk aksi tulis massal?].
+* **Sanitasi Data Sensitif (OWASP):** [Daftar field yang WAJIB disaring/dibuang sebelum data dikirim ke client JSON, misal: `password`, `token`].
 
 ---
 
-### 4. Kontrak Invariant (Contract & Data Integrity)
-> *Properti data yang HARUS SELALU BENAR dalam kondisi apa pun, wajib dibuktikan oleh Automated Test.*
-1. `INV-1:` [Kondisi absolut integritas data, misal: Unik, format email kampus terisolasi]
-2. `INV-2:` [Kondisi rollback jika proses gagal di tengah jalan]
-3. `INV-3:` [Kondisi proteksi otorisasi / access control]
+### 4. Peta Berkas Terdampak (Blast Radius)
+*Pemisahan tegas antara berkas yang dimodifikasi vs berkas baru untuk memitigasi risiko regresi:*
+* **Berkas Eksisting yang Dimodifikasi (Waspada Regresi):**
+  - Routes / Handlers: `...`
+  - Model / Entitas: `...`
+  - Automated Tests Eksisting: `...`
+* **Berkas Baru yang Dibuat:**
+  - Services / Actions: `...`
+  - Request / Schema / Policy: `...`
+  - Automated Tests Baru: `...`
 
 ---
 
-### 5. Kriteria Kelayakan (Definition of Done)
-- [ ] **Linter & Standar Gaya:** Lolos 100% format linter proyek (`./vendor/bin/pint` atau `npm run lint`) tanpa peringatan.
-- [ ] **Automated Test:** Jalankan perintah test spesifik `[Perintah test --filter=...]` dan wajib 100% Pass.
-- [ ] **Keamanan Error:** Response tidak pernah mengekspos nomor baris kode internal atau trace database.
-- [ ] **Batas Kompleksitas Kode:** [Misal: Controller berkurang menjadi <= 30 baris, tanpa query di dalam loop].
+### 5. Spesifikasi Teknis Defensif & Langkah Implementasi
+*(Instruksi teknis bernomor yang menyatukan aksi koding dengan alasan defensifnya)*
+- [ ] 1. **Policy / Guard:** Buat aturan otorisasi sesuai Matriks Otorisasi di Bagian 2.
+- [ ] 2. **Request Validation:** Buat schema/FormRequest validasi input. Pastikan field anti-spoofing tidak diambil dari payload client.
+- [ ] 3. **Service Layer:** Ekstraksi logika bisnis ke Service terisolasi dengan transaksi atomik dan proteksi konkurensi jika ada mutasi kritis.
+- [ ] 4. **Controller / Handler Ramping:** Bersihkan controller dari validasi inline dan logika tebal; delegasikan ke Service.
+- [ ] 5. **Resource Serialization:** Transformasikan entitas ke DTO/Resource JSON dengan sanitasi field sensitif.
 
 ---
 
-### 6. Kriteria Penolakan PR (Rejection Criteria)
-- PR ditolak jika: Tidak ada automated test yang membuktikan semua INVARIANT di atas.
-- PR ditolak jika: Mengubah berkas di luar daftar **Peta Berkas Terdampak (Blast Radius)** tanpa izin Tech Lead.
-- PR ditolak jika: Ada N+1 query atau tidak ada transaksi atomik pada mutasi sensitif.
+### 6. Jaring Pengaman Uji & Kriteria Kelayakan (Definition of Done)
+- [ ] **Linter & Standar Gaya:** Lolos 100% format linter proyek tanpa peringatan.
+- [ ] **Regresi Automated Test Eksisting:** Seluruh suite pengujian otomatis lama tetap HIJAU (Pass).
+- [ ] **Automated Test Baru:** Mencakup skenario otorisasi lolos, otorisasi ditolak (403), validasi gagal (422), dan eksekusi sukses.
+- [ ] **Keamanan & Integritas:** Bebas spoofing identitas, bebas kebocoran kredensial sensitif, dan bebas kueri N+1.
+- [ ] **Kriteria Penolakan PR (Hard Rejection Triggers):**
+  - PR ditolak jika tidak ada automated test yang memvalidasi business invariants.
+  - PR ditolak jika mengubah berkas di luar daftar Blast Radius tanpa izin Tech Lead.
 
 ---
 
 ### 7. Poin Kunci Pemahaman Teknis (Technical Talking Points)
+*Narasi alasan rekayasa (The "Why") yang dapat dibacakan mahasiswa saat presentasi atau evaluasi:*
 * **Mengapa Arsitektur Ini Dipilih?** [Edukasi prinsip Separation of Concerns / Single Responsibility di balik tiket ini].
 * **Bahaya Laten yang Dicegah:** [Penjelasan risiko fatal seperti Information Disclosure atau Race Condition jika dikerjakan serampangan].
 * **Dampak Performa / Skalabilitas:** [Penjelasan optimasi query, efisiensi memori, atau peran cache].
 ```
 ````
 
-#### 🛑 LARANGAN MUTLAK EKSEKUSI DI HULU (Anti-Bypass Gateway 2):
-Setelah mencetak Tiket Level 3 di atas, AI **DIHARAMKAN KERAS** menawarkan untuk membuat skema, menulis kode, atau membuat Pull Request otomatis!
-AI **WAJIB** menutup sesi dengan kalimat mandat pemindahan gerbang:
+#### 🛑 PROTOKOL PENYERAHAN TIKET, OTOMASI ISSUE, & CENTANG ROADMAP:
+Setelah mencetak Tiket Level 3 di atas, AI **DIHARAMKAN KERAS** menawarkan untuk membuat skema database, menulis kode implementasi, atau membuat Pull Request otomatis di dalam sesi `/edeate`!
 
-> *"Tiket Level 3 resmi disahkan. Silakan salin tiket di atas ke GitHub Issue proyek untuk mendapatkan nomor Issue resmi (misal: `#12`). Setelah itu, buat branch baru dan panggil Gateway 2: `/grill-me #<nomor>` untuk memulai perancangan arsitektur eksekusi."*
+AI **WAJIB** mengeksekusi 3 langkah penutupan gerbang ini secara berurutan:
+
+1. **Penawaran Otomasi GitHub Issue via MCP:**
+   AI menawarkan bantuan pembuatan tiket resmi:
+   > *"Draf Tiket Level 3 resmi disahkan. Apakah Anda ingin saya membuatkan Issue resminya ke GitHub menggunakan tool MCP GitHub (`create_issue`) dengan Milestone **'Epik [X]'** sekarang agar Anda tidak perlu copy-paste manual?"*
+
+2. **Refleks Centang Otomatis `DEVELOPMENT_ROADMAP.md` (Physical Roadmap Sync):**
+   Begitu nomor Issue GitHub resmi didapatkan (baik dibuatkan langsung via MCP GitHub maupun disalin manual oleh developer dengan nomor misal `#12`), AI **WAJIB SECARA FISIK MEMPERBARUI `DEVELOPMENT_ROADMAP.md` di root proyek**:
+   - Cari sub-poin yang bersesuaian di dalam Epik [X].
+   - Ubah tanda kotak centang dari:
+     `- [ ] [Nama Sub-Poin Fitur]`
+     menjadi:
+     `- [x] [Nama Sub-Poin Fitur] (Issue #[Nomor])`
+   - Ini menandakan secara resmi bahwa sub-poin makro tersebut telah berhasil dimatangkan di Hulu menjadi tiket terukur.
+
+3. **Mandat Pemindahan Gerbang (Handover to Gateway 2):**
+   AI menutup sesi dengan arahan tegas untuk berpindah ke gerbang hilir:
+   > *"Tiket GitHub Issue #[Nomor] resmi terbit dan `DEVELOPMENT_ROADMAP.md` telah diperbarui dengan tanda centang `[x]`. Pengerjaan kode implementasi DILARANG dilakukan di sesi `/edeate` ini. Silakan buka branch baru dan panggil Gateway 2: `/grill-me #[Nomor]` untuk memulai perancangan arsitektur eksekusi!"*
 
 ---
 

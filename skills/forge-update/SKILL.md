@@ -26,7 +26,9 @@ description: >-
 
 | Nama Blueprint di `plugin.json` | Jalur Berkas Fisik di Proyek Lokal |
 |:---|:---|
+| `00-router.template.md` | `.agents/rules/00-router.md` |
 | `master_rules.template.md` | `.agents/rules/MASTER_RULES.md` |
+| `meta_rules.template.md` | `.agents/rules/META_RULES.md` |
 | `architecture.template.md` | `.agents/rules/ARCHITECTURE.md` |
 | `git_workflow.template.md` | `.agents/rules/GIT_WORKFLOW.md` |
 | `edeate.template.md` | `.agents/skills/project-edeate/SKILL.md` |
@@ -36,6 +38,7 @@ description: >-
 | `execute.template.md` | `.agents/skills/project-execute/SKILL.md` |
 | `audit.template.md` | `.agents/skills/project-audit/SKILL.md` |
 | `debug.template.md` | `.agents/skills/project-debug/SKILL.md` |
+| `epic_persistence.template.md` | `.agents/skills/project-epic-persistence/SKILL.md` |
 
 ---
 

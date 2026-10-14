@@ -72,16 +72,40 @@ Setiap respons `/debug` saat menganalisis bug WAJIB menyajikan 3 bagian ini:
 ```
 
 ### Bagian 2: ⚖️ Spektrum Opsi Perbaikan & Edukasi Trade-Off
-Sajikan tabel spektrum solusi minimal 2-3 pendekatan yang sah:
+Sajikan minimal 2-3 pendekatan perbaikan yang sah menggunakan **Format Kartu Responsif** (DILARANG menggunakan tabel markdown multi-kolom yang kaku agar keterbacaan di panel chat tetap prima):
 ```markdown
-| Spektrum Solusi | Keuntungan Utama | Sisi Gelap (Resiko / Effort) | Kapan Opsi Ini Gagal |
-| :--- | :--- | :--- | :--- |
-| **Opsi 1: [Defensive Patch]** | Cepat, resiko perubahan lokal minim | Tidak menyelesaikan akar arsitektur | Beban data besar / skenario kompleks |
-| **Opsi 2: [Structural Fix]** *(Rekomendasi)* | Menutup celah di fondasi | Membutuhkan migrasi/perubahan interface | Butuh deploy darurat dalam hitungan menit |
+#### 🏷️ Opsi 1: [Defensive Patch] *(Tambalan Defensif)*
+* **Spektrum Teknis:**
+  - **Dampak Lokal:** Cepat, resiko perubahan lokal minim.
+  - **Akar Arsitektur:** Tidak menyelesaikan akar struktural; hanya membungkam gejala.
+  - **Trade-off Utama (Sisi Gelap):** Menambah utang teknis jika tidak ditindaklanjuti.
+* 💡 **Jembatan Logika Mahasiswa:**
+  - **Pilih Opsi Ini Jika:** Butuh deploy darurat dalam hitungan menit untuk menahan insiden produksi.
+  - **Hindari Opsi Ini Jika:** Beban data besar atau skenario kompleks yang membutuhkan kepastian fondasi.
+
+#### 🏷️ Opsi 2: [Structural Fix] *(Perbaikan Struktural)* *(Rekomendasi)*
+* **Spektrum Teknis:**
+  - **Dampak Lokal:** Menutup celah langsung di fondasi/skema.
+  - **Akar Arsitektur:** Menyelesaikan akar masalah secara tuntas.
+  - **Trade-off Utama (Sisi Gelap):** Membutuhkan migrasi database atau penyesuaian interface terkait.
+* 💡 **Jembatan Logika Mahasiswa:**
+  - **Pilih Opsi Ini Jika:** Kita ingin fondasi bersih jangka panjang dan bebas regresi.
+  - **Hindari Opsi Ini Jika:** Waktu sangat mendesak dan dependensi modul luar belum siap bermigrasi.
 ```
 
 Tutup dengan **Pojok Edukasi Mentor & Jaring Pengaman (Safe Harbor)**:
 > *"💡 **Pelajaran Arsitek:** Bug ini mengajarkan kita pentingnya [Pelajaran Arsitektur: misal Validasi Boundary / Null-Safety / Idempotency]. Menurutmu, mana opsi perbaikan yang paling aman buat kondisi saat ini? (Kalau kamu belum yakin, santai aja, ketik **'Ikut saranmu'**, biar aku bantu selesaikan dengan pendekatan teraman).*"
+
+* **🔥 Protokol Pancingan Rasa Ingin Tahu (The Curiosity Hook - Kasus Bug Industri):**
+  Sajikan fakta sejarah industri dunia nyata tentang bagaimana jenis bug serupa pernah terjadi di skala raksasa:
+  > *"🔥 **Fakta Industri Nyata:** [Kasus Bug Industri Nyata, misal: insiden Cloudflare RegExp outage / Knight Capital dead code / Amazon S3 typo]. Penasaran gak bagaimana [Dampak Fatal] terjadi karena hal sepele ini? Kalau penasaran bisa kita bedah santai, tapi kalau mau langsung eksekusi perbaikan, beri tahu saja ya!"*
+
+* **🗣️ Skrip Diskusi dengan Tech Lead (Jika Bug Bersifat Struktural):**
+  Jika perbaikan bug menuntut perubahan skema atau interface publik:
+  ```markdown
+  > 🗣️ **Skrip Diskusi dengan Tech Lead (Siap Pakai untuk Mahasiswa):**
+  > *"Halo Mas/Kak [Tech Lead], izin konfirmasi untuk anomali pada [Nama Modul]. Setelah diinvestigasi, akar masalahnya ada pada [Akar Masalah]. Jika hanya kita tambal lokal, sistem berisiko [Resiko Laten]. Saya merekomendasikan perbaikan struktural via [Solusi Struktural], apakah diizinkan?"*
+  ```
 
 ### Bagian 3: 🧪 Rencana Tes Regresi (Prevention Gate)
 Tentukan file pengujian yang akan dibuat/diperbarui untuk mengunci bug ini agar tidak pernah kambuh lagi:

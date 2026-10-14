@@ -1,12 +1,25 @@
 {
   "name": "forge-constitution",
   "description": "Enterprise Constitution Scaffolder Plugin",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "skills": [
     "forge-constitution",
     "forge-update"
   ],
   "releases": {
+    "1.3.0": {
+      "updated_blueprints": [
+        "00-router.template.md",
+        "meta_rules.template.md",
+        "epic_persistence.template.md",
+        "edeate.template.md",
+        "grill-me.template.md",
+        "git_workflow.template.md",
+        "master_rules.template.md",
+        "audit.template.md"
+      ],
+      "summary": "Evolusi Besar v1.3.0: Penyelarasan Aturan Emas SIM ke Forge. Menambahkan Blueprint Router Induk (00-router.template.md) untuk mengatasi Attention Dilution pada IDE Antigravity; Protokol Preservasi Epik Multi-Sesi & Autonomous Context Hydration (epic_persistence.template.md); Meta-Rule Kendali Kognitif & Tool-First AI (meta_rules.template.md); Socratic Co-Design Protocol (3 Ketukan Interaktif) untuk inisialisasi DEVELOPMENT_ROADMAP.md; Sinkronisasi Fisik Roadmap di hulu (/edeate) dengan Milestone Issue & Refleks Centang Otomatis; Smart Git Handshake di baris pertama respons (/grill-me); Penguncian Branch Isolasi (Stick to Current Branch) & Penegasan Git-Free Zone di /edeate; Standardisasi Format Tiket GitHub Issue V2 (7 Pilar Defensif); serta Auto-Closing Kanban Bridge (Closes #id & label needs-review) dan penawaran pembuatan PR via MCP GitHub di /audit."
+    },
     "1.2.0": {
       "updated_blueprints": [
         "architecture.template.md",
@@ -20,7 +33,7 @@
         "plan.template.md",
         "tdd.template.md"
       ],
-      "summary": "Perombakan total blueprint /debug (Scientific Debugging Pipeline), penanaman front-matter YAML fisik di seluruh 10 blueprint, standardisasi blok GENERATION_DIRECTIVE deklaratif, penambahan protokol ADR pada architecture, penguatan git_workflow (Branch Retention & Main Protection), eliminasi redundansi AGENTS.md demi native AGY, serta penyempurnaan declarative re-render forge-update (New File Ingestion & Custom Data Preservation)."
+      "summary": "Perombakan total blueprint /debug (Scientific Debugging Pipeline), migrasi tabel perbandingan kaku ke Format Kartu Arsitektur Responsif (Anti-Squished Tables & Jembatan Logika Mahasiswa), integrasi The Curiosity Hook (fakta industri nyata), skrip diplomasi Tech Lead, dan analogi eksistensial pada master_rules, edeate, grill-me, dan debug, penanaman front-matter YAML fisik di seluruh 10 blueprint, standardisasi blok GENERATION_DIRECTIVE deklaratif, penambahan protokol ADR pada architecture, penguatan git_workflow (Branch Retention & Main Protection), eliminasi redundansi AGENTS.md demi native AGY, serta penyempurnaan declarative re-render forge-update (New File Ingestion & Custom Data Preservation)."
     },
     "1.1.0": {
       "updated_blueprints": [
