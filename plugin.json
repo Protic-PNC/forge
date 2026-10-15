@@ -1,12 +1,21 @@
 {
   "name": "forge-constitution",
   "description": "Enterprise Constitution Scaffolder Plugin",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "skills": [
     "forge-constitution",
     "forge-update"
   ],
   "releases": {
+    "1.3.1": {
+      "updated_blueprints": [
+        "edeate.template.md",
+        "grill-me.template.md",
+        "debug.template.md",
+        "master_rules.template.md"
+      ],
+      "summary": "Pembaruan v1.3.1: Penguatan Pedagogi Socratic (The Stage Orientation Protocol 4 Dimensi di tiap awal tahap), implementasi Katalog Masalah Horizontal Spektrum Luas (Dynamic Full-Spectrum) dengan pancingan retorika, dan Pelayanan Draf Laporan WhatsApp Mentor pada /forge-constitution."
+    },
     "1.3.0": {
       "updated_blueprints": [
         "00-router.template.md",
