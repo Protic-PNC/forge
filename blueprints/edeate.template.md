@@ -144,12 +144,12 @@ Sebelum melangkah ke giliran wawancara pertama (Fase 1), AI **WAJIB** menyajikan
 ## 🏛️ FASE 1: PILAR BISNIS (The Business Grill)
 *(Murni Kebutuhan Pengguna & Organisasi — Bebas dari Sintaks/Folder Kode)*
 
-### 🗺️ Peta Topik Fase 1 (In-Phase Mini-Roadmap)
-Di Fase 1 ini, kita akan membedah kebutuhan bisnis melalui 4 topik terarah:
-* 📌 **Topik 1.1:** Pemantik Konteks & Akar Masalah Lapangan (The Real Pain & Dinamika Kerja Pengguna)
-* 📌 **Topik 1.2:** Identifikasi Aktor & Persona Pemakai (Siapa yang berinteraksi & batasan hak akses)
-* 📌 **Topik 1.3:** Inventaris Kebutuhan & Elemen/Menu Wajib MVP (Fitur inti vs fitur tunda)
-* 📌 **Topik 1.4:** Definisi Sukses Bisnis yang Terukur & Kasus Tepi (Ukuran sukses & Empty State UX)
+### 🗺️ Peta Topik Fase 1 (In-Phase Mini-Roadmap Dinamis)
+*(AI merumuskan secara dinamis sejumlah topik terarah yang relevan dengan konteks dan kompleksitas tiket, bernomor 1.1, 1.2, dst. DILARANG meng-hardcode atau memaksakan 4 topik jika masalahnya sederhana, dan jangan batasi jika fiturnya membutuhkan eksplorasi lebih)*
+Di Fase 1 ini, kita akan membedah kebutuhan bisnis melalui [X] topik terarah:
+* 📌 **Topik 1.1:** [Nama Topik Relevan 1, misal: Akar Masalah & Dinamika Alur Kerja] — [Deskripsi ringkas fokus bahasan]
+* 📌 **Topik 1.2:** [Nama Topik Relevan 2, misal: Identifikasi Aktor & Hak Akses] — [Deskripsi ringkas fokus bahasan]
+* 📌 **Topik 1.[X]:** [Nama Topik Relevan berikutnya sesuai kebutuhan kontekstual tiket...]
 
 ---
 
@@ -248,18 +248,17 @@ Jika di tengah-tengah giliran developer mengajukan pertanyaan teknis pendukung (
 > *Pacing: Bahas HANYA 1 topik per respons. Selesaikan satu per satu menggunakan FORMULA A.*
 > *Larangan Mutlak: DILARANG membahas struktur folder, kode, atau sintaks teknis di Fase ini!*
 
-**Topik 1.1 — Pemantik Konteks & Akar Masalah Lapangan (The Real Pain):**
-Gali masalah nyata operasional di kepengurusan ormawa (misal: arsip prestasi tercecer, struktur pengurus sulit diakses publik, atau birokrasi pembaruan data yang melelahkan).
-*Contoh Pembuka:* *"Halo! Sebelum kita masuk ke urusan teknis, santai dulu ya. Boleh ceritakan apa kejadian di lapangan atau masalah organisasi yang bikin kamu merasa fitur/halaman ini penting banget dibuat saat ini?"*
+#### 💡 Katalog Dimensi Panduan Perumusan Topik Bisnis (Inspiration & Diagnostic Angles):
+*(AI memilih dan merumuskan topik-topik terarah bernomor 1.1, 1.2, dst. secara dinamis dari dimensi berikut yang benar-benar relevan dengan masalah tiket):*
 
-**Topik 1.2 — Identifikasi Aktor & Persona Pemakai:**
-Petakan siapa yang akan berinteraksi dengan fitur ini (Mahasiswa Umum, Calon Anggota, Pengurus/Admin, atau Dosen Pembina) dan dari sudut pandang mana mereka memanfaatkannya.
-
-**Topik 1.3 — Inventaris Kebutuhan & Elemen/Menu MVP:**
-Tanyakan daftar elemen, menu, atau informasi apa saja yang mutlak harus tampil di rilis versi pertama (MVP), dan mana yang bisa ditunda ke versi rilis berikutnya agar tidak terjadi pembengkakan ruang lingkup (*scope creep*).
-
-**Topik 1.4 — Definisi Sukses Bisnis yang Terukur & Kasus Tepi:**
-Ajak developer merumuskan sukses bisnis yang konkret (bukan sekadar "tidak error", melainkan misal: "Pengunjung website langsung bisa menemukan kontak divisi dalam 3 klik" atau "Pengurus bisa mengedit pengumuman tanpa menyentuh repo"). Tanyakan pula apa yang harus ditampilkan jika data masih kosong (*Empty State UX*).
+* **Dimensi Akar Masalah & Konteks Lapangan (The Real Pain):**
+  Menggali masalah nyata operasional di kepengurusan ormawa (misal: arsip prestasi tercecer, struktur pengurus sulit diakses publik, atau birokrasi pembaruan data yang melelahkan).
+* **Dimensi Aktor & Persona Pemakai:**
+  Memetakan siapa saja yang akan berinteraksi dengan fitur ini (Mahasiswa Umum, Calon Anggota, Pengurus/Admin, atau Dosen Pembina) dan batasan hak operasionalnya.
+* **Dimensi Inventaris Kebutuhan & Batasan MVP:**
+  Menyortir daftar elemen, menu, atau informasi apa saja yang mutlak harus tampil di rilis versi pertama (MVP), dan mana yang bisa ditunda ke versi rilis berikutnya (*anti-scope creep*).
+* **Dimensi Definisi Sukses Bisnis & Penanganan Kasus Tepi (UX):**
+  Merumuskan indikator sukses bisnis yang konkret dan terukur, serta perilaku antarmuka saat kondisi data kosong (*Empty State UX*) atau saat aksi gagal.
 
 ---
 
@@ -269,18 +268,18 @@ Ajak developer merumuskan sukses bisnis yang konkret (bukan sekadar "tidak error
 > *Pacing: Bahas HANYA 1 topik per respons. Wajib gunakan FORMULA B (Spektrum Opsi Kartu Vertikal).*
 
 **Transisi Masuk Fase 2 (The In-Phase Mini-Roadmap Gate):**
-Saat melangkah masuk ke Fase 2 setelah Fase 1 selesai, AI **WAJIB** membuka dengan orientasi sub-topik dan berhenti:
+Saat melangkah masuk ke Fase 2 setelah Fase 1 selesai, AI **WAJIB** membuka dengan orientasi sub-topik dinamis dan berhenti:
 
 ```markdown
 ## 🏛️ FASE 2: PILAR INTEGRASI & ARSITEKTUR TEKNIS (The Integration & Architecture Grill)
 *(Merancang Spektrum Opsi Arsitektur, Segregasi Komponen, & Relasi Antar Modul)*
 
-### 🗺️ Peta Topik Fase 2 (In-Phase Mini-Roadmap)
-Pilar Bisnis telah resmi disepakati! Di Fase 2 ini, kita beralih membedah arsitektur teknis melalui 4 topik:
-* 📌 **Topik 2.1:** Arsitektur Segregasi Komponen & Struktur Layout/Modul (Pemisahan wilayah udara sistem)
-* 📌 **Topik 2.2:** Pemetaan Entitas & Relasi Data (Struktur data / tabel database / config)
-* 📌 **Topik 2.3:** Kontrak Komunikasi & Entry Point (API Routes / Server Actions / Schema)
-* 📌 **Topik 2.4:** Dampak Sistem & Modul Lain (Blast Radius Awareness & dependensi)
+### 🗺️ Peta Topik Fase 2 (In-Phase Mini-Roadmap Dinamis)
+*(AI merumuskan secara dinamis sejumlah topik arsitektur teknis yang relevan dengan tiket ini, bernomor 2.1, 2.2, dst.)*
+Pilar Bisnis telah resmi disepakati! Di Fase 2 ini, kita beralih membedah arsitektur teknis melalui [X] topik:
+* 📌 **Topik 2.1:** [Nama Topik Arsitektur Relevan 1, misal: Segregasi Komponen & Struktur Layout/Modul]
+* 📌 **Topik 2.2:** [Nama Topik Arsitektur Relevan 2, misal: Pemetaan Relasi Data & Penyimpanan]
+* 📌 **Topik 2.[X]:** [Topik teknis berikutnya sesuai esensi masalah...]
 
 ---
 
@@ -290,17 +289,17 @@ Apakah kamu siap kita mulai bedah dari **Topik 2.1**?
 > 🛑 **HARD STOP MACRO TRANSISI FASE 2:**
 > AI **DILARANG KERAS** langsung mencetak kartu opsi arsitektur atau materi Topik 2.1 di respons transisi ini! AI **WAJIB BERHENTI TOTAL** di pertanyaan *"Apakah kamu siap kita mulai bedah dari Topik 2.1?"* dan murni menunggu konfirmasi kesiapan dari developer.
 
-**Topik 2.1 — Arsitektur Segregasi Komponen & Struktur Layout/Modul:**
-Jelaskan perumpamaan pemisahan wilayah udara sistem (misal: Etalase Tamu vs Dapur Kerja Admin). Di sinilah AI menyajikan spektrum opsi arsitektur seperti *Next.js Route Groups vs Monolithic Root Layout vs Component Composition*, atau *Service Layer vs Fat Handler*.
+#### 💡 Katalog Dimensi Panduan Perumusan Topik Arsitektur:
+*(AI memilih dan merumuskan topik-topik teknis bernomor 2.1, 2.2, dst. secara dinamis dari dimensi berikut yang relevan):*
 
-**Topik 2.2 — Pemetaan Entitas & Relasi Data:**
-Jelaskan perubahan tabel database atau struktur data dengan analogi buku induk / laci arsip. Sajikan trade-off antara menambah kolom di tabel lama vs membuat tabel relasi baru (atau file konfigurasi statis vs database dinamis).
-
-**Topik 2.3 — Kontrak Komunikasi & Entry Point (API / Route Handler):**
-Jelaskan endpoint atau route handler yang menjadi pintu masuk. Sajikan trade-off format data, validasi schema, dan bentuk response JSON/RSC.
-
-**Topik 2.4 — Dampak Sistem & Modul Lain (Blast Radius Awareness):**
-Edukasi potensi efek domino: apakah perubahan ini mempengaruhi modul otentikasi, tampilan mobile, dashboard admin, atau SEO publik.
+* **Dimensi Segregasi Komponen & Struktur Layout/Modul:**
+  Pemisahan wilayah udara sistem (misal: Etalase Tamu vs Dapur Kerja Admin). AI menyajikan spektrum opsi arsitektur (seperti *Route Groups vs Monolithic Root Layout vs Component Composition*, atau *Service Layer vs Fat Handler*).
+* **Dimensi Pemetaan Entitas & Relasi Data:**
+  Perubahan tabel database, skema data, atau struktur config. AI menyajikan trade-off antara menambah kolom di tabel lama vs membuat tabel relasi baru (atau config statis vs database dinamis).
+* **Dimensi Kontrak Komunikasi & Entry Point (API / Route Handler):**
+  Endpoint atau route handler yang menjadi pintu masuk. AI menyajikan trade-off format data, validasi schema, dan bentuk response JSON/RSC.
+* **Dimensi Dampak Sistem & Modul Lain (Blast Radius Awareness):**
+  Potensi efek domino terhadap modul otentikasi, tampilan mobile, dashboard admin, atau SEO publik.
 
 ---
 
@@ -310,17 +309,18 @@ Edukasi potensi efek domino: apakah perubahan ini mempengaruhi modul otentikasi,
 > *Pacing: Bahas HANYA 1 topik per respons. Wajib gunakan FORMULA B (Spektrum Opsi Kartu Vertikal).*
 
 **Transisi Masuk Fase 3 (The In-Phase Mini-Roadmap Gate):**
-Saat melangkah masuk ke Fase 3 setelah Fase 2 selesai, AI **WAJIB** membuka dengan orientasi sub-topik dan berhenti:
+Saat melangkah masuk ke Fase 3 setelah Fase 2 selesai, AI **WAJIB** membuka dengan orientasi sub-topik dinamis dan berhenti:
 
 ```markdown
 ## 🏛️ FASE 3: PILAR KEAMANAN, CONCURRENCY, & INVARIANT (The Security & Invariant Grill)
 *(Mendeteksi Risiko Laten, Kebocoran Otorisasi, & Mengunci Kontrak Absolut Sistem)*
 
-### 🗺️ Peta Topik Fase 3 (In-Phase Mini-Roadmap)
-Arsitektur dan integrasi modul telah terkunci! Di Fase 3 ini, kita mengunci benteng pertahanan sistem melalui 3 topik:
-* 📌 **Topik 3.1:** Otorisasi & Pencegahan Akses Liar (Middleware guards & role boundaries)
-* 📌 **Topik 3.2:** Proteksi Sesi, Concurrency, & State Integrity (Penanganan race condition & slow network)
-* 📌 **Topik 3.3:** Invariant & Rejection Criteria — Kontrak Absolut Level 3 (Kondisi absolut sistem & kriteria tolak PR)
+### 🗺️ Peta Topik Fase 3 (In-Phase Mini-Roadmap Dinamis)
+*(AI merumuskan secara dinamis topik proteksi dan invariant yang relevan, bernomor 3.1, 3.2, dst.)*
+Arsitektur dan integrasi modul telah terkunci! Di Fase 3 ini, kita mengunci benteng pertahanan sistem melalui [X] topik:
+* 📌 **Topik 3.1:** [Nama Topik Proteksi Relevan 1, misal: Otorisasi & Pencegahan Akses Liar]
+* 📌 **Topik 3.2:** [Nama Topik Proteksi Relevan 2, misal: Proteksi Sesi, Concurrency, & State Integrity]
+* 📌 **Topik 3.3:** [Nama Topik Invariant & Rejection Criteria — Kontrak Absolut Level 3]
 
 ---
 
@@ -330,13 +330,15 @@ Apakah kamu siap kita mulai bedah dari **Topik 3.1**?
 > 🛑 **HARD STOP MACRO TRANSISI FASE 3:**
 > AI **DILARANG KERAS** langsung mencetak materi Topik 3.1 di respons transisi ini! AI **WAJIB BERHENTI TOTAL** di pertanyaan *"Apakah kamu siap kita mulai bedah dari Topik 3.1?"* dan murni menunggu konfirmasi kesiapan dari developer.
 
-**Topik 3.1 — Otorisasi & Pencegahan Akses Liar:**
-Tanyakan siapa yang dilarang mengakses atau melihat data ini. Sajikan trade-off proteksi route middleware vs proteksi di level komponen/page.
+#### 💡 Katalog Dimensi Panduan Perumusan Topik Keamanan & Invariant:
+*(AI memilih dan merumuskan topik-topik proteksi bernomor 3.1, 3.2, dst. secara dinamis dari dimensi berikut yang relevan):*
 
-**Topik 3.2 — Proteksi Sesi, Concurrency, & State Integrity:**
-Jelaskan skenario saat koneksi lambat, form disubmit ganda, atau navigasi cepat antar halaman. Sajikan opsi mitigasi seperti debouncing, transaction lock, atau loading boundary.
-
-**Topik 3.3 — Invariant & Rejection Criteria — Kontrak Absolut Level 3:**
+* **Dimensi Otorisasi & Pencegahan Akses Liar:**
+  Siapa yang dilarang mengakses atau melihat data ini. Sajikan trade-off proteksi route middleware vs proteksi di level komponen/page.
+* **Dimensi Proteksi Sesi, Concurrency, & State Integrity:**
+  Skenario saat koneksi lambat, form disubmit ganda, atau navigasi cepat antar halaman. Sajikan opsi mitigasi seperti debouncing, transaction lock, atau loading boundary.
+* **Dimensi Invariant & Rejection Criteria — Kontrak Absolut Level 3 (WAJIB):**
+  Merumuskan minimal 2 Invariant absolut (kondisi yang HARUS SELALU BENAR) dan minimal 2 Rejection Criteria (kapan PR wajib ditolak saat review) bersama developer sebelum melangkah ke perumusan plan.
 Ajarkan konsep Invariant: kondisi data/sistem yang **HARUS SELALU BENAR** bahkan saat terjadi error, refresh tiba-tiba, atau misuse.
 *Contoh Analogi:* *"Invariant itu seperti hukum gravitasi di aplikasi kita—apapun yang terjadi, Navbar publik dilarang keras bocor ke area `/admin/*`, dan email user tidak boleh kembar."*
 AI **WAJIB** merumuskan minimal 2 Invariant absolut dan 2 Rejection Criteria (kapan PR wajib ditolak saat review) bersama developer sebelum melangkah ke perumusan plan.
