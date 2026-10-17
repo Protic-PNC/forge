@@ -88,54 +88,87 @@ Sebelum menjalankan `/edeate`, AI dan developer harus memahami target kematangan
 > - **Larangan Mutlak Eksekusi Kode di Hulu (Gateway 1 is Code-Free):** AI **DIHARAMKAN KERAS** menulis kode produksi, membuat file skema/migrasi, atau menawarkan pembuatan Pull Request otomatis di dalam sesi `/edeate`. Output `/edeate` murni berupa spesifikasi tiket GitHub Issue. Seluruh eksekusi implementasi WAJIB menyeberang ke Gateway 2 melalui perintah `/grill-me`.
 > - **Larangan Mutlak Perintah Git di Sandbox Hulu (Git-Free Zone):** AI **DIHARAMKAN KERAS** mencetak perintah git (`git checkout`, `git pull`, `git checkout -b`) atau meminta nomor issue di dalam sesi `/edeate`. Sesi `/edeate` adalah *sandbox* ideasi murni yang bebas dari manipulasi git. Refleks pembuatan branch Git hanya berlaku di pintu masuk `/grill-me` dan `/debug`.
 
-### FASE 0 — Penerimaan & Klasifikasi Awal (AI)
+### FASE 0 — Penerimaan, Klasifikasi, & Orientasi Sesi
 
 Ketika developer mengetik `/edeate [deskripsi ide]`, AI **WAJIB** melakukan hal berikut **sebelum** mengajukan pertanyaan apa pun:
 
 **Langkah 0.1 — Klasifikasi Tiket Otomatis:**
-AI mengidentifikasi tipe tiket berdasarkan kata kunci ide:
+AI mengidentifikasi tipe tiket dan estimasi kompleksitas awal:
 - *"sync", "CSV", "import", "sinkronisasi"* → Tipe: **[FEAT] External I/O**
+- *"layout", "navbar", "footer", "arsitektur", "fondasi"* → Tipe: **[ARCH] System Foundation**
 - *"bug", "error", "gagal", "salah"* → Tipe: **[FIX]**
 - *"refactor", "standarisasi", "pisah", "bersihkan"* → Tipe: **[REFACTOR]**
 - *"test", "coverage", "uji"* → Tipe: **[TEST]**
+- *Estimasi Kompleksitas Awal:* **S** (< 3 berkas), **M** (3–6 berkas), **L** (> 6 berkas / modul baru), **XL** (fondasi multi-modul).
 
 **Langkah 0.2 — Pre-Flight Codebase & Roadmap Audit (WAJIB, Sebelum Giliran Pertanyaan):**
-AI **WAJIB** secara fisik memanggil tool eksplorasi (`view_file` atau `grep_search`) ke repositori terlebih dahulu:
+AI **WAJIB** secara fisik memanggil tool eksplorasi (`view_file`, `search_files`, atau tool LSP) ke repositori terlebih dahulu:
 1. **Audit Roadmap Induk (`DEVELOPMENT_ROADMAP.md`):**
    AI **WAJIB** membaca berkas `DEVELOPMENT_ROADMAP.md` di root proyek untuk memvalidasi:
    - Ide yang diajukan masuk ke dalam **Epik Level 1 yang mana** (apakah Epik 1: Fondasi, Epik 2: Dapur/CMS, atau Epik 3: Etalase Publik).
    - Sub-poin kotak centang (`- [ ]`) mana yang sedang dibahas.
-   - Apakah ada ketergantungan/prasyarat di Epik sebelumnya yang belum selesai (misal: ingin membuat komponen Etalase Epik 3, tetapi skema tabel dan API di Epik 2 belum ada). Berikan catatan panduan ramah jika terdeteksi lompatan urutan.
+   - Apakah ada ketergantungan/prasyarat di Epik sebelumnya yang belum selesai. Berikan catatan panduan ramah jika terdeteksi lompatan urutan.
 2. **Audit Kode Aktual:**
    AI membaca modul yang relevan untuk memastikan AI berbicara dari fakta repositori nyata:
-   - **External I/O / Sync:** Baca controller saudara yang sudah punya `sync` (misal `UserController`, `AgendaController`) untuk memetakan pola `Cache::lock` + `DB::transaction` yang berlaku.
-   - **Fitur Baru pada Entitas Existing:** Baca model terkait + migration terakhir untuk memahami skema data saat ini.
-   - **Otorisasi / Policy:** Baca `routes/api.php` dan `Policy` yang relevan.
-   - **Pengujian:** Baca `tests/Feature/` terkait untuk menghindari duplikasi skenario.
+   - **Frontend / Layout:** Baca `src/app/layout.tsx`, struktur `src/components/`, atau layout page terkait.
+   - **External I/O / Sync:** Baca controller saudara yang sudah punya `sync` untuk memetakan pola transaksi/caching.
+   - **Fitur Baru pada Entitas Existing:** Baca model terkait + schema database untuk memahami struktur data saat ini.
+   - **Otorisasi / Policy:** Baca route guards dan policy yang relevan.
 
-**Output Langkah 0.2 — Blok Bukti Fisik Audit Wajib:**
+**Langkah 0.3 — Orientasi Tahap & Peta Agenda Sesi (The Stage Orientation Protocol & The Agenda Map):**
+Sebelum melangkah ke giliran wawancara pertama (Fase 1), AI **WAJIB** menyajikan orientasi holistik dan peta langkah terukur. Ini menjamin developer tidak mengalami *blind discovery* dan memahami struktur sesi sejak detik pertama.
+
+**Format Blok Pembukaan Sesi (Wajib di Respons Pertama):**
 
 ```markdown
 ### 🔍 Konteks Repositori Aktual & Roadmap (Pre-Flight Audit)
 - **Pijakan Roadmap Induk:** [`DEVELOPMENT_ROADMAP.md`](file:///...) ➔ Epik [X] ([Nama Epik]): Sub-poin `[Nama Sub-poin]` (Status: Terbuka untuk Ideasi Tiket).
-- **Modul Referensi:** [`app/Http/Controllers/XyzController.php`](file:///...) (baris A–B):
-  Pola `Cache::lock` + `upsert()` sudah ada. Fitur baru harus mengikuti pola ini.
-- **Kontrak Data Existing:** Tabel `xyz_table` memiliki kolom `[...]`.
-  Kolom baru apa pun harus dibuatkan migrasinya.
-- **Celah yang Terdeteksi:** [Ada/Tidak ada] potensi konflik atau duplikasi dengan kode existing.
+- **Klasifikasi Tiket Awal:** `[TIPE_TIKET]` | Estimasi Kompleksitas: `[S/M/L/XL]`
+- **Modul Referensi & Pola Eksisting:** [`path/to/file`](file:///...) (baris A–B): [Pola arsitektur standar yang ditemukan]
+- **Celah / Risiko yang Terdeteksi:** [Ada/Tidak ada potensi konflik, kebocoran data, atau duplikasi dengan kode existing]
+
+---
+
+### 🗺️ Orientasi Ideasi & Peta Agenda (The Agenda Map)
+* **Where We Are (Kilas Balik):** Berpijak pada Roadmap Induk `DEVELOPMENT_ROADMAP.md` di Epik [X] ([Nama Epik]), sub-poin `[Nama Sub-poin]`.
+* **The 'Why' & Deliverable:** Ideasi hulu (`/edeate`) bertujuan mematangkan ide kasar menjadi **1 Tiket GitHub Issue Level 3 (Ready for Dev)** yang memiliki batasan scope tegas, kontrak arsitektur kokoh, dan Invariant teruji agar eksekusi di `/grill-me` berjalan mulus tanpa re-work.
+* **Peta Agenda 5 Langkah (The Mini-Roadmap):**
+  - 📍 **Langkah 1 (Saat ini):** Pilar Bisnis & Kebutuhan Pengguna (Menentukan *Why*, persona/aktor pemakai, inventaris kebutuhan/menu MVP, dan kriteria sukses bisnis).
+  - ⏳ **Langkah 2:** Pilar Integrasi & Arsitektur Teknis (Merancang spektrum opsi arsitektur, relasi modul/data/API, dan evaluasi trade-off).
+  - ⏳ **Langkah 3:** Pilar Keamanan & Invariant (Menetapkan hak akses, boundary proteksi, serta Invariant & Rejection Criteria absolut).
+  - ⏳ **Langkah 4:** Rangkuman Konsensus Arsitektur & Scope Plan (Scope IN vs Scope OUT, pemilihan 1 tiket fokus).
+  - ⏳ **Langkah 5:** Penerbitan Draf Tiket Level 3 & Pembuatan GitHub Issue via MCP.
 ```
 
 ---
 
-### 🤝 FORMULA INTERAKSI MENTOR RAMAH (The 4-Step Mentor Formula)
+### 🎙️ FORMULA A: WAWANCARA SOCRATIC PILAR BISNIS (Khusus Fase 1 — Business Elicitation)
 
-Di setiap giliran wawancara pada Fase 1, 2, dan 3, AI **WAJIB** merender pesannya menggunakan struktur 4 langkah ini:
+> 🚨 **HUKUM ANTI-SOLUSI PREMATUR (Code/Folder-Free Zone di Fase 1):**
+> AI **DIHARAMKAN KERAS** mendiskusikan struktur folder fisik (seperti folder `(public)` vs Root Layout di Next.js), nama file teknis, sintaks framework, atau opsi arsitektur kode di Fase 1! 
+> Fase 1 adalah ruang dengar untuk memahami kebutuhan organisasi ormawa dan pengguna nyata.
 
-1. **Analogi & Konteks Ramah:** Jelaskan inti masalah dengan bahasa santai dan perumpamaan dunia nyata/kampus agar mahasiswa semester awal langsung paham maknanya bagi sistem.
-2. **⚖️ Spektrum Opsi Arsitektur Responsif (Format Kartu & Anti-Strawman):**
-   - AI **WAJIB** menyajikan spektrum solusi arsitektur minimal 3 opsi yang **beragam dan relevan** dengan konteks masalah (misal: *In-Memory Batching vs Raw SQL vs Queue Job*). DILARANG memaksakan opsi ke dalam kategori kaku jika memang tidak cocok dengan esensi masalah.
-   - Parameter komparasi wajib **SECARA SPESIFIK RELEVAN** dengan isu yang sedang dibahas (contoh: *Beban Kueri*, *Memory Bloat*, *Integritas Data*, *Latensi Request*, atau *Time Complexity*). DILARANG menggunakan parameter statis generik jika tidak nyambung dengan konteks diskusi.
-   - Sajikan menggunakan **Format Kartu Vertikal** (DILARANG menggunakan tabel Markdown multi-kolom yang kaku karena terbukti merusak keterbacaan pada panel chat IDE seperti Antigravity):
+Di giliran wawancara pada Fase 1, AI **WAJIB** merender pesannya menggunakan struktur 3 langkah ini:
+
+1. **Analogi & Konteks Masalah Lapangan:** Jelaskan inti kebutuhan dengan bahasa santai dan perumpamaan dunia nyata/kampus agar developer merasakan urgensinya bagi organisasi.
+2. **Pertanyaan Pemantik Fokus (Maksimal 1–2 Pertanyaan Tajam per Respons):**
+   - DILARANG melakukan *question bombing* (memberondong banyak pertanyaan besar sekaligus).
+   - Tanyakan secara spesifik kebutuhan riil: *Pain point* yang dialami, siapa aktor yang berinteraksi, daftar elemen/menu wajib untuk MVP, atau apa indikator suksesnya bagi organisasi.
+3. **Pacing Absolut & Jaring Pengaman (Safe Harbor):**
+   AI **BERHENTI TOTAL** dan menunggu jawaban developer. Sertakan jaring pengaman ramah:
+   > *"Ceritakan saja poin-poin yang kamu bayangkan secara santai. Kalau ada bagian yang belum kamu tahu, ketik saja **'Bantu rekomendasikan'**, nanti kita diskusikan bersama!"*
+
+---
+
+### 🏛️ FORMULA B: INTERAKSI MENTOR ARSITEKTUR & SPEKTRUM OPSI (Khusus Fase 2 & 3 — Architecture & Integration)
+
+Setelah kebutuhan bisnis di Fase 1 terkunci, barulah di Fase 2 dan 3 AI bertindak sebagai Arsitek Senior yang membedah spektrum opsi teknis menggunakan struktur 5 langkah:
+
+1. **Analogi & Makna bagi Entitas Sistem:** Jelaskan pilihan arsitektur dengan perumpamaan dunia nyata yang berfokus pada kestabilan dan kemudahan pemeliharaan jangka panjang.
+2. **⚖️ Spektrum Opsi Arsitektur Responsif (Format Kartu Vertikal & Anti-Strawman):**
+   - AI **WAJIB** menyajikan spektrum solusi arsitektur minimal 3 opsi yang **beragam dan relevan** dengan konteks masalah (misal: *Next.js Route Groups vs Single Root Layout vs Component Composition*, atau *In-Memory Batching vs Raw SQL vs Queue Job*). DILARANG memaksakan opsi kaku jika tidak nyambung dengan masalah.
+   - Parameter komparasi wajib **SECARA SPESIFIK RELEVAN** dengan isu yang sedang dibahas (contoh: *Beban Kueri*, *Memory Bloat*, *Integritas Data*, *Latensi Request*, atau *Separation of Concerns*).
+   - Sajikan menggunakan **Format Kartu Vertikal** (DILARANG menggunakan tabel Markdown multi-kolom yang terbukti merusak keterbacaan pada panel chat IDE seperti Antigravity):
    ```markdown
    #### 🏷️ Opsi 1: [Nama Pendekatan Arsitektur] *(Kategori Solusi)*
    * **Spektrum Teknis:**
@@ -146,7 +179,7 @@ Di setiap giliran wawancara pada Fase 1, 2, dan 3, AI **WAJIB** merender pesanny
      - **Pilih Opsi Ini Jika:** [Kondisi nyata proyek di mana opsi ini menang]
      - **Hindari Opsi Ini Jika:** [Skenario di mana opsi ini gagal atau membebani tim]
 
-   #### 🏷️ Opsi 2: [Nama Pendekatan Arsitektur] *(Kategori Solusi)*
+   #### 🏷️ Opsi 2: [Nama Pendekatan Arsitektur] *(Kategori Solusi)* ⭐ **[Rekomendasi Utama]**
    * **Spektrum Teknis:** ...
    * 💡 **Jembatan Logika Mahasiswa:** ...
 
@@ -161,7 +194,7 @@ Di setiap giliran wawancara pada Fase 1, 2, dan 3, AI **WAJIB** merender pesanny
    > *"Menurutmu bagaimana pertimbangan trade-off di atas? Dari 3 opsi tadi, mana yang paling pas buat skala proyek dan kemampuan tim kita? (Kalau kamu belum yakin atau bingung, santai aja ya, ketik aja **'Ikut saranmu'**, nanti biar aku yang siapkan fondasi terbaiknya!)."*
 5. **🔥 Protokol Pancingan Rasa Ingin Tahu (The Curiosity Hook - Formula Fakta Industri & Hak Menolak):**
    Sajikan fakta industri/bisnis nyata yang relevan dengan topik ini menggunakan formula santai, dan berikan hak menolak:
-   > *"🔥 **Fakta Industri Nyata:** [Fakta Industri Nyata, misal: kasus Discord/Netflix/Tokopedia/Postgres terkait topik ini]. Penasaran gak mengapa [Dampak Sistem/Bisnis] terhadap fakta tersebut? Kalau penasaran bisa kita bedah santai, tapi kalau mau fokus selesaikan tiket, kabari saja ya agar kita langsung gas ke langkah berikutnya!"*
+   > *"🔥 **Fakta Industri Nyata:** [Fakta Industri Nyata, misal: kasus Discord/Netflix/Tokopedia/Next.js layout shift]. Penasaran gak mengapa [Dampak Sistem/Bisnis] terhadap fakta tersebut? Kalau penasaran bisa kita bedah santai, tapi kalau mau fokus selesaikan tiket, kabari saja ya agar kita langsung gas ke langkah berikutnya!"*
 
 ---
 
@@ -192,58 +225,59 @@ Jika di tengah-tengah giliran developer mengajukan pertanyaan teknis pendukung (
 
 ### FASE 1 — PILAR BISNIS (The Business Grill)
 
-> *Tujuan: Memahami "MENGAPA" fitur ini ada dan "SIAPA" yang terdampak.*
-> *Pacing: Bahas HANYA 1 topik per respons. Selesaikan satu per satu.*
+> *Tujuan: Memahami "MENGAPA" fitur ini ada, "SIAPA" yang terdampak, dan "APA" kebutuhan esensialnya.*
+> *Pacing: Bahas HANYA 1 topik per respons. Selesaikan satu per satu menggunakan FORMULA A.*
+> *Larangan Mutlak: DILARANG membahas struktur folder, kode, atau sintaks teknis di Fase ini!*
 
-**Topik 1.1 — Pemantik Konteks (The Real Problem):**
-Gali masalah nyata di lapangan (data salah, proses manual melelahkan).
-*Contoh Pembuka:* *"Halo! Sebelum kita masuk ke teknis, santai dulu ya. Boleh ceritakan apa kejadian di lapangan yang bikin kamu merasa fitur ini penting banget dibuat?"*
+**Topik 1.1 — Pemantik Konteks & Akar Masalah Lapangan (The Real Pain):**
+Gali masalah nyata operasional di kepengurusan ormawa (misal: arsip prestasi tercecer, struktur pengurus sulit diakses publik, atau birokrasi pembaruan data yang melelahkan).
+*Contoh Pembuka:* *"Halo! Sebelum kita masuk ke urusan teknis, santai dulu ya. Boleh ceritakan apa kejadian di lapangan atau masalah organisasi yang bikin kamu merasa fitur/halaman ini penting banget dibuat saat ini?"*
 
-**Topik 1.2 — Identifikasi Aktor & Pintu Masuk:**
-Petakan siapa yang menjalankan fitur ini (Super Admin, Editor, Mahasiswa Umum) dan dari mana mereka masuk (Dashboard internal, halaman publik, API). Sertakan edukasi batasan hak akses.
+**Topik 1.2 — Identifikasi Aktor & Persona Pemakai:**
+Petakan siapa yang akan berinteraksi dengan fitur ini (Mahasiswa Umum, Calon Anggota, Pengurus/Admin, atau Dosen Pembina) dan dari sudut pandang mana mereka memanfaatkannya.
 
-**Topik 1.3 — Definisi Sukses yang Terukur:**
-Ajak developer merumuskan sukses bisnis yang terukur (bukan cuma "gak error", tapi misal: "Admin bisa verifikasi 20 pendaftar dalam 1 menit").
+**Topik 1.3 — Inventaris Kebutuhan & Elemen/Menu MVP:**
+Tanyakan daftar elemen, menu, atau informasi apa saja yang mutlak harus tampil di rilis versi pertama (MVP), dan mana yang bisa ditunda ke versi rilis berikutnya agar tidak terjadi pembengkakan ruang lingkup (*scope creep*).
 
-**Topik 1.4 — Kasus Tepi Bisnis & Pengalaman Saat Ditolak (Error UX):**
-Bedah skenario saat kondisi tidak ideal (data kosong, duplikat, atau akses ditolak). Sajikan trade-off pesan error: apakah menampilkan kontak humas atau tombol kembali ke beranda.
-
----
-
-### FASE 2 — PILAR INTEGRASI (The Integration Grill)
-
-> *Tujuan: Memetakan "APA" yang akan berubah di sistem dan dampaknya ke modul lain.*
-> *Pacing: Bahas HANYA 1 topik per respons. Wajib gunakan Mini Trade-off Box.*
-
-**Topik 2.1 — Pemetaan Entitas & Relasi Data:**
-Jelaskan perubahan tabel database dengan analogi buku tamu / kartu identitas. Sajikan trade-off antara menambah kolom di tabel lama vs membuat tabel relasi baru.
-
-**Topik 2.2 — Kontrak API / Entry Point:**
-Jelaskan endpoint atau route handler yang menjadi pintu masuk. Sajikan trade-off antara endpoint terpisah vs memanfaatkan API yang sudah ada.
-
-**Topik 2.3 — Dampak Sistem & Modul Lain:**
-Edukasi potensi efek domino: apakah perubahan ini mempengaruhi modul profil, laporan organisasi, atau sistem otorisasi.
-
-**Topik 2.4 — Sinkronisasi Data & Runtime Types:**
-Jelaskan bagaimana data disinkronkan saat runtime (misal: session token, augmentasi tipe TypeScript). Paparkan trade-off antara sinkronisasi otomatis di background vs sinkronisasi eksplisit saat login.
+**Topik 1.4 — Definisi Sukses Bisnis yang Terukur & Kasus Tepi:**
+Ajak developer merumuskan sukses bisnis yang konkret (bukan sekadar "tidak error", melainkan misal: "Pengunjung website langsung bisa menemukan kontak divisi dalam 3 klik" atau "Pengurus bisa mengedit pengumuman tanpa menyentuh repo"). Tanyakan pula apa yang harus ditampilkan jika data masih kosong (*Empty State UX*).
 
 ---
 
-### FASE 3 — PILAR KEAMANAN & CONCURRENCY (The Security Grill)
+### FASE 2 — PILAR INTEGRASI & ARSITEKTUR TEKNIS (The Integration & Architecture Grill)
 
-> *Tujuan: Mendeteksi risiko tersembunyi yang tidak terlihat dari permukaan ide.*
-> *Pacing: Bahas HANYA 1 topik per respons. Wajib gunakan Mini Trade-off Box.*
+> *Tujuan: Memetakan "BAGAIMANA" arsitektur sistem diwujudkan, segregasi komponen, dan relasi antar modul.*
+> *Pacing: Bahas HANYA 1 topik per respons. Wajib gunakan FORMULA B (Spektrum Opsi Kartu Vertikal).*
+
+**Topik 2.1 — Arsitektur Segregasi Komponen & Struktur Layout/Modul:**
+Jelaskan perumpamaan pemisahan wilayah udara sistem (misal: Etalase Tamu vs Dapur Kerja Admin). Di sinilah AI menyajikan spektrum opsi arsitektur seperti *Next.js Route Groups vs Monolithic Root Layout vs Component Composition*, atau *Service Layer vs Fat Handler*.
+
+**Topik 2.2 — Pemetaan Entitas & Relasi Data:**
+Jelaskan perubahan tabel database atau struktur data dengan analogi buku induk / laci arsip. Sajikan trade-off antara menambah kolom di tabel lama vs membuat tabel relasi baru (atau file konfigurasi statis vs database dinamis).
+
+**Topik 2.3 — Kontrak Komunikasi & Entry Point (API / Route Handler):**
+Jelaskan endpoint atau route handler yang menjadi pintu masuk. Sajikan trade-off format data, validasi schema, dan bentuk response JSON/RSC.
+
+**Topik 2.4 — Dampak Sistem & Modul Lain (Blast Radius Awareness):**
+Edukasi potensi efek domino: apakah perubahan ini mempengaruhi modul otentikasi, tampilan mobile, dashboard admin, atau SEO publik.
+
+---
+
+### FASE 3 — PILAR KEAMANAN, CONCURRENCY, & INVARIANT (The Security & Invariant Grill)
+
+> *Tujuan: Mendeteksi risiko tersembunyi, kebocoran data, dan mengunci kontrak absolut sistem.*
+> *Pacing: Bahas HANYA 1 topik per respons. Wajib gunakan FORMULA B (Spektrum Opsi Kartu Vertikal).*
 
 **Topik 3.1 — Otorisasi & Pencegahan Akses Liar:**
-Tanyakan siapa yang dilarang mengakses. Sajikan trade-off otorisasi terpusat (Middleware/Gate) vs pengecekan manual di controller/page.
+Tanyakan siapa yang dilarang mengakses atau melihat data ini. Sajikan trade-off proteksi route middleware vs proteksi di level komponen/page.
 
-**Topik 3.2 — Proteksi Sesi & Konkurensi:**
-Jelaskan skenario dua admin mengedit data bersamaan atau perubahan role saat user sedang login. Sajikan trade-off Database Session vs JWT Stateless.
+**Topik 3.2 — Proteksi Sesi, Concurrency, & State Integrity:**
+Jelaskan skenario saat koneksi lambat, form disubmit ganda, atau navigasi cepat antar halaman. Sajikan opsi mitigasi seperti debouncing, transaction lock, atau loading boundary.
 
-**Topik 3.3 — Invariant — Kontrak Data Absolut Level 3:**
-Ajarkan konsep Invariant: kondisi data yang HARUS SELALU BENAR bahkan saat sistem error atau listrik mati.
-*Contoh Analogi:* *"Invariant itu seperti hukum gravitasi di aplikasi kita—apapun yang terjadi, email gak boleh kembar dan super admin terakhir gak boleh terhapus."*
-Gali minimal 2-3 invariant absolut sebelum melangkah ke Fase 4.
+**Topik 3.3 — Invariant & Rejection Criteria — Kontrak Absolut Level 3:**
+Ajarkan konsep Invariant: kondisi data/sistem yang **HARUS SELALU BENAR** bahkan saat terjadi error, refresh tiba-tiba, atau misuse.
+*Contoh Analogi:* *"Invariant itu seperti hukum gravitasi di aplikasi kita—apapun yang terjadi, Navbar publik dilarang keras bocor ke area `/admin/*`, dan email user tidak boleh kembar."*
+AI **WAJIB** merumuskan minimal 2 Invariant absolut dan 2 Rejection Criteria (kapan PR wajib ditolak saat review) bersama developer sebelum melangkah ke perumusan plan.
 
 ---
 
