@@ -115,8 +115,8 @@ AI **WAJIB** secara fisik memanggil tool eksplorasi (`view_file`, `search_files`
    - **Fitur Baru pada Entitas Existing:** Baca model terkait + schema database untuk memahami struktur data saat ini.
    - **Otorisasi / Policy:** Baca route guards dan policy yang relevan.
 
-**Langkah 0.3 — Orientasi Tahap & Peta Agenda Sesi (The Stage Orientation Protocol & The Agenda Map):**
-Sebelum melangkah ke giliran wawancara pertama (Fase 1), AI **WAJIB** menyajikan orientasi holistik dan peta langkah terukur. Ini menjamin developer tidak mengalami *blind discovery* dan memahami struktur sesi sejak detik pertama.
+**Langkah 0.3 — Orientasi Tahap, Peta Agenda Sesi, & Peta Topik Fase 1 (The Agenda Map & In-Phase Mini-Roadmap):**
+Sebelum melangkah ke giliran wawancara pertama (Fase 1), AI **WAJIB** menyajikan orientasi holistik, peta agenda 5 langkah makro, serta peta topik spesifik yang akan dibahas di Fase 1. Ini menjamin developer tidak mengalami *blind discovery* dan memahami struktur sesi sejak detik pertama.
 
 **Format Blok Pembukaan Sesi (Wajib di Respons Pertama):**
 
@@ -132,13 +132,32 @@ Sebelum melangkah ke giliran wawancara pertama (Fase 1), AI **WAJIB** menyajikan
 ### 🗺️ Orientasi Ideasi & Peta Agenda (The Agenda Map)
 * **Where We Are (Kilas Balik):** Berpijak pada Roadmap Induk `DEVELOPMENT_ROADMAP.md` di Epik [X] ([Nama Epik]), sub-poin `[Nama Sub-poin]`.
 * **The 'Why' & Deliverable:** Ideasi hulu (`/edeate`) bertujuan mematangkan ide kasar menjadi **1 Tiket GitHub Issue Level 3 (Ready for Dev)** yang memiliki batasan scope tegas, kontrak arsitektur kokoh, dan Invariant teruji agar eksekusi di `/grill-me` berjalan mulus tanpa re-work.
-* **Peta Agenda 5 Langkah (The Mini-Roadmap):**
-  - 📍 **Langkah 1 (Saat ini):** Pilar Bisnis & Kebutuhan Pengguna (Menentukan *Why*, persona/aktor pemakai, inventaris kebutuhan/menu MVP, dan kriteria sukses bisnis).
-  - ⏳ **Langkah 2:** Pilar Integrasi & Arsitektur Teknis (Merancang spektrum opsi arsitektur, relasi modul/data/API, dan evaluasi trade-off).
-  - ⏳ **Langkah 3:** Pilar Keamanan & Invariant (Menetapkan hak akses, boundary proteksi, serta Invariant & Rejection Criteria absolut).
-  - ⏳ **Langkah 4:** Rangkuman Konsensus Arsitektur & Scope Plan (Scope IN vs Scope OUT, pemilihan 1 tiket fokus).
+* **Peta Agenda 5 Langkah (The Macro-Roadmap):**
+  - 📍 **Langkah 1 (Saat ini):** Pilar Bisnis & Kebutuhan Pengguna
+  - ⏳ **Langkah 2:** Pilar Integrasi & Arsitektur Teknis
+  - ⏳ **Langkah 3:** Pilar Keamanan & Invariant
+  - ⏳ **Langkah 4:** Rangkuman Konsensus Arsitektur & Scope Plan
   - ⏳ **Langkah 5:** Penerbitan Draf Tiket Level 3 & Pembuatan GitHub Issue via MCP.
+
+---
+
+## 🏛️ FASE 1: PILAR BISNIS (The Business Grill)
+*(Murni Kebutuhan Pengguna & Organisasi — Bebas dari Sintaks/Folder Kode)*
+
+### 🗺️ Peta Topik Fase 1 (In-Phase Mini-Roadmap)
+Di Fase 1 ini, kita akan membedah kebutuhan bisnis melalui 4 topik terarah:
+* 📌 **Topik 1.1:** Pemantik Konteks & Akar Masalah Lapangan (The Real Pain & Dinamika Kerja Pengguna)
+* 📌 **Topik 1.2:** Identifikasi Aktor & Persona Pemakai (Siapa yang berinteraksi & batasan hak akses)
+* 📌 **Topik 1.3:** Inventaris Kebutuhan & Elemen/Menu Wajib MVP (Fitur inti vs fitur tunda)
+* 📌 **Topik 1.4:** Definisi Sukses Bisnis yang Terukur & Kasus Tepi (Ukuran sukses & Empty State UX)
+
+---
+
+Apakah kamu siap kita mulai bedah dari **Topik 1.1**?
 ```
+
+> 🛑 **HARD STOP MACRO RESPONS PEMBUKA:**
+> AI **DILARANG KERAS** langsung mencetak analogi, penjelasan materi, atau pertanyaan Topik 1.1 di dalam respons pembukaan pertama ini! AI **WAJIB BERHENTI TOTAL** di pertanyaan *"Apakah kamu siap kita mulai bedah dari Topik 1.1?"* dan murni menunggu persetujuan / konfirmasi kesiapan dari developer.
 
 ---
 
@@ -249,6 +268,28 @@ Ajak developer merumuskan sukses bisnis yang konkret (bukan sekadar "tidak error
 > *Tujuan: Memetakan "BAGAIMANA" arsitektur sistem diwujudkan, segregasi komponen, dan relasi antar modul.*
 > *Pacing: Bahas HANYA 1 topik per respons. Wajib gunakan FORMULA B (Spektrum Opsi Kartu Vertikal).*
 
+**Transisi Masuk Fase 2 (The In-Phase Mini-Roadmap Gate):**
+Saat melangkah masuk ke Fase 2 setelah Fase 1 selesai, AI **WAJIB** membuka dengan orientasi sub-topik dan berhenti:
+
+```markdown
+## 🏛️ FASE 2: PILAR INTEGRASI & ARSITEKTUR TEKNIS (The Integration & Architecture Grill)
+*(Merancang Spektrum Opsi Arsitektur, Segregasi Komponen, & Relasi Antar Modul)*
+
+### 🗺️ Peta Topik Fase 2 (In-Phase Mini-Roadmap)
+Pilar Bisnis telah resmi disepakati! Di Fase 2 ini, kita beralih membedah arsitektur teknis melalui 4 topik:
+* 📌 **Topik 2.1:** Arsitektur Segregasi Komponen & Struktur Layout/Modul (Pemisahan wilayah udara sistem)
+* 📌 **Topik 2.2:** Pemetaan Entitas & Relasi Data (Struktur data / tabel database / config)
+* 📌 **Topik 2.3:** Kontrak Komunikasi & Entry Point (API Routes / Server Actions / Schema)
+* 📌 **Topik 2.4:** Dampak Sistem & Modul Lain (Blast Radius Awareness & dependensi)
+
+---
+
+Apakah kamu siap kita mulai bedah dari **Topik 2.1**?
+```
+
+> 🛑 **HARD STOP MACRO TRANSISI FASE 2:**
+> AI **DILARANG KERAS** langsung mencetak kartu opsi arsitektur atau materi Topik 2.1 di respons transisi ini! AI **WAJIB BERHENTI TOTAL** di pertanyaan *"Apakah kamu siap kita mulai bedah dari Topik 2.1?"* dan murni menunggu konfirmasi kesiapan dari developer.
+
 **Topik 2.1 — Arsitektur Segregasi Komponen & Struktur Layout/Modul:**
 Jelaskan perumpamaan pemisahan wilayah udara sistem (misal: Etalase Tamu vs Dapur Kerja Admin). Di sinilah AI menyajikan spektrum opsi arsitektur seperti *Next.js Route Groups vs Monolithic Root Layout vs Component Composition*, atau *Service Layer vs Fat Handler*.
 
@@ -267,6 +308,27 @@ Edukasi potensi efek domino: apakah perubahan ini mempengaruhi modul otentikasi,
 
 > *Tujuan: Mendeteksi risiko tersembunyi, kebocoran data, dan mengunci kontrak absolut sistem.*
 > *Pacing: Bahas HANYA 1 topik per respons. Wajib gunakan FORMULA B (Spektrum Opsi Kartu Vertikal).*
+
+**Transisi Masuk Fase 3 (The In-Phase Mini-Roadmap Gate):**
+Saat melangkah masuk ke Fase 3 setelah Fase 2 selesai, AI **WAJIB** membuka dengan orientasi sub-topik dan berhenti:
+
+```markdown
+## 🏛️ FASE 3: PILAR KEAMANAN, CONCURRENCY, & INVARIANT (The Security & Invariant Grill)
+*(Mendeteksi Risiko Laten, Kebocoran Otorisasi, & Mengunci Kontrak Absolut Sistem)*
+
+### 🗺️ Peta Topik Fase 3 (In-Phase Mini-Roadmap)
+Arsitektur dan integrasi modul telah terkunci! Di Fase 3 ini, kita mengunci benteng pertahanan sistem melalui 3 topik:
+* 📌 **Topik 3.1:** Otorisasi & Pencegahan Akses Liar (Middleware guards & role boundaries)
+* 📌 **Topik 3.2:** Proteksi Sesi, Concurrency, & State Integrity (Penanganan race condition & slow network)
+* 📌 **Topik 3.3:** Invariant & Rejection Criteria — Kontrak Absolut Level 3 (Kondisi absolut sistem & kriteria tolak PR)
+
+---
+
+Apakah kamu siap kita mulai bedah dari **Topik 3.1**?
+```
+
+> 🛑 **HARD STOP MACRO TRANSISI FASE 3:**
+> AI **DILARANG KERAS** langsung mencetak materi Topik 3.1 di respons transisi ini! AI **WAJIB BERHENTI TOTAL** di pertanyaan *"Apakah kamu siap kita mulai bedah dari Topik 3.1?"* dan murni menunggu konfirmasi kesiapan dari developer.
 
 **Topik 3.1 — Otorisasi & Pencegahan Akses Liar:**
 Tanyakan siapa yang dilarang mengakses atau melihat data ini. Sajikan trade-off proteksi route middleware vs proteksi di level komponen/page.
