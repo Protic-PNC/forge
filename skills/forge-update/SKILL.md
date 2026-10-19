@@ -45,17 +45,27 @@ description: >-
 ## 🔬 FASE 0: FAST VERSION & MANIFEST CHECK
 
 **Aksi:**
+0. **Pre-Flight Remote Sync Check (Anti-Stale Cache):**
+   Sebelum membaca berkas versi global, AI **WAJIB** memastikan repositori Forge global di disk lokal (`$LOCALAPPDATA/hermes/forge` atau direktori clone Forge terkait) selalu mutakhir dengan upstream GitHub:
+   - Jalankan sinkronisasi hening melalui terminal:
+     ```bash
+     git -C "$LOCALAPPDATA/hermes/forge" pull origin main
+     ```
+   - Ini menjamin bahwa jika ada commit rilis baru di GitHub dari mesin/sesi lain, cache lokal di laptop langsung ter-refresh secara otomatis sebelum evaluasi versi dimulai.
 1. Periksa keberadaan berkas fisik `.agents/forge_manifest.json` di repositori lokal menggunakan tools pembaca file:
    - **Jika TIDAK ADA:** AI wajib menginformasikan: *"Berkas `.agents/forge_manifest.json` belum ditemukan (proyek ini di-forge sebelum versi 1.1.0). Jalankan `/forge-constitution` sekali lagi untuk menggenerasi manifest DNA resmi proyek ini."* → **STOP.**
 2. Baca `forge_version` dari `.agents/forge_manifest.json`.
 3. Baca `version` global dan riwayat `releases` dari berkas `plugin.json` Forge global.
-4. **Evaluasi Versi:**
-   - Jika `local_version == global_version`:
-     Sajikan pesan:
-     > *"✅ Konstitusi proyek Anda sudah berada di versi terbaru (**v{{GLOBAL_VERSION}}**). Tidak ada pembaruan blueprint yang diperlukan."*
-     → **STOP.**
-   - Jika `local_version < global_version`:
-     Lanjutkan ke **Fase 1**.
+4. **Evaluasi Versi & Force Bypass:**
+   - **Pemeriksaan Opsi Force Re-sync:** Jika developer menyertakan argumen `--force` (misal: `/forge-update --force`), atau secara eksplisit meminta perbaikan/sinkronisasi ulang berkas:
+     Abaikan perbandingan versi sama, tetapkan daftar target ke seluruh `updated_blueprints` pada rilis versi aktif saat ini (atau seluruh blueprint jika diminta perbaikan total), dan **Lanjutkan ke Fase 1**.
+   - **Evaluasi Normal:**
+     - Jika `local_version == global_version`:
+       Sajikan pesan:
+       > *"✅ Konstitusi proyek Anda sudah berada di versi terbaru (**v{{GLOBAL_VERSION}}**). Tidak ada pembaruan blueprint yang diperlukan. (Gunakan `/forge-update --force` jika ingin memaksa render ulang blueprint versi ini)."*
+       → **STOP.**
+     - Jika `local_version < global_version`:
+       Lanjutkan ke **Fase 1**.
 
 `[TUGAS AI BERHENTI DI SINI. DILARANG MERENDER FASE SELANJUTNYA SEBELUM ADA BALASAN USER]`
 
@@ -161,6 +171,8 @@ Setelah seluruh berkas terdampak selesai dirender ulang:
    ```bash
    git add -A && git commit -m "chore: sync konstitusi ke Forge v{{GLOBAL_VERSION}}"
    ```
+   
+   *(Catatan Transparansi: Setelah commit dieksekusi, status Source Control di panel IDE Anda akan otomatis kembali bersih/clean working tree tanpa tanda modified. Anda dapat memeriksa riwayat perubahan yang baru saja di-commit kapan saja dengan `git show HEAD` atau `git log -1 -p`).*
    ```
 
 ---

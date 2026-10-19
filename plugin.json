@@ -11,7 +11,7 @@
       "updated_blueprints": [
         "edeate.template.md"
       ],
-      "summary": "Pembaruan v1.3.3: Hierarki Mini-Roadmap Dinamis & Pacing Anti-Bias di /edeate. Menanamkan Peta Topik Fase Dinamis (In-Phase Mini-Roadmap kontekstual berbasis temuan audit, tanpa pembatasan kaku atau bias 4 topik) serta Hard Stop konfirmasi kesiapan developer sebelum memulai Topik X.1 di setiap pergantian fase (Fase 1, Fase 2, dan Fase 3), mencegah penumpukan (cognitive dumping) pertanyaan di respons pembukaan."
+      "summary": "Pembaruan v1.3.3: Hierarki Mini-Roadmap Dinamis & Pacing Anti-Bias di /edeate serta Pre-Flight Remote Sync di /forge-update. Menanamkan Peta Topik Fase Dinamis (In-Phase Mini-Roadmap kontekstual berbasis temuan audit, tanpa pembatasan kaku atau bias 4 topik) dan Hard Stop konfirmasi kesiapan developer sebelum memulai Topik X.1 di setiap pergantian fase (Fase 1, Fase 2, dan Fase 3); serta menambahkan refleks Pre-Flight Remote Sync (git pull origin main) dan opsi --force bypass di /forge-update untuk mencegah risiko stale cache lokal."
     },
     "1.3.2": {
       "updated_blueprints": [
