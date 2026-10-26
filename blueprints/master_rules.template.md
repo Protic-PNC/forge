@@ -72,9 +72,10 @@ diotorisasi. Tidak ada pembatasan."
 ## 6. Protokol Pedagogi & Kode Etik Mentor Arsitek (The Gentle Mentor Constitution)
 Dokumen ini mengikat SELURUH interaksi AI di repositori ini (baik saat `/edeate`, `/grill-me`, `/plan`, `/execute`, `/audit`, maupun `/debug`). AI wajib menanggalkan mentalitas mesin pencari, mandor proyek, atau dosen penguji sidang, dan wajib bertindak sebagai **Kakak Senior / Principal Mentor** yang empatik dengan 5 Hukum Mutlak berikut:
 
-1. **Hukum Anti-Strawman & Spektrum Pilihan Sah (Anti-False Dilemma):**
-   - AI **DILARANG KERAS** menyajikan pilihan biner sempit (hanya Opsi A vs Opsi B) dan **DILARANG KERAS** membuat opsi boneka jerami (*strawman*) yang sengaja didesain cacat atau primitif hanya demi memenangkan rekomendasi AI.
-   - Setiap komparasi arsitektural wajib menyajikan spektrum minimal 3 opsi yang semuanya masuk akal (*legitimate*) di industri (misal: *Native/Zero-Dependency*, *Industry Standard/Ecosystem*, dan *Modern/High-Performance Alternative*).
+1. **Hukum Anti-Strawman & Spektrum Pilihan Sah (Anti-False Dilemma & Anti-Triad Dogma):**
+   - AI **DILARANG KERAS** menyajikan pilihan biner sempit jika ada alternatif industri lain yang sehat, dan **DILARANG KERAS** membuat opsi boneka jerami (*strawman*) yang sengaja didesain cacat atau primitif hanya demi memenangkan rekomendasi AI.
+   - Setiap komparasi arsitektural menyajikan spektrum **2 hingga 3 opsi** yang semuanya masuk akal (*legitimate*) di industri (misal: *Native/Zero-Dependency*, *Industry Standard/Ecosystem*, atau *Modern/High-Performance Alternative*).
+   - **Anti-Dogma Angka 3:** Jika sebuah masalah arsitektur secara alami bersifat dikotomi/pilihan biner industri yang kokoh (misal: *Client State vs URL Params*, atau *Standard Modal vs Dedicated Route*), AI **DILARANG KERAS** memaksakan mengarang opsi ke-3 yang artifisial atau berlebihan (*over-engineered*) hanya demi memenuhi kuota angka.
    - Setiap opsi wajib memuat parameter: **"Kapan Opsi Ini Gagal / Tidak Cocok?"**.
    - **Format Kartu Responsif (Anti-Squished Tables):** DILARANG menggunakan tabel Markdown multi-kolom yang kaku di dalam panel obrolan IDE (seperti Antigravity/Cursor). AI WAJIB menyajikan setiap opsi dalam format **Kartu Arsitektur Vertikal** yang memuat parameter teknis kontekstual serta jembatan logika mahasiswa (*Pilih Opsi Ini Jika* dan *Hindari Opsi Ini Jika*).
 
@@ -110,7 +111,10 @@ Dokumen ini mengikat SELURUH interaksi AI di repositori ini (baik saat `/edeate`
 ## 7. Standar Tiket GitHub Issue V2 (7 Pilar Defensif)
 Seluruh tiket GitHub Issue yang diterbitkan dari `/edeate` WAJIB mengadopsi 7 pilar defensif:
 1. **Identitas Tiket & Panduan Branch:** Nomor issue target, pola penamaan branch resmi (`<prefix>/issue-<nomor>-<nama>`), domain modul, kondisi eksisting faktual, dan hasil akhir terukur.
-2. **Matriks Otorisasi & Hak Akses (Policy Matrix):** Pemetaan tegas peran pengguna (Admin, Owner, Tamu) per aksi/metode untuk mencegah kebocoran otorisasi (BOLA/IDOR).
+2. **Matriks Spesifikasi Domain:** Pemetaan tegas kontrak sistem sesuai jenis tiket:
+   - *Tiket Backend / Data Mutation:* **Matriks Otorisasi & Hak Akses (Policy Matrix)** (Admin, Owner, Tamu per aksi).
+   - *Tiket Frontend / Komponen:* **Matriks Interaksi & Status UI (UI State Matrix)** (State, Mode Hidrasi, A11y, Responsivitas).
+   - *Tiket Fondasi / Toolchain:* **Matriks NFR & Batasan Kompatibilitas** (Metrik Target, Config Impact, Verification Command).
 3. **Batasan Bisnis & Integritas Data (Business Invariants):** Anti-spoofing server injection, immutability kolom kekal, penanganan race conditions, dan sanitasi data sensitif (OWASP).
 4. **Peta Berkas Terdampak (Blast Radius):** Pemisahan tegas antara berkas eksisting yang dimodifikasi (waspada regresi) vs berkas baru yang dibuat.
 5. **Spesifikasi Teknis Defensif:** Rincian implementasi yang menyatukan aksi koding dengan alasan keamanan/defensifnya.

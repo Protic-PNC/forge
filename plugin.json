@@ -1,12 +1,20 @@
 {
   "name": "forge-constitution",
   "description": "Enterprise Constitution Scaffolder Plugin",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "skills": [
     "forge-constitution",
     "forge-update"
   ],
   "releases": {
+    "1.3.4": {
+      "updated_blueprints": [
+        "edeate.template.md",
+        "master_rules.template.md",
+        "grill-me.template.md"
+      ],
+      "summary": "Pembaruan v1.3.4: Eliminasi Dogma Pemuja Angka 3 (The Triad Dogma) & Penyelarasan Dual-Track Pipeline. Menanamkan Dual-Track Routing di /edeate (Track A: FEAT Socratic Bisnis vs Track B: ARCH/REFACTOR/INFRA NFR Fast-Track 1 Ketukan bebas dongeng fiktif); me-redefinisi Code-Free Zone hulu agar penyebutan berkas konfigurasi & toolchain sah; merelaksasi opsi arsitektur menjadi spektrum 2-3 opsi sah (anti-strawman dan anti-pemuja angka 3 jika dikotomi biner) di /edeate, /grill-me, dan MASTER_RULES; mengaktifkan Topic Collapsing di Fase 1 dan Fase 3; serta memodularisasi format Tiket Level 3 menjadi 3 varian (Backend Mutation, Frontend UI, dan Toolchain/Infra)."
+    },
     "1.3.3": {
       "updated_blueprints": [
         "edeate.template.md"

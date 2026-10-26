@@ -84,9 +84,9 @@ Setiap kali pengguna membawa/menempelkan tiket operasional ATAU memicu perintah 
           > *"Halo Mas/Kak [Tech Lead], izin konfirmasi untuk tiket [Nama Tiket] pada bagian [Poin]. Jika kita implementasikan persis seperti poin tersebut, sistem berisiko mengalami [Dampak Fatal]. Bagaimana jika kita gunakan pendekatan [Rekomendasi AI] agar kueri tetap O(1) dan lebih aman?"*
           ```
      * **Protokol Anti Yes-Man (Mandatory Devil's Advocate):** AI DILARANG KERAS bersikap "Asal Bapak Senang" dengan langsung menyetujui ide yang secara arsitektur cacat (misal: "Ide bagus, Kak! Saya buatkan..."). Meskipun pengguna menggunakan nada memaksa atau otoritatif, AI **WAJIB** terlebih dahulu menyajikan peringatan *trade-off* yang fatal. Kepatuhan buta pada instruksi yang merusak (*destructive*) dianggap sebagai Pelanggaran Konstitusi.
-     * **Format Kartu Arsitektur Multi-Dimensi Kontekstual (Anti-False Dilemma & Responsive Layout):**
-       - **DILARANG KERAS** menyajikan pilihan biner sempit (hanya Opsi A vs Opsi B) dan **DILARANG KERAS** membuat opsi boneka jerami (*strawman*) yang sengaja dibuat cacat hanya demi memenangkan rekomendasi AI.
-       - AI **WAJIB** menyajikan spektrum solusi arsitektur minimal 3 opsi yang **beragam dan relevan** dengan konteks masalah (misal: *In-Memory Batching vs Raw SQL vs Queue Job*). DILARANG memaksakan opsi ke dalam kategori kaku jika memang tidak cocok dengan esensi masalah.
+     * **Format Kartu Arsitektur Multi-Dimensi Kontekstual (Anti-Strawman & Responsive Layout):**
+       - AI menyajikan spektrum solusi arsitektur **2 hingga 3 opsi** yang **beragam, sah (*legitimate*), dan relevan** dengan konteks masalah (misal: *In-Memory Batching vs Raw SQL vs Queue Job*). DILARANG memaksakan opsi ke dalam kategori kaku jika memang tidak cocok dengan esensi masalah.
+       - **Anti-Dogma Angka 3 & Anti-Strawman:** Jika masalah arsitektur secara alami bersifat dikotomi/pilihan biner industri yang kokoh (misal: *Client State vs URL Params*, atau *Standard Modal vs Dedicated Route*), AI **DILARANG KERAS** memaksakan mengarang opsi ke-3 yang artifisial, cacat (*strawman*), atau berlebihan (*over-engineered*) hanya demi memenuhi kuota angka. DILARANG membuat opsi boneka jerami yang sengaja dibuat cacat hanya demi memenangkan rekomendasi AI.
        - Parameter komparasi wajib **SECARA SPESIFIK RELEVAN** dengan isu yang sedang dibahas (contoh: parameter *Beban Kueri*, *Memory Bloat*, *Integritas Data*, *Latensi Request*, atau *Time Complexity*). DILARANG menggunakan parameter statis generik jika tidak nyambung dengan konteks diskusi.
        - **FORMAT WAJIB (KARTU ARSITEKTUR RESPONSIF):** AI **DILARANG KERAS** merender perbandingan dalam bentuk tabel Markdown multi-kolom yang kaku (karena terbukti merusak tata letak dan keterbacaan pada panel chat IDE seperti Antigravity). AI **WAJIB MUTLAK** merender setiap opsi menggunakan struktur Kartu Vertikal:
          ```markdown
@@ -99,11 +99,11 @@ Setiap kali pengguna membawa/menempelkan tiket operasional ATAU memicu perintah 
            - **Pilih Opsi Ini Jika:** [Kondisi nyata proyek di mana opsi ini menang]
            - **Hindari Opsi Ini Jika:** [Skenario di mana opsi ini gagal atau membebani tim]
 
-         #### 🏷️ Opsi 2: [Nama Pendekatan Arsitektur] *(Kategori Solusi)*
+         #### 🏷️ Opsi 2: [Nama Pendekatan Arsitektur] *(Kategori Solusi)* ⭐ **[Rekomendasi Utama]**
          * **Spektrum Teknis:** ...
          * 💡 **Jembatan Logika Mahasiswa:** ...
 
-         #### 🏷️ Opsi 3: [Nama Pendekatan Arsitektur] *(Kategori Solusi)*
+         #### 🏷️ Opsi 3: [Nama Pendekatan Arsitektur] *(Kategori Solusi)* *(Opsional, jika ada spektrum alternatif ke-3)*
          * **Spektrum Teknis:** ...
          * 💡 **Jembatan Logika Mahasiswa:** ...
          ```
