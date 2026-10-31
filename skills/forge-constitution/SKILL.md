@@ -159,9 +159,10 @@ Saat melangkah ke Tahap 4, AI **WAJIB** membuka dengan orientasi 4 dimensi:
   | MCP / Tool | Fungsi | Skenario Nyata di Proyek Anda | Status |
   | :--- | :--- | :--- | :--- |
   | **Agent-LSP** | Navigasi kode: lompat ke definisi, cari referensi, diagnostik | Saat `/audit`, saya bisa memverifikasi apakah method Service benar-benar dipanggil oleh Controller tanpa menebak | ⭐ DIREKOMENDASIKAN |
-  | **MCP MySQL** | Query langsung ke database: describe table, validasi skema | Saat `/edeate`, saya bisa memeriksa kolom tabel secara riil, bukan menebak dari file migrasi lama | ⭐ DIREKOMENDASIKAN |
+  | **Playwright MCP** | Uji interaksi UI, deteksi backdrop intercept, crop snapshot (Light/Dark) | Saat `/audit`, menguji interaktivitas nyata di browser, memastikan tombol tidak tertutup backdrop, dan verifikasi rasio kontainer | ⭐ DIREKOMENDASIKAN (FE / Fullstack) |
+  | **MCP MySQL / Database** | Query langsung ke database: describe table, validasi skema | Saat `/edeate`, saya bisa memeriksa kolom tabel secara riil, bukan menebak dari file migrasi lama | ⭐ DIREKOMENDASIKAN (BE / Fullstack) |
   | **MCP GitHub** | Buat Issue, PR, baca komentar | Saat `/audit` selesai, saya bisa langsung membuat PR tanpa Anda harus copy-paste | ⭐ DIREKOMENDASIKAN |
-  | **Chrome DevTools** | Inspeksi DOM, network, performance | Jika ada komponen FE, saya bisa mendiagnosis layout shift atau memory leak | Opsional |
+  | **Chrome DevTools** | Inspeksi DOM & profiling performa mendalam | Jika ada komponen FE khusus yang butuh trace memori atau network throttling ekstrem | Opsional |
   ```
 
   **Pancingan Keterlibatan Developer:** Setelah menyajikan tabel, AI wajib bertanya:
@@ -182,9 +183,9 @@ Saat melangkah ke Tahap 4, AI **WAJIB** membuka dengan orientasi 4 dimensi:
 - **Kritikal:** Jika developer ragu/bingung, JANGAN LANJUT. Berikan analogi sederhana hingga mereka paham.
 
 **Fase 4.4: Penyusunan Panduan Onboarding & Setup MCP (The Setup Guide)**
-- **Pedagogi:** File konfigurasi saja tidak cukup jika anggota tim lain tidak tahu cara melakukan setup *environment* (seperti token GitHub atau instalasi MCP pihak ketiga).
-- **Coaching Aktif:** Jelaskan: *"Karena setup token dan MCP harus dilakukan secara lokal oleh masing-masing developer (demi keamanan), kita wajib membuat satu dokumen panduan instalasi."*
-- **Pertanyaan Keputusan:** Tanyakan: *"Apakah Anda ingin saya membuatkan file `ONBOARDING.md` nantinya, yang berisi panduan *copy-paste* langkah demi langkah bagi tim PROTIC tentang cara setup LSP, mendaftarkan Token GitHub, dan menginstal MCP pihak ketiga (seperti Figma) saat mereka baru melakukan clone repositori ini?"*
+- **Pedagogi:** File konfigurasi saja tidak cukup jika anggota tim lain tidak tahu cara melakukan setup *environment* (seperti token GitHub, instalasi browser Playwright, atau instalasi MCP pihak ketiga).
+- **Coaching Aktif:** Jelaskan: *"Karena setup token, browser Playwright (`npx playwright install chromium`), dan MCP harus dilakukan secara lokal oleh masing-masing developer (demi keamanan), kita wajib membuat satu dokumen panduan instalasi."*
+- **Pertanyaan Keputusan:** Tanyakan: *"Apakah Anda ingin saya membuatkan file `ONBOARDING.md` nantinya, yang berisi panduan copy-paste langkah demi langkah bagi tim tentang cara setup LSP, instalasi opsional Playwright browser binary untuk visual smoke testing (dengan garansi tidak memblokir audit jika belum dipasang), mendaftarkan Token GitHub, dan menginstal MCP saat baru clone repositori ini?"*
 
 **Fase 4.5: Penguncian Komitmen (The Architect's Oath)**
 - **Aksi:** Rangkum seluruh kesepakatan (Tahap 1-4). Tegaskan bahwa kedisiplinan ini akan mengunci repositori.

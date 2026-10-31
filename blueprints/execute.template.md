@@ -22,6 +22,27 @@ Setiap kali pengguna menginstruksikan penghapusan fitur, penghapusan komponen, p
 
 ## 💼 STANDAR EKSEKUSI KODE ENTERPRISE
 Hasilkan kode standar Enterprise kelas dunia dengan bimbingan arsitektur yang mendidik, bersih, dan mudah dipahami:
+
+### 🛡️ ATURAN RESILIENSI VISUAL & INTERAKSI KOMPONEN (FRONTEND GUARANTEES)
+1. **Hukum Default Unmounted Guard (Pencegahan Phantom Backdrop / Layar Terkunci):**
+   - Setiap komponen modal, dialog, sheet, drawer, atau overlay **DIHARAMKAN** merender elemen wrapper `fixed inset-0` secara telanjang hanya mengandalkan class CSS `opacity-0` atau animasi tersembunyi.
+   - AI **WAJIB** menerapkan pola *Conditional Unmount Pattern*:
+     ```jsx
+     // WAJIB: Unmount total dari DOM saat tertutup
+     if (!isOpen) return null;
+     return <div className="fixed inset-0 z-50 ...">{children}</div>;
+     ```
+   - Jika library animasi (seperti Framer Motion atau Headless UI) mengharuskan elemen tetap di DOM saat transisi keluar, wrapper overlay **WAJIB MUTLAK** disematkan class `pointer-events-none` saat state `!isOpen`, dan hanya mengaktifkan `pointer-events-auto` saat `isOpen === true`. DILARANG meninggalkan dinding tak kasat mata (*invisible wall*) yang mengunci interaksi layar pengguna.
+2. **Hukum Kontainer Adaptif Memeluk Gambar (Hug-Content Bounds):**
+   - Untuk elemen media dinamis / poster / barcode (seperti QRIS):
+     * **DILARANG KERAS** mengunci kontainer ke dimensi bujur sangkar kaku (misal `w-64 h-64`) dengan `object-contain` yang menimbulkan ruang kosong (*pillarbox / sayap putih*) pada aset berformat potret 3:4 atau A4.
+     * **WAJIB** menggunakan kontainer adaptif yang memeluk dimensi asli poster:
+       ```jsx
+       <div className="relative inline-flex items-center justify-center rounded-2xl border bg-white p-2.5 shadow-md ...">
+         <img className="max-h-64 sm:max-h-72 w-auto max-w-full rounded-xl object-contain" ... />
+       </div>
+       ```
+
 <!-- GENERATION_DIRECTIVE: ENTERPRISE_CODE_STANDARDS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):

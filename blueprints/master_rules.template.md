@@ -25,6 +25,15 @@ project_name: "{{PROJECT_NAME}}"
 ## 3. Hukum Pengujian (Testing)
 - **Tingkat Komitmen:** {{TDD_STRICTNESS_DECISION}}
 - **Aturan Praktis:** (Contoh: AI dilarang menulis kode produksi sebelum tes ditulis).
+- **Four-Tier Quality Gate (Khusus Fitur Antarmuka Pengguna/UI):**
+  1. *Tier 1 (Linting):* Oxlint / ESLint 0 error dan 0 warning.
+  2. *Tier 2 (Logic Tests):* Unit/Integration logic test passing 100%.
+  3. *Tier 3 (Production Bundler):* Build produksi sukses dengan Exit Code 0.
+  4. *Tier 4 (Visual Smoke & Actionability Gate):* Verifikasi interaktivitas browser riil via Playwright MCP (anti-backdrop intercept, rasio aspek proporsional, dan targeted crop snapshot Light/Dark mode).
+- **Hukum Anti-Kebutaan Visual & Metrik Geometri (Anti-Visual Blindness Protocol):**
+  * **Metrik Geometri Sebelum Opini:** AI dilarang menyimpulkan keselarasan tampilan hanya dari pencocokan semantik. Rasio wadah wajib selaras dengan rasio asli gambar (`naturalWidth/naturalHeight`) untuk mencegah sayap putih (*pillarbox*).
+  * **Uji Dua Tema Ekstrem (Dual-Theme Bleed):** Verifikasi tangkapan layar elemen pada Light Mode dan Dark Mode untuk mendeteksi balok semen kontras tak diinginkan.
+  * **Penyelamat Laptop Fresh Clone (Graceful Fallback):** Jika lingkungan lokal belum memiliki Playwright / Chromium, AI dilarang membatalkan audit atau memblokir PR; AI wajib beralih ke inspeksi kode statis (*conditional unmount & adaptive bounds*) dengan catatan edukatif ramah.
 
 ## 4. Standar Kode & Kualitas
 - **Ketegasan Audit:** {{CODE_AUDIT_STRICTNESS_DECISION}}
