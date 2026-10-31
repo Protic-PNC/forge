@@ -184,7 +184,7 @@ Saat melangkah ke Tahap 4, AI **WAJIB** membuka dengan orientasi 4 dimensi:
 
 **Fase 4.4: Penyusunan Panduan Onboarding & Setup MCP (The Setup Guide)**
 - **Pedagogi:** File konfigurasi saja tidak cukup jika anggota tim lain tidak tahu cara melakukan setup *environment* (seperti token GitHub, instalasi browser Playwright, atau instalasi MCP pihak ketiga).
-- **Coaching Aktif:** Jelaskan: *"Karena setup token, browser Playwright (`npx playwright install chromium`), dan MCP harus dilakukan secara lokal oleh masing-masing developer (demi keamanan), kita wajib membuat satu dokumen panduan instalasi."*
+- **Coaching Aktif:** Jelaskan: *"Karena setup token, browser Playwright (`npm install -D @playwright/test && npx playwright install chromium`), dan MCP harus dilakukan secara lokal oleh masing-masing developer (demi keamanan), kita wajib membuat satu dokumen panduan instalasi."*
 - **Pertanyaan Keputusan:** Tanyakan: *"Apakah Anda ingin saya membuatkan file `ONBOARDING.md` nantinya, yang berisi panduan copy-paste langkah demi langkah bagi tim tentang cara setup LSP, instalasi opsional Playwright browser binary untuk visual smoke testing (dengan garansi tidak memblokir audit jika belum dipasang), mendaftarkan Token GitHub, dan menginstal MCP saat baru clone repositori ini?"*
 
 **Fase 4.5: Penguncian Komitmen (The Architect's Oath)**

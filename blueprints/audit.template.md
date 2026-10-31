@@ -34,7 +34,9 @@ Saat perintah `/audit` dikirim:
        - AI otomatis mengalihkan Tier 4 ke **Static Code Inspection (Fallback Audit)**:
          (a) Memvalidasi bahwa komponen overlay/modal menerapkan pola *Conditional Unmount* (`if (!isOpen) return null;` atau `pointer-events-none` saat state tertutup).
          (b) Memvalidasi bahwa kontainer gambar menggunakan pola adaptif *Hug-Content*.
-       - AI menyertakan kotak catatan edukatif ramah di Bagian 3 laporan audit yang menjelaskan bahwa pengujian visual dialihkan ke audit statis, disertai petunjuk satu baris ramah pemula (`npx playwright install chromium`) tanpa menghambat penerbitan PR.
+       - AI **WAJIB MENYEBUTKAN PERINTAH LENGKAP & VALID** (bukan perintah tunggal yang memicu warning dependency):
+         `npm install -D @playwright/test && npx playwright install chromium`
+         *(Jelaskan alasannya: pasang driver ke devDependencies proyek terlebih dahulu agar npx tidak melempar peringatan dependensi hilang, lalu unduh biner peramban Chromium).*
 4. **Poin Evaluasi Kritis:**
    <!-- GENERATION_DIRECTIVE: AUDIT_EVALUATION_POINTS
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -56,6 +58,14 @@ Saat perintah `/audit` dikirim:
      * *Pelayanan Proaktif & Penawaran MCP GitHub PR:* DILARANG melakukan `git merge` lokal ke `main`. Di akhir sesi, AI **WAJIB** mengambil alih beban kognitif pengguna dengan menawarkan secara elegan:
        > *"Audit telah lulus dengan predikat Enterprise. Apakah Anda ingin saya langsung membuatkan Pull Request resminya menggunakan MCP GitHub (`create_pull_request`) ke branch `main` sekarang (lengkap dengan `Closes #<id>` dan label `needs-review`) agar papan Kanban kampus otomatis bergerak dan Anda bisa langsung bersantai?"*
        Jika developer menyetujui, AI memanggil tool MCP GitHub untuk menerbitkan PR secara nyata dan menyematkan label `needs-review`.
+     * *Peringatan & Penawaran Interaktif Visual Smoke Test (Khusus Fallback):* Jika Tier 4 dialihkan ke fallback statis karena browser Playwright belum terpasang, AI **WAJIB MENEKANKANNYA SECARA JELAS DI AKHIR LAPORAN (BAGIAN 3)** dalam blok callout khusus, dan secara eksplisit menawarkan:
+       > 💡 **Peringatan Pengujian Visual:** Pengujian Tier 4 Visual Smoke dialihkan ke audit statis karena browser Playwright belum terpasang di perangkat ini.  
+       > Untuk mengaktifkannya secara resmi dan bebas error/warning, jalankan:  
+       > ```bash
+       > npm install -D @playwright/test && npx playwright install chromium
+       > ```  
+       > **👉 Apakah kamu sudah install Playwright dan mau test visual sekarang?**  
+       > *(Jika sudah, balas 'ya jalankan test visual' dan saya akan langsung menguji interaktivitas serta mengambil tangkapan layar Light & Dark mode).*
      * *Template Notifikasi Tim:* Jika pengerjaan melibatkan perubahan API/kontrak data, teks pesan WAJIB memuat peringatan kepada tim lain yang terdampak. (Sajikan dalam blok ` ```text `).
        <!-- GENERATION_DIRECTIVE: CROSS_TEAM_NOTIFICATION_TEMPLATE
        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
