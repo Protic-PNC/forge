@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0",
+  "description": "Lockfile deterministik untuk seluruh aset upstream lossless di repositori FORGE (khusus aset eksternal GitHub; tidak mencakup skrip internal buatan FORGE).",
+  "assets": [
+    {
+      "id": "api_linter",
+      "asset_type": "python_stdlib_script",
+      "local_path": "skills/forge-constitution/scripts/api_linter.py",
+      "repo": "alirezarezvani/claude-skills",
+      "branch": "main",
+      "upstream_path": "engineering/skills/api-design-reviewer/scripts/api_linter.py",
+      "license": "MIT",
+      "local_sha256": "64dedab21bbec8a74ac9cc3400b1425208b2ec9f8e5a499c41c0fcc24b4e75a9",
+      "required_flags": [],
+      "used_by_blueprints": [
+        "blueprints/audit.template.md",
+        "blueprints/references/audit_api_checklist.md"
+      ],
+      "last_synced_at": "2026-11-24"
+    },
+    {
+      "id": "api_scorecard",
+      "asset_type": "python_stdlib_script",
+      "local_path": "skills/forge-constitution/scripts/api_scorecard.py",
+      "repo": "alirezarezvani/claude-skills",
+      "branch": "main",
+      "upstream_path": "engineering/skills/api-design-reviewer/scripts/api_scorecard.py",
+      "license": "MIT",
+      "local_sha256": "6648acd694c21cef26719bdeebbe530bbfaab6dfff5636a9e679f4d1ba5b64ca",
+      "required_flags": [
+        "--min-grade"
+      ],
+      "used_by_blueprints": [
+        "blueprints/audit.template.md",
+        "blueprints/references/audit_api_checklist.md"
+      ],
+      "last_synced_at": "2026-11-24"
+    },
+    {
+      "id": "breaking_change_detector",
+      "asset_type": "python_stdlib_script",
+      "local_path": "skills/forge-constitution/scripts/breaking_change_detector.py",
+      "repo": "alirezarezvani/claude-skills",
+      "branch": "main",
+      "upstream_path": "engineering/skills/api-design-reviewer/scripts/breaking_change_detector.py",
+      "license": "MIT",
+      "local_sha256": "ea1950f6505b278344571625ad1d19bea7db4d1ef1e3ded98d76ef2151b4ac87",
+      "required_flags": [
+        "--exit-on-breaking"
+      ],
+      "used_by_blueprints": [
+        "blueprints/audit.template.md",
+        "blueprints/references/audit_api_checklist.md"
+      ],
+      "last_synced_at": "2026-11-24"
+    },
+    {
+      "id": "changelog_generator",
+      "asset_type": "python_stdlib_script",
+      "local_path": "skills/forge-constitution/scripts/changelog_generator.py",
+      "repo": "alirezarezvani/claude-skills",
+      "branch": "main",
+      "upstream_path": "product-team/skills/roadmap-communicator/scripts/changelog_generator.py",
+      "license": "MIT",
+      "local_sha256": "a7604c81ac75e19b10c5451dad78587b86edc060f3e5e50148714da9274ae1c7",
+      "required_flags": [],
+      "used_by_blueprints": [
+        "blueprints/ship.template.md"
+      ],
+      "last_synced_at": "2026-11-24"
+    },
+    {
+      "id": "design_token_generator",
+      "asset_type": "python_stdlib_script",
+      "local_path": "skills/forge-constitution/scripts/design_token_generator.py",
+      "repo": "alirezarezvani/claude-skills",
+      "branch": "main",
+      "upstream_path": "product-team/skills/ui-design-system/scripts/design_token_generator.py",
+      "license": "MIT",
+      "local_sha256": "a431890fd9486bbed7e6c33dd97103433bb8e9d7c1c530782e1a71e529043a12",
+      "required_flags": [
+        "--style",
+        "--format"
+      ],
+      "used_by_blueprints": [
+        "blueprints/references/anti_slop_design_guide.md"
+      ],
+      "last_synced_at": "2026-11-24"
+    },
+    {
+      "id": "finish_lint",
+      "asset_type": "python_stdlib_script",
+      "local_path": "skills/forge-constitution/scripts/finish_lint.py",
+      "repo": "alirezarezvani/claude-skills",
+      "branch": "main",
+      "upstream_path": "product-team/skills/design-qa/scripts/finish_lint.py",
+      "license": "MIT",
+      "local_sha256": "dad9c17abba469566de4c47d0cb87cfd55dbbd443a1fb225d91ab0e6a12f851d",
+      "required_flags": [],
+      "used_by_blueprints": [
+        "blueprints/audit.template.md",
+        "blueprints/references/anti_slop_design_guide.md"
+      ],
+      "last_synced_at": "2026-11-24"
+    },
+    {
+      "id": "state_matrix_checker",
+      "asset_type": "python_stdlib_script",
+      "local_path": "skills/forge-constitution/scripts/state_matrix_checker.py",
+      "repo": "alirezarezvani/claude-skills",
+      "branch": "main",
+      "upstream_path": "product-team/skills/design-qa/scripts/state_matrix_checker.py",
+      "license": "MIT",
+      "local_sha256": "4b3b93755b90f04353cb33cb8fed2fdb3efe80a33114a01a215ba4adf4164ffc",
+      "required_flags": [
+        "--matrix"
+      ],
+      "used_by_blueprints": [
+        "blueprints/references/anti_slop_design_guide.md"
+      ],
+      "last_synced_at": "2026-11-24"
+    },
+    {
+      "id": "anthropic_frontend_design",
+      "asset_type": "markdown_reference",
+      "local_path": "blueprints/references/upstream/anthropic_frontend_design.md",
+      "repo": "anthropics/skills",
+      "branch": "main",
+      "upstream_path": "skills/frontend-design/SKILL.md",
+      "license": "Apache-2.0",
+      "local_sha256": "d91970639e9f5c37682ac7ab60094d35f1c7c1f38d731bd56396563aee10c1d3",
+      "required_flags": [],
+      "used_by_blueprints": [
+        "blueprints/references/anti_slop_design_guide.md",
+        "blueprints/prototype.template.md"
+      ],
+      "last_synced_at": "2026-11-25"
+    },
+    {
+      "id": "blader_humanizer",
+      "asset_type": "markdown_reference",
+      "local_path": "blueprints/references/upstream/blader_humanizer.md",
+      "repo": "blader/humanizer",
+      "branch": "main",
+      "upstream_path": "SKILL.md",
+      "license": "MIT",
+      "local_sha256": "3013910ef5433dab12f0d2b86d9cf9e3421a253ef986518a68ef07aa29629bdc",
+      "required_flags": [],
+      "used_by_blueprints": [
+        "blueprints/references/anti_slop_design_guide.md",
+        "blueprints/prototype.template.md"
+      ],
+      "last_synced_at": "2026-11-25"
+    },
+    {
+      "id": "vercel_web_design_guidelines",
+      "asset_type": "markdown_reference",
+      "local_path": "blueprints/references/upstream/vercel_web_design_guidelines.md",
+      "repo": "vercel-labs/web-interface-guidelines",
+      "branch": "main",
+      "upstream_path": "command.md",
+      "license": "UNSPECIFIED",
+      "local_sha256": "d246b026f4f29b5823a9cc857f9edf3d2507002e055e32040cadeaf3b38e0234",
+      "required_flags": [],
+      "used_by_blueprints": [
+        "blueprints/references/anti_slop_design_guide.md",
+        "blueprints/prototype.template.md"
+      ],
+      "last_synced_at": "2026-11-25"
+    }
+  ]
+}
