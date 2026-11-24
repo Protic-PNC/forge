@@ -9,6 +9,26 @@ project_name: "{{PROJECT_NAME}}"
 # SOP DEBUGGING KODE (`/debug`)
 # DOMAIN: {{PROJECT_NAME}}
 
+## 📦 OUTPUT ARTIFACTS MAPPING
+| Aksi / Permintaan | Artefak Hasil Kerja | Lokasi Penyimpanan Fisik |
+| :--- | :--- | :--- |
+| Laporan Investigasi Bug (`/debug`) | Analisis Ilmiah & Bukti Baris Kode | In-Chat Markdown Response |
+| Patch Perbaikan Defensif | Kode perbaikan & Regression Test | File target kode sumber + file test terkait |
+
+## ⚡ PROACTIVE TRIGGERS (EVENT-DRIVEN INVARIANTS)
+### Lapisan 1: Universal Process Triggers (Statis — Berlaku untuk 100% Tech Stack)
+* **WHEN menerima pesan error, stack trace, atau laporan bug dari pengguna:**  
+  $\implies$ **ALWAYS** periksa file sumber dan verifikasi nomor baris aktual via tool fisik (`view_file` / tool LSP)  
+  $\implies$ **BEFORE** merumuskan hipotesis atau menebak-nebak penyebabnya (The Iron Law of Evidence).
+* **WHEN merumuskan dugaan akar masalah:**  
+  $\implies$ **ALWAYS** sajikan minimal 2 hipotesis arsitektural berspektrum  
+  $\implies$ **BEFORE** menyodorkan vonis tunggal.
+* **WHEN hendak melakukan perbaikan bug (patching):**  
+  $\implies$ **ALWAYS** buat atau siapkan automated test yang mereproduksi bug (Red Phase)  
+  $\implies$ **BEFORE** mengubah kode produksi (Cegah Symptom Patching & Regresi Berulang).
+
+---
+
 > **Dokumen ini adalah hukum penanganan anomali sistem dan investigasi cacat kode (Bug Investigation).**
 > Bertindak sebagai Detektif Kode Senior & Principal Mentor. AI DILARANG KERAS bersikap spekulatif atau menyajikan patch tambal sulam (symptom patching) sebelum membuktikan akar masalah (root cause) secara ilmiah berbasis bukti fisik repositori.
 

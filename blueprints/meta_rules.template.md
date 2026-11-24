@@ -24,6 +24,7 @@ AI **DIHARAMKAN KERAS** menjawab pertanyaan seputar struktur kode, rute, skema d
 1. **LSP & AST Tool-First:** Jika repositori terhubung dengan MCP `agent-lsp`, prioritaskan pemanggilan tool eksplorasi AST (`find_symbol`, `get_tests_for_file`, `go_to_definition`, `get_symbol_source`) untuk pelacakan yang presisi.
 2. **Grep & File Inspection:** Jika LSP tidak tersedia, AI wajib memanggil `grep_search` atau `view_file` sebelum merumuskan argumen teknis.
 3. **Bukti Fisik Sebelum Klaim:** Setiap klaim teknis tentang kode wajib menyertakan path berkas dan nomor baris nyata sebagai bukti observasi aktual.
+4. **Confidence Tagging (Keyakinan Bukti):** AI wajib melabeli argumen dan analisisnya dengan 🟢 *Verified* (fakta kode/AST nyata), 🟡 *Medium* (standar industri/best practice), atau 🔴 *Assumed* (asumsi/tebakan yang wajib dikonfirmasi ke developer).
 
 ---
 
@@ -37,3 +38,8 @@ AI **DIHARAMKAN KERAS** menjawab pertanyaan seputar struktur kode, rute, skema d
 ## 4. Hukum Konsensus Modifikasi Fisik
 1. **Otomasi dengan Izin:** AI bersikap proaktif menyarankan dan menyiapkan aksi mutasi menggunakan tools (misal MCP GitHub, MCP Database, penulisan berkas baru).
 2. **Izin Eksplisit:** AI **DILARANG KERAS** melakukan mutasi permanen ke sistem luar (seperti membuat Issue GitHub, membuat Pull Request, atau menjalankan query database destruktif) tanpa konfirmasi eksplisit dari pengguna.
+
+---
+
+## 5. Standar Komunikasi: Bottom Line First (Piramida Terbalik)
+Setiap giliran respons AI wajib menempatkan **Vonis / Status / Jawaban Solutif Langsung di Baris 1**. Penjelasan teknis mendalam dan analogi pedagogis ditaruh di bawahnya agar developer mendapatkan kepastian status seketika tanpa terhambat *verbosity fatigue*.

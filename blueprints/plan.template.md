@@ -9,6 +9,38 @@ project_name: "{{PROJECT_NAME}}"
 # SOP PERENCANAAN EKSEKUSI (`/plan`)
 # DOMAIN: {{PROJECT_NAME}}
 
+## 📦 OUTPUT ARTIFACTS MAPPING
+| Aksi / Permintaan | Artefak Hasil Kerja | Lokasi Penyimpanan Fisik |
+| :--- | :--- | :--- |
+| Perencanaan Fitur (`/plan`) | Dokumen Rencana Permanen | `.docs/plan/issue-<nomor:2digit>-<prefix>-<kebab-case-slug>.md` |
+| Sinkronisasi Scratchpad IDE | Active Working Scratchpad | `implementation_plan.md` (root proyek) |
+
+## ⚡ PROACTIVE TRIGGERS (EVENT-DRIVEN INVARIANTS)
+### Lapisan 1: Universal Process Triggers (Statis — Berlaku untuk 100% Tech Stack)
+* **WHEN menyusun langkah implementasi yang menyentuh kode eksisting:**  
+  $\implies$ **ALWAYS** validasi signature method, class, dan interface aktual via `agent-lsp` (`go_to_definition`, `get_signature_help`) atau inspeksi file fisik  
+  $\implies$ **BEFORE** menulis langkah perubahan di berkas rencana (Cegah Rencana Berbasis Asumsi).
+* **WHEN merumuskan rencana eksekusi baru:**  
+  $\implies$ **ALWAYS** pisahkan daftar berkas lama yang dimodifikasi (*Blast Radius*) vs berkas baru, serta urutkan secara *Bottom-Up*  
+  $\implies$ **BEFORE** mengesahkan draf `.docs/plan/` (Cegah Regresi & Ketergantungan Terbalik).
+
+### Lapisan 2: Stack & Domain Triggers (Dinamis Sesuai DNA Proyek)
+<!-- GENERATION_DIRECTIVE: PLAN_PROACTIVE_TRIGGERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+Sintesis 2-3 Event-Driven Proactive Triggers khusus fase perencanaan (/plan)
+sesuai tech stack di `.agents/forge_manifest.json` (format: WHEN ... => ALWAYS ... => BEFORE ...).
+DILARANG memasukkan trigger Database/SQL jika proyek adalah Frontend Statis tanpa DB!
+- Contoh Stack BE/DB:
+  * WHEN merancang endpoint/mutasi baru => ALWAYS tetapkan skema validasi input & status code error => BEFORE mengesahkan plan.
+  * WHEN merancang relasi tabel Foreign Key => ALWAYS tentukan klausul ON DELETE (CASCADE/RESTRICT) => BEFORE menyusun DDL.
+- Contoh Stack FE/UI:
+  * WHEN merancang komponen interaktif/halaman baru => ALWAYS tentukan batas hidrasi (Static vs Client Island), Empty/Error State, & kontrak responsivitas mobile/desktop => BEFORE mengesahkan plan.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
+
+---
+
 ## PROTOKOL PERENCANAAN (`/plan`) & GERBANG ANTI-AUTO-EXECUTE
 Saat pengguna menjalankan perintah `/plan`:
 1. **Tugas Terisolasi & Validasi Pramodifikasi (LSP):** Sebelum menyusun rencana, AI **WAJIB** memvalidasi *class*, parameter, dan *interface* yang akan disentuh menggunakan tool `agent-lsp` (seperti `go_to_definition` atau `get_signature_help`). Jangan merancang rencana berdasarkan asumsi nama fungsi atau parameter. AI HANYA menyusun dan memperbarui artefak rencana berdasarkan konsensus arsitektur dan kepastian struktur kode dari LSP.

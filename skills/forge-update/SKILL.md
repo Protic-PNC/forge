@@ -32,6 +32,9 @@ description: >-
 | `architecture.template.md` | `.agents/rules/ARCHITECTURE.md` |
 | `git_workflow.template.md` | `.agents/rules/GIT_WORKFLOW.md` |
 | `edeate.template.md` | `.agents/skills/project-edeate/SKILL.md` |
+| `references/dual_track_protocol.md` | `.agents/skills/project-edeate/references/dual_track_protocol.md` |
+| `references/ticket_variants.md` | `.agents/skills/project-edeate/references/ticket_variants.md` |
+| `references/anti_patterns.md` | `.agents/skills/project-edeate/references/anti_patterns.md` |
 | `grill-me.template.md` | `.agents/skills/project-grill-me/SKILL.md` |
 | `plan.template.md` | `.agents/skills/project-plan/SKILL.md` |
 | `tdd.template.md` | `.agents/skills/project-tdd/SKILL.md` |
@@ -127,10 +130,11 @@ Di setiap iterasi:
 1. Baca berkas template terbaru dari direktori global: `blueprints/{{NAMA_BLUEPRINT}}`.
 2. **Preservasi Zona Kustom (Anti-Data Loss):**
    Jika berkas target lokal sudah ada di disk, AI **WAJIB** memeriksa apakah berkas tersebut memuat zona riwayat dinamis (misalnya `<!-- ADR_LOG_START -->` hingga `<!-- ADR_LOG_END -->` pada `ARCHITECTURE.md`). Jika ada entri catatan yang dibuat developer/tim di dalamnya, ekstrak dan simpan teks tersebut agar tidak hilang saat ditimpa.
-3. **Penanganan Berkas Baru & Celah Variabel (Micro-Interview):**
-   Jika berkas berstatus `[BERKAS BARU]`:
-   - AI memeriksa apakah template berkas baru tersebut memuat placeholder variabel `{{VAR}}` atau `<!-- GENERATION_DIRECTIVE: ... -->` yang belum terdaftar di dalam `dna` atau `directives` manifest lokal.
-   - Jika ada variabel baru yang belum diketahui: AI **WAJIB BERHENTI** dan mengajukan 1 pertanyaan wawancara terarah (disertai 3 spektrum opsi + rekomendasi) kepada developer. Setelah disetujui, simpan nilai tersebut ke `.agents/forge_manifest.json` sebelum melanjutkan render.
+3. **Penanganan Celah Variabel & Directive Baru (`[BERKAS BARU]` MAUPUN `[PEMBARUAN]`):**
+   Pada **SETIAP berkas** yang dirender (baik `[BERKAS BARU]` maupun `[PEMBARUAN]`):
+   - AI **WAJIB** memeriksa apakah template memuat placeholder variabel `{{VAR}}` atau tag `<!-- GENERATION_DIRECTIVE: NAMA_DIRECTIVE ... -->` yang **belum terdaftar** di dalam `dna` atau `directives` `.agents/forge_manifest.json` lokal.
+   - **Jalur Cepat (Derivasi dari DNA Eksisting):** Jika directive baru tersebut dapat diturunkan langsung secara objektif dari `dna.TECH_STACK_SUMMARY` dan `dna.BUSINESS_DOMAIN_SUMMARY` di manifest lokal (misal: `EXECUTE_PROACTIVE_TRIGGERS`, `PLAN_PROACTIVE_TRIGGERS`, `AUDIT_PROACTIVE_TRIGGERS`), AI merumuskan draf nilainya secara proporsional sesuai stack proyek, menyajikan drafnya dalam 1 konfirmasi singkat kepada developer, lalu menyimpannya ke `directives` di `.agents/forge_manifest.json`.
+   - **Jalur Micro-Interview (Butuh Keputusan Baru):** Jika variabel/directive membutuhkan keputusan kebijakan baru yang tidak ada di `dna` manifest, AI **WAJIB BERHENTI** dan mengajukan 1 pertanyaan wawancara terarah (disertai 2–3 spektrum opsi + rekomendasi) kepada developer. Setelah disetujui, simpan nilai tersebut ke `.agents/forge_manifest.json` sebelum melanjutkan render.
 4. Baca data dari `.agents/forge_manifest.json` (lokal):
    - Metadata Front-Matter (sudah ada di template):
      - `{{FORGE_VERSION}}` ➔ `{{GLOBAL_VERSION}}`

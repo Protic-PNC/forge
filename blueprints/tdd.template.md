@@ -9,6 +9,13 @@ project_name: "{{PROJECT_NAME}}"
 # SOP TEST-DRIVEN DEVELOPMENT (`/tdd`)
 # DOMAIN: {{PROJECT_NAME}}
 
+## 📦 OUTPUT ARTIFACTS MAPPING
+| Aksi / Permintaan | Artefak Hasil Kerja | Lokasi Penyimpanan Fisik |
+| :--- | :--- | :--- |
+| Perumusan Tes (`/tdd`) | Berkas Pengujian Otomatis (Red Phase) | Direktori tes proyek (e.g. `tests/`, `src/__tests__/`) |
+
+---
+
 ## 🧪 PROTOKOL TEST-DRIVEN DEVELOPMENT (`/tdd`)
 Saat pengguna menjalankan perintah `/tdd`:
 

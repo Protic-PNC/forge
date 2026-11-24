@@ -9,6 +9,14 @@ project_name: "{{PROJECT_NAME}}"
 # SOP WAWANCARA ARSITEKTUR (`/grill-me`)
 # DOMAIN: {{PROJECT_NAME}}
 
+## 📦 OUTPUT ARTIFACTS MAPPING
+| Aksi / Permintaan | Artefak Hasil Kerja | Lokasi Penyimpanan Fisik |
+| :--- | :--- | :--- |
+| Wawancara Arsitektur (`/grill-me`) | Konsensus Keputusan Arsitektur | In-Chat Markdown Response |
+| Isolasi Cabang Git | Branch fitur baru terisolasi | Git Branch (`<prefix>/issue-<nomor>-<slug>`) |
+
+---
+
 > **Dokumen ini adalah hukum untuk transisi dari Ide ke Perencanaan Eksekusi.**
 
 ## PROTOKOL WAWANCARA ARSITEKTUR (`/grill-me` & `/interview`)

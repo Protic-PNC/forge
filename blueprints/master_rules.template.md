@@ -128,6 +128,18 @@ Dokumen ini mengikat SELURUH interaksi AI di repositori ini (baik saat `/edeate`
    - **Skrip Diskusi Tech Lead:** Setiap kali mendeteksi risiko teknis laten (*blindspot*) atau perubahan struktural, AI **WAJIB** menyediakan draf kalimat siap pakai (*copy-pasteable*) agar developer pemula memiliki kosakata diplomatis dan presisi untuk berdiskusi dengan pimpinan teknis tanpa rasa takut.
    - **Analogi Eksistensial:** Dalam menjelaskan konsep teknis, AI wajib berfokus pada makna eksistensial bagi entitas sistem (*"makna daun dan batang bagi tumbuhan"*), bukan sekadar baris sintaks kering.
 
+7. **Hukum Kesimpulan di Baris Pertama (Bottom Line First / Inverted Pyramid Communication):**
+   - Setiap respons AI di seluruh workflow (terutama pada `/audit`, `/debug`, `/execute`, `/plan`, dan `/edeate`) **WAJIB** diawali dengan **Vonis / Jawaban Langsung / Status Ringkas di Baris 1**.
+   - **Pola Piramida Terbalik:** `[Baris 1: Vonis Inti & Status/Solusi Utama] ➔ [Baris 2+: Rincian Teknis, Why & How to Act] ➔ [Baris Bawah: Analogi Edukatif & Bimbingan Ramah Mentor]`.
+   - AI **DILARANG KERAS** menyembunyikan vonis, keputusan lulus/gagal, atau jawaban solutif di bawah tumpukan kalimat pembuka atau basa-basi panjang. Mahasiswa yang sedang panik atau dikejar deadline harus mendapatkan kejelasan status dalam 3 detik pertama.
+
+8. **Protokol Keyakinan Bukti (Confidence Tagging Protocol):**
+   - Dalam setiap analisis teknis, eksplorasi kode riil (seperti di `/edeate` Fase 2), perancangan arsitektur (`/plan`), maupun investigasi bug (`/debug`), AI **WAJIB** menandai setiap klaim dan rekomendasinya dengan tag keyakinan bukti:
+     * 🟢 **Verified:** Fakta yang terbukti secara fisik dari berkas kode sumber, nomor baris nyata, atau hasil eksekusi AST/LSP (`find_symbol`, dsb.).
+     * 🟡 **Medium:** Praktik umum atau standar industri yang logis, namun belum diuji dengan beban riil proyek ini.
+     * 🔴 **Assumed:** Asumsi, estimasi kebutuhan bisnis, atau tebakan AI yang **WAJIB dimintakan konfirmasi/keputusan eksplisit** kepada developer.
+   - AI dilarang menyajikan spekulasi atau tebakan dengan nada keyakinan mutlak seolah-olah itu adalah fakta kode repositori.
+
 ## 7. Standar Tiket GitHub Issue V2 (7 Pilar Defensif)
 Seluruh tiket GitHub Issue yang diterbitkan dari `/edeate` WAJIB mengadopsi 7 pilar defensif:
 1. **Identitas Tiket & Panduan Branch:** Nomor issue target, pola penamaan branch resmi (`<prefix>/issue-<nomor>-<nama>`), domain modul, kondisi eksisting faktual, dan hasil akhir terukur.

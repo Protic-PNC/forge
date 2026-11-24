@@ -9,6 +9,36 @@ project_name: "{{PROJECT_NAME}}"
 # SOP AUDIT KODE (`/audit`)
 # DOMAIN: {{PROJECT_NAME}}
 
+## 📦 OUTPUT ARTIFACTS MAPPING
+| Aksi / Permintaan | Artefak Hasil Kerja | Lokasi Penyimpanan Fisik |
+| :--- | :--- | :--- |
+| Evaluasi Kualitas (`/audit`) | Laporan Audit 4-Tier & Bukti Visual | In-Chat Markdown Response |
+| Pengesahan Selesai Roadmap | Kotak Centang Selesai (`- [x] (Issue #[Nomor])`) | `DEVELOPMENT_ROADMAP.md` (root proyek) |
+
+## ⚡ PROACTIVE TRIGGERS (EVENT-DRIVEN INVARIANTS)
+### Lapisan 1: Universal Process Triggers (Statis — Berlaku untuk 100% Tech Stack)
+* **WHEN mereview perubahan interface, DTO, atau kontrak fungsi yang di-export:**  
+  $\implies$ **ALWAYS** periksa seluruh berkas konsumen yang mengimpor simbol tersebut via `agent-lsp` (`find_references`)  
+  $\implies$ **BEFORE** menyatakan lolos Tier 1 (Cegah Breaking Contract & Silent Consumer Failure).
+* **WHEN hendak mengubah status roadmap menjadi selesai (`- [x]`):**  
+  $\implies$ **ALWAYS** buktikan bahwa Tier 1 (Lint), Tier 2 (Tests), dan Tier 3 (Build) lolos 100% tanpa kompromi  
+  $\implies$ **BEFORE** memodifikasi `DEVELOPMENT_ROADMAP.md` (Cegah False Sense of Completion).
+
+### Lapisan 2: Stack & Domain Triggers (Dinamis Sesuai DNA Proyek)
+<!-- GENERATION_DIRECTIVE: AUDIT_PROACTIVE_TRIGGERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+Sintesis 2-3 Event-Driven Proactive Triggers khusus fase audit (/audit)
+sesuai tech stack di `.agents/forge_manifest.json` (format: WHEN ... => ALWAYS ... => BEFORE ...).
+- Contoh Stack FE/UI:
+  * WHEN mendeteksi perubahan berkas visual (JSX/TSX/Vue/CSS) => ALWAYS jalankan verifikasi Playwright pada viewport nyata (`1280x680` & `375x667`) serta Light/Dark mode => BEFORE memberikan vonis lulus Jalur 3.
+- Contoh Stack BE/DB:
+  * WHEN mereview query database atau endpoint mutasi => ALWAYS periksa potensi N+1 query, kebocoran field sensitif (OWASP), dan cakupan Policy/Auth => BEFORE meloloskan PR.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
+
+---
+
 ## 🔎 PROTOKOL AUDIT KODE (`/audit`)
 Saat perintah `/audit` dikirim:
 1. **Default Behavior & Klasifikasi Domain Otomatis (Smart Blast-Radius Tri-Track Routing):**

@@ -9,6 +9,47 @@ project_name: "{{PROJECT_NAME}}"
 # SOP EKSEKUSI KODE (`/execute`)
 # DOMAIN: {{PROJECT_NAME}}
 
+## 📦 OUTPUT ARTIFACTS MAPPING
+| Aksi / Permintaan | Artefak Hasil Kerja | Lokasi Penyimpanan Fisik |
+| :--- | :--- | :--- |
+| Eksekusi Kode (`/execute`) | Kode produksi modular (chunking) | File target di `src/` (sesuai spesifikasi `/plan`) |
+| Laporan Hasil Eksekusi | Meeting Cheat Sheet & Ringkasan Trade-off | In-Chat Markdown Response |
+
+## ⚡ PROACTIVE TRIGGERS (EVENT-DRIVEN INVARIANTS)
+### Lapisan 1: Universal Process Triggers (Statis — Berlaku untuk 100% Tech Stack)
+* **WHEN pengguna menginstruksikan amputasi / penghapusan fitur / refaktor destruktif:**  
+  $\implies$ **ALWAYS** minta Git Checkpoint (`git commit -am "chore: checkpoint..."`) & periksa seluruh caller via tool AST/LSP (`find_references`, `callers`)  
+  $\implies$ **BEFORE** menghapus berkas fisik secara permanen (Cegah Broken Import & Regresi Liar).
+* **WHEN hendak memodifikasi berkas di luar daftar *Blast Radius* pada `/plan` atau tiket:**  
+  $\implies$ **ALWAYS** hentikan eksekusi dan konfirmasi alasan ekspansi scope kepada developer  
+  $\implies$ **BEFORE** menyentuh berkas di luar kontrak (Cegah Scope Creep & Regresi Tersembunyi).
+* **WHEN menulis implementasi kode baru:**  
+  $\implies$ **ALWAYS** sajikan dalam potongan terisolasi (*chunking*) disertai *the "why"* dan arahkan ke `/audit` di akhir sesi  
+  $\implies$ **BEFORE** menawarkan commit/PR (Cegah Wall of Code & Bypass Quality Gate).
+
+### Lapisan 2: Stack & Domain Triggers (Dinamis Sesuai DNA Proyek)
+<!-- GENERATION_DIRECTIVE: EXECUTE_PROACTIVE_TRIGGERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
+Sintesis 2-4 Event-Driven Proactive Triggers (format: WHEN ... => ALWAYS ... => BEFORE ...)
+yang SPESIFIK sesuai tech stack dan domain bisnis proyek di `.agents/forge_manifest.json`.
+DILARANG menginjeksi aturan Frontend ke proyek Pure Backend, atau sebaliknya!
+
+PANDUAN KONDISIONAL BERDASARKAN STACK:
+- JIKA PROYEK MEMILIKI FRONTEND / UI (React/Vue/Astro/Tailwind/dll):
+  1. Modal/Dialog/Overlay => ALWAYS pasang Conditional Unmount (`if (!isOpen) return null;`) atau `pointer-events-none` saat `!isOpen` => BEFORE menulis wrapper `fixed inset-0` (Cegah Phantom Backdrop).
+  2. Media Dinamis/Poster/QRIS => ALWAYS gunakan kontainer adaptif (`inline-flex`, `max-h-64 sm:max-h-72 w-auto max-w-full object-contain`) => BEFORE mengunci dimensi bujur sangkar kaku `w-64 h-64` (Cegah Pillarbox/Sayap Putih).
+  3. Revisi Tinggi Seksi / First Fold Hero => ALWAYS hitung anggaran vertikal terhadap Inner-Viewport Laptop nyata `1280 x 680` (`Navbar + Padding Wrapper + Konten <= 680px`) => BEFORE mengubah class `min-h-*`/`py-*` (Cegah CTA terpotong & over-correction).
+- JIKA PROYEK MEMILIKI BACKEND / DATABASE (Laravel/Express/FastAPI/Go/SQL/dll):
+  1. Mutasi Multi-Tabel / Keuangan / Stok => ALWAYS bungkus dalam Database Transaction atomik & concurrency lock => BEFORE menjalankan query write.
+  2. Endpoint / Payload Mutasi => ALWAYS validasi via FormRequest/Schema Validator & injeksi identitas user dari sesi server (anti-spoofing) => BEFORE memproses logika Service.
+  3. Query Relasi / List => ALWAYS terapkan Eager Loading & paginasi => BEFORE merender response JSON (Cegah N+1 Query & Memory Bloat).
+- TAMBAHKAN JUGA 1-2 Trigger Invariant Bisnis Kritis sesuai `dna.BUSINESS_DOMAIN_SUMMARY` proyek.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
+
+---
+
 ## 🚨 PROTOKOL AMPUTASI KODE & RADIUS LEDAKAN (BLAST-RADIUS ASSESSMENT)
 **[PROTOKOL AMPUTASI KODE]**
 Setiap kali pengguna menginstruksikan penghapusan fitur, penghapusan komponen, pencabutan rute, atau refaktor destruktif lainnya, AI **DILARANG KERAS** langsung menghapus berkas secara fisik atau membongkar fitur sebelum melakukan *Blast-Radius Assessment* (Penilaian Radius Ledakan). 
@@ -23,37 +64,15 @@ Setiap kali pengguna menginstruksikan penghapusan fitur, penghapusan komponen, p
 ## 💼 STANDAR EKSEKUSI KODE ENTERPRISE
 Hasilkan kode standar Enterprise kelas dunia dengan bimbingan arsitektur yang mendidik, bersih, dan mudah dipahami:
 
-### 🛡️ ATURAN RESILIENSI VISUAL & INTERAKSI KOMPONEN (FRONTEND GUARANTEES)
-1. **Hukum Default Unmounted Guard (Pencegahan Phantom Backdrop / Layar Terkunci):**
-   - Setiap komponen modal, dialog, sheet, drawer, atau overlay **DIHARAMKAN** merender elemen wrapper `fixed inset-0` secara telanjang hanya mengandalkan class CSS `opacity-0` atau animasi tersembunyi.
-   - AI **WAJIB** menerapkan pola *Conditional Unmount Pattern*:
-     ```jsx
-     // WAJIB: Unmount total dari DOM saat tertutup
-     if (!isOpen) return null;
-     return <div className="fixed inset-0 z-50 ...">{children}</div>;
-     ```
-   - Jika library animasi (seperti Framer Motion atau Headless UI) mengharuskan elemen tetap di DOM saat transisi keluar, wrapper overlay **WAJIB MUTLAK** disematkan class `pointer-events-none` saat state `!isOpen`, dan hanya mengaktifkan `pointer-events-auto` saat `isOpen === true`. DILARANG meninggalkan dinding tak kasat mata (*invisible wall*) yang mengunci interaksi layar pengguna.
-2. **Hukum Kontainer Adaptif Memeluk Gambar (Hug-Content Bounds):**
-   - Untuk elemen media dinamis / poster / barcode (seperti QRIS):
-     * **DILARANG KERAS** mengunci kontainer ke dimensi bujur sangkar kaku (misal `w-64 h-64`) dengan `object-contain` yang menimbulkan ruang kosong (*pillarbox / sayap putih*) pada aset berformat potret 3:4 atau A4.
-     * **WAJIB** menggunakan kontainer adaptif yang memeluk dimensi asli poster:
-       ```jsx
-       <div className="relative inline-flex items-center justify-center rounded-2xl border bg-white p-2.5 shadow-md ...">
-         <img className="max-h-64 sm:max-h-72 w-auto max-w-full rounded-xl object-contain" ... />
-       </div>
-       ```
-3. **Hukum Pre-Flight Parent Wrapper & Vertical Budget Audit (Anti-Pendulum Over-Correction):**
-   - Sebelum memodifikasi tinggi seksi (`min-h-*`, `py-*`), *scroll-margin* (`scroll-mt-*`), atau tata letak *First Fold / Hero*:
-     * AI **WAJIB** terlebih dahulu memeriksa komponen pembungkus induk (*Parent Wrapper* seperti `SectionWrapper.jsx` atau aturan global `@apply py-16 md:py-24` di `index.css`) serta tinggi *Sticky Navbar* (`h-20` / `80px`).
-     * AI **WAJIB** menghitung anggaran ruang vertikal terhadap **Real-World Laptop Inner-Viewport (`1280 × 680`)** di atas kertas (`Tinggi Sticky Navbar + Padding Wrapper + Tinggi Konten <= 680px`) agar tidak terjadi *double-padding*, tombol CTA terpotong di bawah layar, atau *over-correction* ekstrem saat melakukan revisi.
-
 <!-- GENERATION_DIRECTIVE: ENTERPRISE_CODE_STANDARDS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
 Isi dengan aturan-aturan standar kode Enterprise secara komprehensif
 (tanpa batasan kuota) yang tidak bisa ditawar sesuai tech stack.
-Misal BE: Strict Types, Service Pattern (SoC), FormRequest, DB Transaction.
-Misal FE: Strict TypeScript, SoC (no inline query di UI), Immutability, A11y.
+Misal BE: Strict Types, Service Pattern (SoC), FormRequest, DB Transaction, Sanitasi OWASP.
+Misal FE: Strict TypeScript, SoC (no inline query di UI), Immutability, A11y,
+serta Aturan Resiliensi Visual (Unmounted Guard `if (!isOpen) return null;`,
+Hug-Content Bounds untuk poster/media dinamis, dan Pre-Flight Vertical Budget `1280x680`).
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -->
 
