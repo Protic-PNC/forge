@@ -31,7 +31,7 @@ INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
 Sintesis 2-3 Event-Driven Proactive Triggers khusus fase audit (/audit)
 sesuai tech stack di `.agents/forge_manifest.json` (format: WHEN ... => ALWAYS ... => BEFORE ...).
 - Contoh Stack FE/UI:
-  * WHEN mendeteksi perubahan berkas visual (JSX/TSX/Vue/CSS) => ALWAYS baca `references/audit_visual_gate.md` dan jalankan verifikasi Playwright pada viewport nyata (`1280x680` & `375x667`) serta Light/Dark mode => BEFORE memberikan vonis lulus Jalur 3.
+  * WHEN mendeteksi perubahan berkas visual (JSX/TSX/Vue/CSS) => ALWAYS jalankan `finish_lint.py` (anti-Zombie UI: `() => {}`, `href="#"`, `Lorem Ipsum`), baca `references/audit_visual_gate.md`, dan jalankan verifikasi Playwright pada viewport nyata (`1280x680` & `375x667`) serta Light/Dark mode => BEFORE memberikan vonis lulus Jalur 3.
 - Contoh Stack BE/DB/API:
   * WHEN mereview perubahan endpoint/API => ALWAYS baca `references/audit_api_checklist.md` dan jalankan 3 skrip OpenAPI (`api_linter.py`, `api_scorecard.py --min-grade B`, `breaking_change_detector.py`) => BEFORE meloloskan PR.
   * WHEN mereview query database atau endpoint mutasi => ALWAYS periksa potensi N+1 query, kebocoran field sensitif (OWASP), dan cakupan Policy/Auth => BEFORE meloloskan PR.

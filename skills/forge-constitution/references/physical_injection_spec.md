@@ -27,7 +27,8 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
       "TDD_STRICTNESS_DECISION": "...",
       "CODE_AUDIT_STRICTNESS_DECISION": "...",
       "GIT_BRANCHING_STRATEGY_DECISION": "...",
-      "PULL_REQUEST_APPROVAL_POLICY": "..."
+      "PULL_REQUEST_APPROVAL_POLICY": "...",
+      "VISUAL_BRAND_TONE": "... (Khusus Proyek FE/Fullstack, isi 'N/A - Pure Backend' jika tanpa UI)"
     },
     "directives": {
       "MCP_POLICY_SECTION": "...",
@@ -35,6 +36,7 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
       "DYNAMIC_GRILL_QUESTIONS": "...",
       "EXECUTION_HIERARCHY": "...",
       "ENTERPRISE_CODE_STANDARDS": "...",
+      "DESIGN_SYSTEM_FOUNDATION": "... (Khusus Proyek FE/Fullstack)",
       "PLAN_PROACTIVE_TRIGGERS": "...",
       "EXECUTE_PROACTIVE_TRIGGERS": "...",
       "AUDIT_PROACTIVE_TRIGGERS": "...",
@@ -68,6 +70,12 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   AI harus memahami bahwa template *blueprint* terdiri dari 2 zona absolut:
   1. **Zona Statis & Variabel Substitusi (`{{VAR}}`):** Semua teks Markdown di luar tag direktif generasi **WAJIB DISALIN 100% APA ADANYA**. Anda **DILARANG KERAS** meringkas, merombak, atau memotong hukum statis (seperti protokol *Anti-Strawman*) yang ada di template. Ganti variabel langsung dengan nilai dari Tahap 1-4.
   2. **Zona Generasi Dinamis** (`<!-- GENERATION_DIRECTIVE: ... -->`): Anda HANYA diizinkan berkreasi dan menyusun kalimat sendiri tepat di area yang diapit oleh tag ini (berdasarkan keputusan developer). Di luar tag ini, bias peringkasan (*summarization bias*) bawaan LLM Anda **HARUS DIMATIKAN**.
+- **🔒 HUKUM PENYALINAN BIT-FOR-BIT ASET STATIS (`references/` & `scripts/` — HARAM `write_file`!):**
+  Seluruh berkas di `blueprints/references/*.md` dan `skills/forge-constitution/scripts/*.py` adalah **aset statis murni** (0 variabel `{{VAR}}`). AI **DIHARAMKAN KERAS** mengetiknya ulang menggunakan tool `write_file` (yang rawan *summarization bias* / pemotongan kode). AI **WAJIB** menyalinnya secara fisik tingkat sistem file menggunakan skrip deterministik SHA-256:
+  ```bash
+  python "<FORGE_ROOT>/skills/forge-constitution/scripts/copy_static_assets.py" --target-root "." --profile <fe|be|fullstack|minimal>
+  ```
+  dan memastikan keluaran terminal berstatus **`✅ 100% LOSSLESS SHA-256 VERIFIED`**.
 
 - **Protokol Audit Integritas Pascakopi (Self-Correction):**
   Setelah Anda mencetak sebuah file, lakukan Audit Integritas internal: *"Apakah ada klausa, aturan, tabel spektrum, atau paragraf peringatan dari blueprint asli yang tidak sengaja saya ringkas atau hapus?"* Jika ada narasi asli yang menguap, Anda telah melanggar Konstitusi. Anda **WAJIB** membatalkan hasil tersebut dan mencetak ulang file dengan struktur statis yang 100% utuh.
@@ -98,9 +106,10 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   3. Cetak `.agents/rules/MASTER_RULES.md`. Tunggu izin.
   4. Cetak `.agents/rules/META_RULES.md` (Kendali Kognitif & Protokol Tool-First). Tunggu izin.
   5. Cetak `.agents/rules/ARCHITECTURE.md`. Tunggu izin.
+  5b. *(Khusus Proyek FE / Fullstack; lewati untuk proyek Pure Backend)* Cetak `.agents/rules/DESIGN.md` (Konstitusi Visual 7 Pilar Draft v0 dari `blueprints/design.template.md` — dikalibrasi final di Epik 0). Tunggu izin.
   6. Cetak `.agents/rules/GIT_WORKFLOW.md`. Tunggu izin.
   7. Cetak `.agents/mcp_config.json`. Tunggu izin.
-  8. Cetak `ONBOARDING.md` (di *root* proyek). Tunggu izin.
+  8. Cetak `ONBOARDING.md` (di *root* proyek — wajib memuat verifikasi Python 3.8+ stdlib di semua proyek). Tunggu izin.
   9. Cetak file `.agents/skills/project-edeate/SKILL.md` beserta 3 berkas rujukan on-demand (salin utuh dari `blueprints/references/` ke `.agents/skills/project-edeate/references/`: `dual_track_protocol.md`, `ticket_variants.md`, `anti_patterns.md`). Tunggu izin.
   10. Cetak file `.agents/skills/project-grill-me/SKILL.md`. Tunggu izin.
   11. Cetak file `.agents/skills/project-plan/SKILL.md` *(Khusus proyek yang memiliki Database: salin utuh `blueprints/references/database_design_checklist.md` ke `.agents/skills/project-plan/references/database_design_checklist.md`; lewati untuk proyek Frontend statis tanpa DB)*. Tunggu izin.
@@ -108,8 +117,11 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   13. Cetak file `.agents/skills/project-execute/SKILL.md`. Tunggu izin.
   14. Cetak file `.agents/skills/project-audit/SKILL.md` beserta skrip & rujukan kondisionalnya:
       - **Wajib di Semua Proyek:** Salin `skills/forge-constitution/scripts/classify_blast_radius.py` ke `.agents/skills/project-audit/scripts/classify_blast_radius.py` dan salin utuh `blueprints/references/audit_handoff_package.md` ke `.agents/skills/project-audit/references/audit_handoff_package.md`.
-      - **Khusus Proyek FE / Fullstack:** Salin utuh `blueprints/references/audit_visual_gate.md` ke `.agents/skills/project-audit/references/audit_visual_gate.md`.
+      - **Khusus Proyek FE / Fullstack:** Salin utuh `blueprints/references/audit_visual_gate.md` ke `.agents/skills/project-audit/references/audit_visual_gate.md` serta 2 skrip QA UI (`finish_lint.py`, `state_matrix_checker.py`) ke `.agents/skills/project-audit/scripts/`.
       - **Khusus Proyek BE / Fullstack:** Salin utuh `blueprints/references/audit_api_checklist.md` ke `.agents/skills/project-audit/references/audit_api_checklist.md` serta 3 skrip OpenAPI (`api_linter.py`, `breaking_change_detector.py`, `api_scorecard.py`) dari `skills/forge-constitution/scripts/` ke `.agents/skills/project-audit/scripts/`.
       Tunggu izin.
   15. Cetak file `.agents/skills/project-debug/SKILL.md`. Tunggu izin.
   16. Cetak file `.agents/skills/project-epic-persistence/SKILL.md`. Tunggu izin.
+  17. Cetak file `.agents/skills/project-explore/SKILL.md` (Gerbang Tur Pedagogi Codebase 1x di hari pertama). Tunggu izin.
+  18. Cetak file `.agents/skills/project-ship/SKILL.md` beserta salinan skrip `skills/forge-constitution/scripts/changelog_generator.py` ke `.agents/skills/project-ship/scripts/changelog_generator.py` (Gerbang Kesiapan Rilis & Demo UAS). Tunggu izin.
+  19. *(Khusus Proyek FE / Fullstack; lewati untuk proyek Pure Backend)* Cetak file `.agents/skills/project-prototype/SKILL.md` beserta rujukan `blueprints/references/anti_slop_design_guide.md` ke `.agents/skills/project-prototype/references/anti_slop_design_guide.md` dan 3 skrip UI (`design_token_generator.py`, `finish_lint.py`, `state_matrix_checker.py`) ke `.agents/skills/project-prototype/scripts/`. Tunggu izin.

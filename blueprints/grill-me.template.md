@@ -73,8 +73,12 @@ Setiap kali pengguna membawa/menempelkan tiket operasional ATAU memicu perintah 
        INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
        Desain poin-poin pertanyaan kritis secara komprehensif dan
        mendalam (tanpa batasan kuota) sesuai tech stack.
-       Misal FE: "Bagaimana re-render behavior-nya? Bagaimana strategi caching state-nya?"
-       Misal BE: "Bagaimana strategi Indexing dan keamanan Race Condition-nya?"
+       Misal FE / UI:
+       1. Re-render behavior, batas hidrasi (Static vs Client), & caching state.
+       2. Keselarasan Arah Visual dengan `.agents/rules/DESIGN.md` (cegah AI Visual Slop).
+       3. Hierarki Aksi (CTA Primer vs Sekunder) & perilaku 5 State UX (Default, Loading, Empty, Error, Focus).
+       4. Penguncian Batas Field Data & Input di Layar (pastikan semua elemen yang akan digambar di `/prototype` sudah terakomodasi kontrak API/DB sebelum masuk `/plan`).
+       Misal BE: "Bagaimana strategi Indexing, transaksi atomik, dan keamanan Race Condition-nya?"
        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        -->
      * **Protokol Detektor Blindspot Tiket (Strict Guard Tingkat 2):**

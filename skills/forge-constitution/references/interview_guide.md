@@ -22,10 +22,10 @@ Saat pertama kali menyapa developer saat `/forge-constitution` dipanggil, AI **W
 - **Aksi:** Tanyakan siapa saja Aktor/Role dalam sistem.
 - **Coaching Wajib:** Di akhir respons, Anda harus menawarkan secara proaktif: *"Jika Anda belum menentukan aktornya, apakah Anda mau saya menjelaskan terlebih dahulu, memberikan contoh dalam konteks produk serupa di industri, dan menyajikan beberapa opsi aktor yang relevan dengan bisnis kita sekarang?"*
 
-**Fase 1.3: Pemilihan Senjata Teknologi (Tech Stack & Architecture Blueprint)**
+**Fase 1.3: Pemilihan Senjata Teknologi & Rasa Visual Awal (Tech Stack & Brand Tone)**
 - **Pedagogi:** Keputusan *tech stack* berdampak jangka panjang. Berikan bimbingan arsitektural (misal: *Monolith* vs *Microservices*, pemisahan FE/BE).
-- **Aksi:** Tanyakan framework apa yang akan digunakan.
-- **Coaching Wajib:** Tutup dengan penawaran: *"Jika Anda belum menentukannya, maukah saya bantu memberikan opsi tech-stack, membedah pro-kontra masing-masing, dan memberikan rekomendasi beralasan hingga Anda benar-benar yakin?"*
+- **Aksi:** Tanyakan framework apa yang akan digunakan. *(Khusus jika proyek memiliki Frontend / UI: selipkan 1 pertanyaan ringan 1 kalimat tentang **Arah Rasa Visual / Brand Tone** — misal organik hangat, minimalis bersih seperti kertas, atau tegas modern — cukup untuk mengisi kerangka awal `.agents/rules/DESIGN.md` tanpa membebani wawancara panjang).*
+- **Coaching Wajib:** Tutup dengan penawaran: *"Jika Anda belum menentukannya, maukah saya bantu memberikan opsi tech-stack (dan arah rasa visualnya), membedah pro-kontra masing-masing, dan memberikan rekomendasi beralasan hingga Anda benar-benar yakin?"*
 
 ---
 
@@ -62,26 +62,28 @@ Saat pertama kali membuka Tahap 2, AI **WAJIB** membuka dengan orientasi 4 dimen
 - **Aturan Hard Stop:** Tunggu konfirmasi developer atas inventaris halaman sebelum membedah matriks CRUD.
 
 **Fase 2.3: Pemetaan Aktor & Operasi Dapur vs Etalase (CRUD & Role Matrix — Ketukan 3)**
-- **Pedagogi:** Pisahkan peran produsen data (*Dapur / CMS*) dengan penikmat data (*Etalase / Publik*). Terapkan pola *Walking Skeleton* (Alistair Cockburn) dan *User Story Mapping* (Jeff Patton) agar mahasiswa paham mengapa urutan pengerjaan harus logis (Fondasi ➔ Dapur ➔ Etalase).
+- **Pedagogi:** Pisahkan peran produsen data (*Dapur / CMS*) dengan penikmat data (*Etalase / Publik*). Terapkan pola *Walking Skeleton* (Alistair Cockburn) dan *User Story Mapping* (Jeff Patton) agar mahasiswa paham mengapa urutan pengerjaan harus logis (Bootstrap ➔ Fondasi/MVP ➔ Dapur ➔ Etalase).
 - **Aksi & Pancingan Interaktif (Ketukan 3):** Setelah halaman terdata, AI membedah kepemilikan dan manipulasi data:
   > *"Keren! Berarti kita punya inventaris domain halaman tersebut. Sekarang mari kita bagi dua sisi:*
   > *1. Untuk halaman yang memuat data dinamis: siapa yang berhak menambah, mengedit, dan menghapus datanya? Apakah butuh halaman admin/CMS khusus dengan autentikasi peran, atau cukup diisi oleh Super Admin?*
   > *2. Untuk halaman publik: apakah ada form interaktif (seperti pendaftaran/kontak) yang datanya harus disimpan ke database lokal, atau diarahkan ke platform luar?"*
-- **Edukasi Arsitektur 3-Tier Epics:** Jelaskan kepada mahasiswa mengapa roadmap dibagi menjadi 3 Epik berjenjang:
-  - **Epik 1: Fondasi & Autentikasi (Walking Skeleton):** Pipa data terhubung dulu (Framework + ORM + Database + Auth SSO + Base Layout). *(Khusus proyek yang memiliki Backend / REST API, WAJIB sertakan sub-poin fondasi: `- [ ] Setup Kontrak API & OpenAPI Spec Exporter (docs/api/openapi.json)` agar kontrak API terpasang sejak hari pertama).* Tanpa fondasi ini, fitur apa pun di atasnya tidak bisa berjalan.
-  - **Epik 2: Pembangunan "Dapur" / CMS (Data-First):** Membangun form input admin, upload berkas, dan skema tabel database terlebih dahulu. Ini mencegah *The Empty Shell Trap* (terjebak data palsu/mocking di UI).
-  - **Epik 3: Pembangunan "Etalase" Publik (Consumer UI):** Membangun komponen UI publik yang menyedot data asli yang sudah diinput dari Epik 2. Nol spekulasi!
+- **Edukasi Arsitektur Epik 0 (Bootstrap) + 3-Tier Epics:** Jelaskan kepada mahasiswa pemisahan tegas antara setup lingkungan pra-sprint dan pengembangan fitur aplikasi:
+  - **Epik 0: Pra-Sprint & Bootstrap Lingkungan *(Mode Bypass SOP `/edeate`–`/audit`)*:** Setup lingkungan & kalibrasi konstitusi 1 kali oleh Ketua/Lead tepat setelah `/forge-constitution` selesai, meliputi: (1) Eksekusi panduan `ONBOARDING.md` (Python 3.8+, LSP, MCP, Playwright/Penpot), (2) *(Khusus Proyek BE/Fullstack)* Setup OpenAPI Spec Exporter & baseline `docs/api/openapi.json`, serta (3) *(Khusus Proyek FE/Fullstack)* Kalibrasi final `.agents/rules/DESIGN.md` + `design-tokens.css` (1x oleh UI Lead, dapat dibantu `ui-ux-pro-max` / `design_token_generator.py` & uji awal Penpot).
+    * 🚨 **Pagar Anti-Penyalahgunaan Epik 0:** Epik 0 **HANYA** boleh memuat setup alat, kontrak awal, dan konstitusi visual. AI **DILARANG KERAS** memasukkan satu pun fitur bisnis, halaman pengguna, atau logika aplikasi ke dalam Epik 0!
+  - **Epik 1: Fondasi Aplikasi & MVP Inti (Walking Skeleton — *Mulai Wajib SOP `/edeate` ➔ `/audit`*):** Pipa aplikasi & fitur MVP paling mendasar terhubung dulu (Framework + ORM + Database + Auth + Fitur Inti MVP). Tanpa fondasi ini, fitur lanjutan tidak bisa berjalan.
+  - **Epik 2: Pembangunan "Dapur" / CMS & Integrasi Data (Data-First):** Membangun manajemen data admin, integrasi API, dan skema tabel database. Ini mencegah *The Empty Shell Trap* (terjebak data palsu/mocking di UI).
+  - **Epik 3: Pembangunan "Etalase" Lanjutan, Validasi & Rilis Produksi:** Menyempurnakan pengalaman konsumen publik, optimasi performa/SEO, hingga siap dibungkus dengan `/ship`.
 
 **Fase 2.4: Konfirmasi Draf Roadmap & Laporan WhatsApp Mentor (Review Gate — Ketukan 4)**
-- **Aksi:** AI menyusun draf 3 Epik beserta sub-poin fitur/halamannya menggunakan format kotak centang Markdown (`- [ ]`), lalu mengajukan konfirmasi eksplisit:
+- **Aksi:** AI menyusun draf **Epik 0 (Bootstrap — dengan label eksplisit *"⚡ Bypass SOP `/edeate`–`/audit`, langsung instruksikan eksekusi ke AI"* )** diikuti **Epik 1–3** beserta sub-poin fitur/halamannya menggunakan format kotak centang Markdown (`- [ ]`), lalu mengajukan konfirmasi eksplisit:
   > *"Berdasarkan obrolan kita, ini draf Peta Jalan Pengembangan (DEVELOPMENT_ROADMAP.md) kita:*
-  > *[Sajikan Draf 3 Epik dengan sub-poin checkbox - [ ]]*
+  > *[Sajikan Draf Epik 0 (Bootstrap) + Epik 1–3 dengan sub-poin checkbox - [ ]]*
   > *Menurutmu apakah sub-poin ini sudah mewakili kebutuhan nyata organisasi kalian? Ada fitur yang ingin ditambah, dikurangi, atau ditunda ke versi nanti?"*
 - **Review Gate Mutlak:** AI **HANYA BOLEH** mencetak file fisik `DEVELOPMENT_ROADMAP.md` ke root direktori proyek setelah developer menyatakan **"Setuju / Gas / Lanjut"**.
 - **Output Hard File:** Cetak `DEVELOPMENT_ROADMAP.md` di root proyek.
   - Setiap sub-poin wajib menggunakan kotak centang Markdown (`- [ ]`).
-  - Tegaskan bahwa tanda centang `- [x]` pada sub-poin nantinya akan dicentang di dalam siklus `/edeate` begitu sub-poin tersebut selesai dibedah menjadi tiket GitHub Issue resmi Level 3 (lengkap dengan nomor issue-nya).
-  - Ingatkan developer bahwa setiap Epik di roadmap ini WAJIB melalui pintu `/edeate` terlebih dahulu sebelum dikerjakan.
+  - Pada bagian atas **Epik 0**, wajib tertera catatan blok kutipan jelas: *"⚡ Mode Bootstrap: Item di Epik 0 tidak perlu melalui SOP `/edeate`–`/audit`. Cukup minta AI mengeksekusinya langsung lalu commit ke `main` sebelum memulai Epik 1."*
+  - Pada **Epik 1 s.d. Epik 3**, ingatkan developer bahwa setiap sub-poin fitur WAJIB melalui pintu `/edeate` terlebih dahulu (ditautkan nomor Issue saat `/edeate`, dan dicentang `- [x]` saat lulus `/audit`).
 - **Pelayanan Proaktif: Draf Pesan WhatsApp Siap Salin untuk Dosen/Mentor:**
   Setelah berkas `DEVELOPMENT_ROADMAP.md` selesai dicetak, AI **WAJIB** menyajikan draf pesan WhatsApp siap kirim di dalam blok kode markdown (```markdown) yang ditujukan untuk Dosen Pembimbing, Mentor, atau Pengawas di grup koordinasi. Draf ini merangkum secara sopan dan beralasan arsitektur:
   1. Pelaporan penyelesaian tahap *Problem Framing* dan penerbitan `DEVELOPMENT_ROADMAP.md`.
@@ -141,6 +143,7 @@ Saat melangkah ke Tahap 4, AI **WAJIB** membuka dengan orientasi 4 dimensi:
   | :--- | :--- | :--- | :--- |
   | **Agent-LSP** | Navigasi kode: lompat ke definisi, cari referensi, diagnostik | Saat `/audit`, saya bisa memverifikasi apakah method Service benar-benar dipanggil oleh Controller tanpa menebak | ⭐ DIREKOMENDASIKAN |
   | **Playwright MCP** | Uji interaksi UI, deteksi backdrop intercept, crop snapshot (Light/Dark) | Saat `/audit`, menguji interaktivitas nyata di browser, memastikan tombol tidak tertutup backdrop, dan verifikasi rasio kontainer | ⭐ DIREKOMENDASIKAN (FE / Fullstack) |
+  | **Penpot MCP (`penpot/penpot-mcp`)** | Bangun & audit prototipe kanvas CSS Flexbox/Grid (`execute_code`, `export_shape`) | Saat `/prototype`, merancang tata letak visual interaktif di kanvas Penpot dan melakukan *self-review* visual sebelum koding | ⭐ DIREKOMENDASIKAN (FE / Fullstack) |
   | **MCP MySQL / Database** | Query langsung ke database: describe table, validasi skema | Saat `/edeate`, saya bisa memeriksa kolom tabel secara riil, bukan menebak dari file migrasi lama | ⭐ DIREKOMENDASIKAN (BE / Fullstack) |
   | **MCP GitHub** | Buat Issue, PR, baca komentar | Saat `/audit` selesai, saya bisa langsung membuat PR tanpa Anda harus copy-paste | ⭐ DIREKOMENDASIKAN |
   | **Chrome DevTools** | Inspeksi DOM & profiling performa mendalam | Jika ada komponen FE khusus yang butuh trace memori atau network throttling ekstrem | Opsional |
@@ -153,26 +156,33 @@ Saat melangkah ke Tahap 4, AI **WAJIB** membuka dengan orientasi 4 dimensi:
 - **Output Fase 4.1:** Setelah developer memilih, AI menyimpan keputusan MCP untuk digunakan sebagai variabel saat mencetak `mcp_config.json` dan instruksi wajib di `MASTER_RULES.md` pada Tahap 5.
 
 **Fase 4.2: Pengenalan Persenjataan (The Arsenal Introduction)**
-- **Pedagogi:** Aturan tanpa alat penegak adalah omong kosong. Kenalkan "Senjata" kita.
-- **Aksi:** Paparkan fungsi 7 slash command standar: `/edeate`, `/grill-me`, `/plan`, `/tdd`, `/execute`, `/audit`, dan `/debug`.
-- **Pertanyaan Keputusan:** Tanyakan apakah mereka ingin mengadopsi semuanya. Jika mereka menolak salah satu (misal menghindari `/grill-me`), **ANDA WAJIB MENGEDUKASI ULANG** dampak hilangnya gerbang arsitektur tersebut, sebelum menyerah pada keputusan mereka.
+- **Pedagogi:** Aturan tanpa alat penegak adalah omong kosong. Kenalkan "Senjata" kita secara proporsional (bedakan senjata harian vs senjata event-driven 1x).
+- **Aksi:** Paparkan fungsi slash command FORGE:
+  - *Event-Driven Awal & Akhir (1x):* `/explore` (Tur Kampus Kode hari pertama) & `/ship` (Kertas Kado Rilis menjelang demo/UAS).
+  - *Siklus Rutin Fitur:* `/edeate`, `/grill-me`, `/plan`, `/prototype` *(khusus proyek FE/Fullstack untuk eksperimen Penpot & Visual Contract Gate)*, `/tdd`, `/execute`, `/audit`, dan `/debug`.
+- **Pertanyaan Keputusan:** Tanyakan apakah mereka ingin mengadopsi semuanya. Jika mereka menolak salah satu gerbang inti (misal menghindari `/grill-me` atau `/prototype` pada proyek UI), **ANDA WAJIB MENGEDUKASI ULANG** dampak hilangnya gerbang tersebut, sebelum menyerah pada keputusan mereka.
 
 **Fase 4.3: Simulasi Tempur & Sinkronisasi (The Workflow Simulation)**
 - **Pedagogi:** Developer harus bisa memvisualisasikan alur kerja harian mereka.
-- **Coaching Aktif:** Simulasikan skenario nyata secara verbal. *"Ambil satu epik Level 1 dari Roadmap Anda. Panggil `/edeate` untuk jadikan Issue. Buka branch baru. Panggil `/grill-me` lalu `/plan`, tulis tes dengan `/tdd`, implementasi dengan `/execute`, dan akhiri dengan `/audit` sebelum PR."*
+- **Coaching Aktif:** Simulasikan skenario nyata secara verbal: *"Selesaikan dulu Epik 0 (Bootstrap `ONBOARDING.md` & kalibrasi `DESIGN.md`/`openapi.json` tanpa SOP). Lalu ambil satu fitur dari Epik 1: panggil `/edeate` jadi Issue ➔ buka branch baru di `/grill-me` ➔ kunci rencana di `/plan` ➔ rancang & validasi kanvas di `/prototype` (jika ada UI) ➔ tulis tes `/tdd` ➔ implementasi `/execute` ➔ akhiri `/audit` sebelum PR. Di akhir semester, bungkus rilis dengan `/ship`."*
 - **Pertanyaan Keputusan:** *"Apakah Anda bisa memvisualisasikan alur ini? Adakah yang terasa terlalu birokratis?"*
 - **Kritikal:** Jika developer ragu/bingung, JANGAN LANJUT. Berikan analogi sederhana hingga mereka paham.
 
-**Fase 4.4: Penyusunan Panduan Onboarding & Setup MCP (The Setup Guide)**
-- **Pedagogi:** File konfigurasi saja tidak cukup jika anggota tim lain tidak tahu cara melakukan setup *environment* (seperti token GitHub, instalasi browser Playwright, OpenAPI Spec Exporter untuk proyek Backend, atau instalasi MCP pihak ketiga).
-- **Coaching Aktif:** Jelaskan: *"Karena setup token, browser Playwright (`npm install -D @playwright/test && npx playwright install chromium`), OpenAPI Spec Exporter (khusus proyek Backend/API), dan MCP harus dilakukan secara lokal oleh masing-masing developer (demi keamanan & reproduktibilitas), kita wajib membuat satu dokumen panduan instalasi."*
-- **Mandat Khusus Proyek Backend / REST API (OpenAPI Contract Setup di `ONBOARDING.md`):**
-  Jika DNA proyek mencakup Backend / REST API, AI **WAJIB** mencantumkan panduan instalasi & perintah ekspor **OpenAPI Spec Exporter** sesuai tech stack ke dalam `ONBOARDING.md` (beserta catatan bahwa 3 skrip audit Python cukup memakai Python 3 bawaan tanpa `pip install`):
-  - **Laravel:** `composer require dedoc/scramble` $\rightarrow$ ekspor via `php artisan scramble:export --path=docs/api/openapi.json`
-  - **FastAPI:** Bawaan gratis (ekspor langsung dari endpoint `/openapi.json` ke `docs/api/openapi.json`)
-  - **NestJS:** `npm install @nestjs/swagger` $\rightarrow$ ekspor ke `docs/api/openapi.json`
-  - **Express / Next.js polos:** Tanpa package tambahan (AI menjaga sinkronisasi `docs/api/openapi.json` langsung di `/plan` & `/execute`)
-- **Pertanyaan Keputusan:** Tanyakan: *"Apakah Anda ingin saya membuatkan file `ONBOARDING.md` nantinya, yang berisi panduan copy-paste langkah demi langkah bagi tim tentang cara setup LSP, instalasi opsional Playwright browser binary untuk visual smoke testing (dengan garansi tidak memblokir audit jika belum dipasang), setup OpenAPI Spec Exporter (jika proyek Backend/Fullstack), mendaftarkan Token GitHub, dan menginstal MCP saat baru clone repositori ini?"*
+**Fase 4.4: Penyusunan Panduan Onboarding & Setup Toolchain (`ONBOARDING.md`)**
+- **Pedagogi:** File konfigurasi saja tidak cukup jika anggota tim lain tidak tahu cara melakukan setup *environment* lokal (Python runtime, token GitHub, browser Playwright, Penpot MCP, atau OpenAPI Spec Exporter).
+- **Coaching Aktif:** Jelaskan: *"Karena prasyarat Python, token rahasia, browser Playwright, Penpot MCP, maupun OpenAPI Exporter harus disiapkan di laptop masing-masing (dan dieksekusi pada **Epik 0 Bootstrap**), kita wajib membuat satu dokumen panduan instalasi `ONBOARDING.md`."*
+- **4 Klausul Wajib Kontekstual di Dalam `ONBOARDING.md`:**
+  1. **Wajib di 100% Proyek — Runtime Python 3.8+ (0 `pip install`):** Seluruh skrip deterministik FORGE (`classify_blast_radius.py`, `api_linter.py`, `finish_lint.py`, `changelog_generator.py`, dll.) menggunakan *Python Standard Library* murni. Cantumkan verifikasi `python --version` dan panduan instalasi cepat (Windows: `winget install Python.Python.3.12` dengan centang *"Add Python to PATH"*; macOS: `brew install python3`) serta tegaskan **tidak perlu `pip install` apa pun**.
+  2. **Khusus Proyek Backend / REST API — OpenAPI Spec Exporter:**
+     - **Laravel:** `composer require dedoc/scramble` $\rightarrow$ ekspor via `php artisan scramble:export --path=docs/api/openapi.json`
+     - **FastAPI:** Bawaan gratis (ekspor dari `/openapi.json` ke `docs/api/openapi.json`)
+     - **NestJS:** `npm install @nestjs/swagger` $\rightarrow$ ekspor ke `docs/api/openapi.json`
+     - **Express / Next.js polos:** Tanpa package tambahan (AI menyinkronkan `docs/api/openapi.json` langsung).
+  3. **Khusus Proyek Frontend / Fullstack — Playwright, Penpot MCP, & Alat Bantu 1x `DESIGN.md`:**
+     - **Playwright Visual Smoke:** `npm install -D @playwright/test && npx playwright install chromium` (dengan garansi *Graceful Fallback* tidak memblokir audit bila belum dipasang).
+     - **Penpot MCP (`penpot/penpot-mcp`):** Panduan menjalankan server lokal (`npm run start:all`), memastikan plugin Penpot berstatus *"Connected"*, serta tabel troubleshooting cepat (pastikan port `4400, 4401, 4402` tidak diblokir firewall, dan izinkan *localhost access* / matikan Brave Shield jika koneksi WebSocket gagal).
+     - **Opsional Khusus 1 UI Lead (1x saat Epik 0):** Catatan referensi `nextlevelbuilder/ui-ux-pro-max-skill` sebagai alat bantu opsional 1 kali bagi Ketua/UI Lead saat mengkalibrasi `.agents/rules/DESIGN.md` di Epik 0 (anggota tim lain **tidak perlu** menginstalnya setelah `DESIGN.md` di-commit ke Git).
+- **Pertanyaan Keputusan:** Tanyakan: *"Apakah Anda ingin saya membuatkan file `ONBOARDING.md` nantinya, yang berisi panduan copy-paste langkah demi langkah bagi tim tentang verifikasi Python 3.8+, setup LSP, MCP, serta kakas spesifik stack proyek kita untuk dieksekusi langsung di Epik 0?"*
 
 **Fase 4.5: Penguncian Komitmen (The Architect's Oath)**
 - **Aksi:** Rangkum seluruh kesepakatan (Tahap 1-4). Tegaskan bahwa kedisiplinan ini akan mengunci repositori.

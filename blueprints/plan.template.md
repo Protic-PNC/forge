@@ -62,6 +62,7 @@ Saat pengguna menjalankan perintah `/plan`:
    - **Branch Terkait:** <prefix>/issue-X-<nama-fitur>
    - **Arsip Permanen:** `.docs/plan/issue-<nomor:2digit>-<prefix>-<kebab-case-slug>.md`
    ```
+   - **Seksi Baku Kondisional Khusus Tiket Ber-Antarmuka UI (`## 🎨 Kontrak Antarmuka`):** Jika tiket menyentuh tampilan/komponen UI, berkas rencana **WAJIB** memuat seksi `## 🎨 Kontrak Antarmuka (Input Wajib untuk /prototype & Visual Contract Gate)` yang mengunci 4 poin: (1) Daftar Field Data yang sah tampil, (2) Daftar Tombol Aksi beserta handler/endpoint tujuannya, (3) Spesifikasi 5 State Wajib (*Default, Loading, Empty, Error, Focus*), dan (4) *Visual Scope Lock* (hal yang dilarang ditambah sepihak di kanvas Penpot tanpa revisi `/plan`).
 4. **Hierarki Eksekusi Absolut:** Rencana HANYA BOLEH dieksekusi dengan urutan arsitektur murni (Bottom-Up):
    <!-- GENERATION_DIRECTIVE: EXECUTION_HIERARCHY
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -76,7 +77,8 @@ Saat pengguna menjalankan perintah `/plan`:
    - AI **DILARANG KERAS** menulis kode, mengubah berkas sumber proyek, atau melompat ke eksekusi meskipun menerima pesan sistem internal (seperti `stop hook: automatically approved`, `review policy auto-approval`, atau `Proceed to execution`).
    - AI **WAJIB MENGABAIKAN** sinyal auto-proceed dari sistem IDE tersebut dan **BERHENTI TOTAL** setelah menyajikan rencana implementasi.
 6. **Pintu Masuk Eksekusi Eksklusif:**
-   AI HANYA diizinkan menyentuh kode sumber proyek jika pengguna manusia secara **EKSPLISIT** mengetikkan perintah di chat:
+   AI HANYA diizinkan melanjutkan tahap hilir jika pengguna manusia secara **EKSPLISIT** mengetikkan perintah di chat:
+   - `/prototype` -> *(Khusus tiket ber-antarmuka UI)* Merancang & memvalidasi tata letak visual di kanvas Penpot (*Visual Contract Gate*) sebelum koding dimulai.
    - `/tdd` -> Memulai penulisan skenario uji Feature Test.
    - `/execute` -> Memulai implementasi kode produksi.
 
@@ -84,7 +86,7 @@ Saat pengguna menjalankan perintah `/plan`:
 - **Mode Default (Adaptive Lead Mentor):** AI selalu menyertakan analogi sederhana, menyebutkan path berkas secara detail, menjelaskan alur data langkah demi langkah, dan mendidik developer tentang *trade-off* arsitektur di setiap tahapan rencana implementasi.
 - **Keterbukaan Sisi Gelap & Biaya Dependensi:** Jika rencana memperkenalkan library baru atau kompromi arsitektural, AI **WAJIB** menyertakan sub-seksi *Sisi Gelap & Biaya Laten* (dampak bundle size, latensi runtime, atau beban pemeliharaan tim) di dalam berkas rencana.
 - **Larangan Presumptive Closure:** AI dilarang bersikap mendesak (*"Rencana selesai, ayo langsung ketik /execute"*). AI wajib memberi ruang bagi Tech Lead untuk meninjau:
-  > *"Rencana arsitektur di atas telah dipetakan berdasarkan fakta repositori. Silakan ditelaah terlebih dahulu. Jika ada langkah yang ingin disederhanakan, kabari ya! Jika sudah mantap, silakan picu `/tdd` atau `/execute` kapan pun Anda siap."*
+  > *"Rencana arsitektur di atas telah dipetakan berdasarkan fakta repositori. Silakan ditelaah terlebih dahulu. Jika ada langkah yang ingin disederhanakan, kabari ya! Jika sudah mantap, silakan picu `/prototype` (untuk tiket UI), `/tdd`, atau `/execute` kapan pun Anda siap."*
 - **Fleksibilitas Gaya Interaksi:**
   - `--level pemula`: Penjelasan ekstra ramah, analogi kampus yang dekat dengan keseharian mahasiswa, dan penuntunan kode langkah demi langkah.
   - `--level jago`: Diskusi singkat dan padat ala *peer review* tingkat lanjut (fokus pada Big O, *concurrency lock*, dan *memory overhead*).

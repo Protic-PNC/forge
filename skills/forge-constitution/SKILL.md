@@ -61,10 +61,10 @@ Untuk menjaga efisiensi jendela memori dan mencegah *Lost-in-the-Middle*, materi
 ---
 
 ### TAHAP 4: PELATIHAN SENJATA & SINKRONISASI PIPELINE
-1. **Fase 4.1:** Pemasangan Panca Indera AI (Katalog MCP Dinamis: Agent-LSP, Playwright, DB, GitHub).
-2. **Fase 4.2:** Pengenalan 7 Senjata (/edeate, /grill-me, /plan, /tdd, /execute, /audit, /debug).
+1. **Fase 4.1:** Pemasangan Panca Indera AI (Katalog MCP Dinamis: Agent-LSP, Playwright, Penpot MCP, DB, GitHub).
+2. **Fase 4.2:** Pengenalan Persenjataan (`/explore`, `/edeate`, `/grill-me`, `/plan`, `/prototype` *(khusus UI)*, `/tdd`, `/execute`, `/audit`, `/debug`, `/ship`).
 3. **Fase 4.3:** Simulasi Tempur & Sinkronisasi Alur Harian.
-4. **Fase 4.4:** Penyusunan Panduan Setup Onboarding (`ONBOARDING.md`).
+4. **Fase 4.4:** Penyusunan Panduan Setup Onboarding (`ONBOARDING.md` — termasuk Python 3.8+ wajib stdlib).
 5. **Fase 4.5:** Penguncian Komitmen (*The Architect's Oath*) & Izin Tahap 5.
 *(Rujuk `references/interview_guide.md` Bagian Tahap 4 untuk panduan dialog).*
 
@@ -75,5 +75,5 @@ Untuk menjaga efisiensi jendela memori dan mencegah *Lost-in-the-Middle*, materi
 1. **Artefak Ke-0 Mutlak:** Cetak `.agents/forge_manifest.json` (Brankas DNA Fisik) terlebih dahulu.
 2. **One-File-Per-Turn:** AI membaca template blueprint dan mencetak SATU FILE PER RESPONS.
 3. **Wawancara Celah Keputusan:** Ajukan pertanyaan mikro jika ada detail implementasi spesifik yang belum diputuskan.
-4. **Urutan Injeksi 16 Berkas:** Ikuti urutan baku 0 s.d. 16 pada spesifikasi rujukan.
+4. **Urutan Injeksi Berkas:** Ikuti urutan baku (termasuk berkas kondisional `DESIGN.md` & `/prototype` khusus FE/Fullstack) pada spesifikasi rujukan.
 *(Rujuk `references/physical_injection_spec.md` untuk skema manifest, 5 Dimensi Enterprise, dan urutan file).*

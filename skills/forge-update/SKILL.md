@@ -30,6 +30,7 @@ description: >-
 | `master_rules.template.md` | `.agents/rules/MASTER_RULES.md` |
 | `meta_rules.template.md` | `.agents/rules/META_RULES.md` |
 | `architecture.template.md` | `.agents/rules/ARCHITECTURE.md` |
+| `design.template.md` | `.agents/rules/DESIGN.md` *(Khusus Proyek FE/Fullstack)* |
 | `git_workflow.template.md` | `.agents/rules/GIT_WORKFLOW.md` |
 | `edeate.template.md` | `.agents/skills/project-edeate/SKILL.md` |
 | `references/dual_track_protocol.md` | `.agents/skills/project-edeate/references/dual_track_protocol.md` |
@@ -38,6 +39,12 @@ description: >-
 | `grill-me.template.md` | `.agents/skills/project-grill-me/SKILL.md` |
 | `plan.template.md` | `.agents/skills/project-plan/SKILL.md` |
 | `references/database_design_checklist.md` | `.agents/skills/project-plan/references/database_design_checklist.md` *(Khusus Proyek dengan DB)* |
+| `prototype.template.md` | `.agents/skills/project-prototype/SKILL.md` *(Khusus Proyek FE/Fullstack)* |
+| `references/anti_slop_design_guide.md` | `.agents/skills/project-prototype/references/anti_slop_design_guide.md` *(Khusus Proyek FE/Fullstack)* |
+| `references/upstream/*` | `.agents/skills/project-prototype/references/upstream/*` *(Khusus Proyek FE/Fullstack — 100% Lossless via `copy_static_assets.py`)* |
+| `scripts/design_token_generator.py` | `.agents/skills/project-prototype/scripts/design_token_generator.py` *(Khusus Proyek FE/Fullstack)* |
+| `scripts/finish_lint.py` | `.agents/skills/project-prototype/scripts/finish_lint.py` & `.agents/skills/project-audit/scripts/finish_lint.py` *(Khusus Proyek FE/Fullstack)* |
+| `scripts/state_matrix_checker.py` | `.agents/skills/project-prototype/scripts/state_matrix_checker.py` & `.agents/skills/project-audit/scripts/state_matrix_checker.py` *(Khusus Proyek FE/Fullstack)* |
 | `tdd.template.md` | `.agents/skills/project-tdd/SKILL.md` |
 | `execute.template.md` | `.agents/skills/project-execute/SKILL.md` |
 | `audit.template.md` | `.agents/skills/project-audit/SKILL.md` |
@@ -50,6 +57,9 @@ description: >-
 | `scripts/api_scorecard.py` | `.agents/skills/project-audit/scripts/api_scorecard.py` *(Khusus Proyek BE/Fullstack)* |
 | `debug.template.md` | `.agents/skills/project-debug/SKILL.md` |
 | `epic_persistence.template.md` | `.agents/skills/project-epic-persistence/SKILL.md` |
+| `explore.template.md` | `.agents/skills/project-explore/SKILL.md` |
+| `ship.template.md` | `.agents/skills/project-ship/SKILL.md` |
+| `scripts/changelog_generator.py` | `.agents/skills/project-ship/scripts/changelog_generator.py` |
 
 ---
 
@@ -136,8 +146,10 @@ description: >-
 AI memproses berkas yang terdampak **SATU PER SATU PER RESPONS**. 
 Di setiap iterasi:
 1. Baca berkas template terbaru dari direktori global: `blueprints/{{NAMA_BLUEPRINT}}`.
+   - **🔒 Pengecualian Aset Statis Murni (`references/*` & `scripts/*` — HARAM `write_file`!):** Untuk berkas statis di `blueprints/references/` maupun `skills/forge-constitution/scripts/`, AI **DILARANG KERAS** mengetiknya ulang via `write_file`! AI **WAJIB** menyalinnya secara bit-for-bit menggunakan skrip deterministik SHA-256:
+     `python "$LOCALAPPDATA/hermes/forge/skills/forge-constitution/scripts/copy_static_assets.py" --target-root "." --profile <fe|be|fullstack|minimal>` (atau perintah `cp`/`Copy-Item` + cek hash bila hanya 1 file).
 2. **Preservasi Zona Kustom (Anti-Data Loss):**
-   Jika berkas target lokal sudah ada di disk, AI **WAJIB** memeriksa apakah berkas tersebut memuat zona riwayat dinamis (misalnya `<!-- ADR_LOG_START -->` hingga `<!-- ADR_LOG_END -->` pada `ARCHITECTURE.md`). Jika ada entri catatan yang dibuat developer/tim di dalamnya, ekstrak dan simpan teks tersebut agar tidak hilang saat ditimpa.
+   Jika berkas target lokal sudah ada di disk, AI **WAJIB** memeriksa apakah berkas tersebut memuat zona riwayat dinamis (misalnya `<!-- ADR_LOG_START -->` hingga `<!-- ADR_LOG_END -->` pada `ARCHITECTURE.md`, atau `<!-- DDR_LOG_START -->` hingga `<!-- DDR_LOG_END -->` pada `DESIGN.md`). Jika ada entri catatan yang dibuat developer/tim di dalamnya, ekstrak dan simpan teks tersebut agar tidak hilang saat ditimpa (serta pertahankan hasil kalibrasi `DESIGN_SYSTEM_FOUNDATION` dari manifest lokal).
 3. **Penanganan Celah Variabel & Directive Baru (`[BERKAS BARU]` MAUPUN `[PEMBARUAN]`):**
    Pada **SETIAP berkas** yang dirender (baik `[BERKAS BARU]` maupun `[PEMBARUAN]`):
    - AI **WAJIB** memeriksa apakah template memuat placeholder variabel `{{VAR}}` atau tag `<!-- GENERATION_DIRECTIVE: NAMA_DIRECTIVE ... -->` yang **belum terdaftar** di dalam `dna` atau `directives` `.agents/forge_manifest.json` lokal.
