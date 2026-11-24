@@ -68,7 +68,7 @@ Saat pertama kali membuka Tahap 2, AI **WAJIB** membuka dengan orientasi 4 dimen
   > *1. Untuk halaman yang memuat data dinamis: siapa yang berhak menambah, mengedit, dan menghapus datanya? Apakah butuh halaman admin/CMS khusus dengan autentikasi peran, atau cukup diisi oleh Super Admin?*
   > *2. Untuk halaman publik: apakah ada form interaktif (seperti pendaftaran/kontak) yang datanya harus disimpan ke database lokal, atau diarahkan ke platform luar?"*
 - **Edukasi Arsitektur 3-Tier Epics:** Jelaskan kepada mahasiswa mengapa roadmap dibagi menjadi 3 Epik berjenjang:
-  - **Epik 1: Fondasi & Autentikasi (Walking Skeleton):** Pipa data terhubung dulu (Framework + ORM + Database + Auth SSO + Base Layout). Tanpa fondasi ini, fitur apa pun di atasnya tidak bisa berjalan.
+  - **Epik 1: Fondasi & Autentikasi (Walking Skeleton):** Pipa data terhubung dulu (Framework + ORM + Database + Auth SSO + Base Layout). *(Khusus proyek yang memiliki Backend / REST API, WAJIB sertakan sub-poin fondasi: `- [ ] Setup Kontrak API & OpenAPI Spec Exporter (docs/api/openapi.json)` agar kontrak API terpasang sejak hari pertama).* Tanpa fondasi ini, fitur apa pun di atasnya tidak bisa berjalan.
   - **Epik 2: Pembangunan "Dapur" / CMS (Data-First):** Membangun form input admin, upload berkas, dan skema tabel database terlebih dahulu. Ini mencegah *The Empty Shell Trap* (terjebak data palsu/mocking di UI).
   - **Epik 3: Pembangunan "Etalase" Publik (Consumer UI):** Membangun komponen UI publik yang menyedot data asli yang sudah diinput dari Epik 2. Nol spekulasi!
 
@@ -164,9 +164,15 @@ Saat melangkah ke Tahap 4, AI **WAJIB** membuka dengan orientasi 4 dimensi:
 - **Kritikal:** Jika developer ragu/bingung, JANGAN LANJUT. Berikan analogi sederhana hingga mereka paham.
 
 **Fase 4.4: Penyusunan Panduan Onboarding & Setup MCP (The Setup Guide)**
-- **Pedagogi:** File konfigurasi saja tidak cukup jika anggota tim lain tidak tahu cara melakukan setup *environment* (seperti token GitHub, instalasi browser Playwright, atau instalasi MCP pihak ketiga).
-- **Coaching Aktif:** Jelaskan: *"Karena setup token, browser Playwright (`npm install -D @playwright/test && npx playwright install chromium`), dan MCP harus dilakukan secara lokal oleh masing-masing developer (demi keamanan), kita wajib membuat satu dokumen panduan instalasi."*
-- **Pertanyaan Keputusan:** Tanyakan: *"Apakah Anda ingin saya membuatkan file `ONBOARDING.md` nantinya, yang berisi panduan copy-paste langkah demi langkah bagi tim tentang cara setup LSP, instalasi opsional Playwright browser binary untuk visual smoke testing (dengan garansi tidak memblokir audit jika belum dipasang), mendaftarkan Token GitHub, dan menginstal MCP saat baru clone repositori ini?"*
+- **Pedagogi:** File konfigurasi saja tidak cukup jika anggota tim lain tidak tahu cara melakukan setup *environment* (seperti token GitHub, instalasi browser Playwright, OpenAPI Spec Exporter untuk proyek Backend, atau instalasi MCP pihak ketiga).
+- **Coaching Aktif:** Jelaskan: *"Karena setup token, browser Playwright (`npm install -D @playwright/test && npx playwright install chromium`), OpenAPI Spec Exporter (khusus proyek Backend/API), dan MCP harus dilakukan secara lokal oleh masing-masing developer (demi keamanan & reproduktibilitas), kita wajib membuat satu dokumen panduan instalasi."*
+- **Mandat Khusus Proyek Backend / REST API (OpenAPI Contract Setup di `ONBOARDING.md`):**
+  Jika DNA proyek mencakup Backend / REST API, AI **WAJIB** mencantumkan panduan instalasi & perintah ekspor **OpenAPI Spec Exporter** sesuai tech stack ke dalam `ONBOARDING.md` (beserta catatan bahwa 3 skrip audit Python cukup memakai Python 3 bawaan tanpa `pip install`):
+  - **Laravel:** `composer require dedoc/scramble` $\rightarrow$ ekspor via `php artisan scramble:export --path=docs/api/openapi.json`
+  - **FastAPI:** Bawaan gratis (ekspor langsung dari endpoint `/openapi.json` ke `docs/api/openapi.json`)
+  - **NestJS:** `npm install @nestjs/swagger` $\rightarrow$ ekspor ke `docs/api/openapi.json`
+  - **Express / Next.js polos:** Tanpa package tambahan (AI menjaga sinkronisasi `docs/api/openapi.json` langsung di `/plan` & `/execute`)
+- **Pertanyaan Keputusan:** Tanyakan: *"Apakah Anda ingin saya membuatkan file `ONBOARDING.md` nantinya, yang berisi panduan copy-paste langkah demi langkah bagi tim tentang cara setup LSP, instalasi opsional Playwright browser binary untuk visual smoke testing (dengan garansi tidak memblokir audit jika belum dipasang), setup OpenAPI Spec Exporter (jika proyek Backend/Fullstack), mendaftarkan Token GitHub, dan menginstal MCP saat baru clone repositori ini?"*
 
 **Fase 4.5: Penguncian Komitmen (The Architect's Oath)**
 - **Aksi:** Rangkum seluruh kesepakatan (Tahap 1-4). Tegaskan bahwa kedisiplinan ini akan mengunci repositori.

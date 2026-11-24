@@ -44,6 +44,7 @@ PANDUAN KONDISIONAL BERDASARKAN STACK:
   1. Mutasi Multi-Tabel / Keuangan / Stok => ALWAYS bungkus dalam Database Transaction atomik & concurrency lock => BEFORE menjalankan query write.
   2. Endpoint / Payload Mutasi => ALWAYS validasi via FormRequest/Schema Validator & injeksi identitas user dari sesi server (anti-spoofing) => BEFORE memproses logika Service.
   3. Query Relasi / List => ALWAYS terapkan Eager Loading & paginasi => BEFORE merender response JSON (Cegah N+1 Query & Memory Bloat).
+  4. Sinkronisasi Kontrak OpenAPI (WAJIB) => ALWAYS pastikan `docs/api/openapi.json` sinkron dengan kode terbaru setelah perubahan endpoint/DTO (jalankan perintah exporter proyek seperti `php artisan scramble:export` / FastAPI bila terpasang, atau sinkronkan langsung oleh AI bila stack polos) => BEFORE mengarahkan ke `/audit`.
 - TAMBAHKAN JUGA 1-2 Trigger Invariant Bisnis Kritis sesuai `dna.BUSINESS_DOMAIN_SUMMARY` proyek.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -->

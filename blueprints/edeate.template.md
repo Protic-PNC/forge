@@ -59,10 +59,12 @@ IDE MENTAH ➔ GATEWAY 1 (Hulu: /edeate) ➔ TIKET LEVEL 3 (GitHub Issue) ➔ GA
 1. **Klasifikasi Otomatis & Dual-Track Routing:**
    - Fitur Pengguna / UI / Form / I/O $\rightarrow$ 🟢 **TRACK A ([FEAT])** (Alur Penuh Socratic Bisnis).
    - Fondasi / Toolchain / Config / Refactor / Test $\rightarrow$ ⚡ **TRACK B ([ARCH]/[REFACTOR]/[INFRA])** (NFR Fast-Track 1 Ketukan, No Fictional Persona).
-2. **Pre-Flight Codebase & Roadmap Audit:**
-   AI WAJIB memeriksa fisik repositori (`view_file` / tool LSP):
-   - Baca `DEVELOPMENT_ROADMAP.md`: validasi Epik [X] dan sub-poin `- [ ]` mana yang dibahas.
-   - Baca modul/kode eksisting yang bersangkutan.
+2. **Pre-Flight Codebase, Architecture, & Roadmap Audit (Silent Inspection + Confidence Tagging):**
+   AI WAJIB memeriksa fisik repositori (`view_file` / tool LSP) secara senyap sebelum bertanya:
+   - **Silent Inspection `.agents/rules/ARCHITECTURE.md`:** Serap tech stack, peta aktor, pola FE/BE, keamanan, dan riwayat ADR secara diam-diam. **DILARANG** menanyakan ulang hal mendasar yang sudah terjawab di `ARCHITECTURE.md` (*Gap-Only Questioning*). Jika ditemukan ketidaksinkronan antara `ARCHITECTURE.md` dan kode fisik (atau muncul keputusan arsitektur makro baru), laporkan 1 baris untuk konfirmasi — **dan jika developer menyetujuinya, AI diizinkan langsung mencatat 1 entri `[ADR-YYYY-MM-DD]` ke `.agents/rules/ARCHITECTURE.md`** (pengecualian resmi di luar `DEVELOPMENT_ROADMAP.md` agar celah arsitektur tertutup permanen).
+   - **Audit `DEVELOPMENT_ROADMAP.md`:** Validasi Epik [X] dan sub-poin `- [ ]` mana yang dibahas.
+   - **Audit Kode Eksisting:** Baca modul terkait untuk pijakan fakta riil.
+   - **Wajib Confidence Tagging (🟢/🟡/🔴):** Setiap butir temuan Pre-Flight Audit dan estimasi teknis WAJIB diberi label keyakinan: 🟢 **Verified** (terbukti dari file/baris nyata), 🟡 **Medium** (standar industri yang belum diuji beban riil), atau 🔴 **Assumed** (asumsi AI yang wajib dimintakan konfirmasi developer).
 3. **Orientasi Sesi & Mini-Roadmap:**
    Sajikan temuan audit, klasifikasi tiket, dan agenda sesi.
    - 🛑 **HARD STOP:** Berhenti di respons pertama: *"Apakah kamu siap kita mulai bedah dari Topik 1.1?"* dan tunggu persetujuan.

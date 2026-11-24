@@ -103,9 +103,13 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   8. Cetak `ONBOARDING.md` (di *root* proyek). Tunggu izin.
   9. Cetak file `.agents/skills/project-edeate/SKILL.md` beserta 3 berkas rujukan on-demand (salin utuh dari `blueprints/references/` ke `.agents/skills/project-edeate/references/`: `dual_track_protocol.md`, `ticket_variants.md`, `anti_patterns.md`). Tunggu izin.
   10. Cetak file `.agents/skills/project-grill-me/SKILL.md`. Tunggu izin.
-  11. Cetak file `.agents/skills/project-plan/SKILL.md`. Tunggu izin.
+  11. Cetak file `.agents/skills/project-plan/SKILL.md` *(Khusus proyek yang memiliki Database: salin utuh `blueprints/references/database_design_checklist.md` ke `.agents/skills/project-plan/references/database_design_checklist.md`; lewati untuk proyek Frontend statis tanpa DB)*. Tunggu izin.
   12. Cetak file `.agents/skills/project-tdd/SKILL.md`. Tunggu izin.
   13. Cetak file `.agents/skills/project-execute/SKILL.md`. Tunggu izin.
-  14. Cetak file `.agents/skills/project-audit/SKILL.md`. Tunggu izin.
+  14. Cetak file `.agents/skills/project-audit/SKILL.md` beserta skrip & rujukan kondisionalnya:
+      - **Wajib di Semua Proyek:** Salin `skills/forge-constitution/scripts/classify_blast_radius.py` ke `.agents/skills/project-audit/scripts/classify_blast_radius.py` dan salin utuh `blueprints/references/audit_handoff_package.md` ke `.agents/skills/project-audit/references/audit_handoff_package.md`.
+      - **Khusus Proyek FE / Fullstack:** Salin utuh `blueprints/references/audit_visual_gate.md` ke `.agents/skills/project-audit/references/audit_visual_gate.md`.
+      - **Khusus Proyek BE / Fullstack:** Salin utuh `blueprints/references/audit_api_checklist.md` ke `.agents/skills/project-audit/references/audit_api_checklist.md` serta 3 skrip OpenAPI (`api_linter.py`, `breaking_change_detector.py`, `api_scorecard.py`) dari `skills/forge-constitution/scripts/` ke `.agents/skills/project-audit/scripts/`.
+      Tunggu izin.
   15. Cetak file `.agents/skills/project-debug/SKILL.md`. Tunggu izin.
   16. Cetak file `.agents/skills/project-epic-persistence/SKILL.md`. Tunggu izin.

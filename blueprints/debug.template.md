@@ -38,9 +38,17 @@ project_name: "{{PROJECT_NAME}}"
 
 Ketika developer memicu perintah `/debug` atau melaporkan perilaku anomali / error / stack trace:
 
-### 1. 🛑 LARANGAN MUTLAK PATCH PREMATUR (ANTI-PREMATURE PATCHING)
+### 1. 🛑 THE IRON LAW OF DIAGNOSIS (LARANGAN MUTLAK PATCH PREMATUR)
+```text
+NO FIXES WITHOUT COMPLETING SCOPE ➔ TRACE ➔ DIAGNOSE FIRST
+```
 - AI **DILARANG KERAS** langsung mengubah berkas kode atau menyodorkan potongan kode perbaikan di giliran pertama laporan bug.
-- Perbaikan tanpa pemahaman akar masalah adalah bom waktu regresi. AI WAJIB menuntaskan Investigasi Bukti (Fase 1–2) sebelum membahas solusi (Fase 3).
+- Perbaikan tanpa pemahaman akar masalah adalah bom waktu regresi (*Shotgun Debugging*). AI WAJIB menuntaskan Investigasi Bukti (Fase 0–2) sebelum membahas solusi (Fase 3).
+
+### 2. 🔀 DUAL-MODE ROUTING (SINGLE BUG vs FULL MODULE REPAIR)
+Sebelum memulai Fase 0, AI menentukan skala investigasi secara sadar:
+- **Mode Default (`/debug` — Single Bug / Gejala Terisolasi):** Untuk error tunggal, stack trace spesifik, atau anomali 1 fungsi. Langsung jalankan alur 4 Fase di bawah.
+- **Mode Modul (`/debug --module` — Whole Feature/Module Broken):** Aktif jika developer melaporkan *"fitur X rusak total"*, *"modul Y tidak jalan"*, atau banyak bug saling berkaitan. Pada Fase 0, AI **WAJIB** memetakan **Feature Scope Manifest** terlebih dahulu (Primary Path, Entry Points, Internal Files, Total Files) dan membaca seluruh file inti di folder modul tersebut sebelum melompat ke Fase 1.
 
 ---
 
@@ -48,9 +56,10 @@ Ketika developer memicu perintah `/debug` atau melaporkan perilaku anomali / err
 
 AI WAJIB memandu developer melalui 4 fase berikut secara disiplin:
 
-### FASE 0: PENGGALIAN GEJALA & REPRODUKSI (Symptom Capture)
+### FASE 0: PENGGALIAN GEJALA, SCOPE, & REPRODUKSI (Symptom & Scope Capture)
 1. **Analisis Laporan:** Tangkap pesan error literal, kode status HTTP, atau perilaku menyimpang dari ekspektasi bisnis.
-2. **Identifikasi Domain Anomali:**
+2. **Feature Scope Manifest *(Khusus Mode `--module`)*:** Petakan direktori utama, file *entry point* yang diimpor modul lain, serta daftar file internal fitur sebelum mendiagnosis.
+3. **Identifikasi Domain Anomali:**
    - [ ] *Database & Relasi:* Data anomali, skema constraint, foreign key violation, lock timeout.
    - [ ] *Payload & Boundary:* Validasi input, tipe data meleset di perbatasan Client/Server.
    - [ ] *Logika Bisnis & State:* Kondisi `if/else` lolos, mutasi state liar, async race condition.
@@ -59,23 +68,30 @@ AI WAJIB memandu developer melalui 4 fase berikut secara disiplin:
 ### FASE 1: FORMULASI HIPOTESIS BERSPEKTRUM (Hypothesis Generation)
 AI merumuskan **minimal 2 dugaan sementara** yang masuk akal di level arsitektur, BUKAN satu tebakan mutlak.
 
-### FASE 2: INVESTIGASI BUKTI BERBASIS AST & MCP (Evidence Tracing)
+### FASE 2: INVESTIGASI BUKTI BERBASIS AST & PETA DEPENDENSI 2 ARAH (Evidence Tracing)
 AI **WAJIB** membuktikan atau menggugurkan hipotesis menggunakan panca indera fisik:
 1. **[MANDAT AGENT-LSP]:** AI WAJIB menggunakan `callers`, `find_references`, `go_to_definition`, atau `get_diagnostics` untuk menyusuri jejak eksekusi (*call stack tracing*) secara absolut berbasis AST. Dilarang menebak alur fungsi.
-2. **[MANDAT MCP DATABASE]:** Jika bug berkaitan dengan anomali data atau kegagalan relasi, AI WAJIB memeriksa data nyata via tool database (bukan menebak dari model).
-3. **[PENEMUAN SMOKING GUN]:** AI WAJIB menemukan titik tepat di mana asumsi kode runtuh (*The Smoking Gun*), lengkap dengan tautan berkas dan rentang baris kode.
+2. **[BIDIRECTIONAL DEPENDENCY MAP — INBOUND & OUTBOUND]:** Untuk bug lintas file atau Mode `--module`, AI wajib memetakan ketergantungan dua arah sebelum menyentuh kode:
+   - **INBOUND (Yang Diimpor/Dibutuhkan Modul Ini):** File helper/service yang diimpor, variabel environment (`process.env` / `.env`), tabel/schema DB, dan API eksternal. Verifikasi apakah semuanya benar-benar ada dan signature-nya cocok.
+   - **OUTBOUND (Siapa yang Mengimpor Modul Ini):** Seluruh *consumer* (route, komponen, test) di seluruh repo yang memanggil modul ini, agar perbaikan tidak mematahkan kontrak *consumer*.
+3. **[MANDAT MCP DATABASE]:** Jika bug berkaitan dengan anomali data atau kegagalan relasi, AI WAJIB memeriksa data nyata via tool database (bukan menebak dari model).
+4. **[PENEMUAN SMOKING GUN]:** AI WAJIB menemukan titik tepat di mana asumsi kode runtuh (*The Smoking Gun*), lengkap dengan tautan berkas dan rentang baris kode.
 
 ### FASE 3: EVALUASI RADIUS LEDAKAN & SPEKTRUM SOLUSI (Blast-Radius & Trade-Off)
-Sebelum menulis perbaikan, evaluasi apakah perbaikan di titik ini akan merusak modul lain:
+Sebelum menulis perbaikan, evaluasi apakah perbaikan di titik ini akan merusak modul lain (merujuk peta **OUTBOUND** dari Fase 2):
 - Sajikan **Tabel Spektrum Opsi Perbaikan** (Defensive Patch vs Structural Fix).
 - Peringatkan sisi gelap dan risiko regresi dari setiap opsi.
 
-### FASE 4: SIKLUS VERIFIKASI TES REGRESI (Regression TDD Gate)
+### FASE 4: SIKLUS VERIFIKASI TES REGRESI & CIRCUIT BREAKER (Regression TDD Gate)
 Setiap perbaikan bug WAJIB dikunci dengan pengujian otomatis:
 1. Tulis skenario tes otomatis yang meniru persis kondisi pemicu bug.
 2. Pastikan tes tersebut **GAGAL (Red)** pada kode yang bermasalah.
 3. Terapkan perbaikan kode hingga tes menjadi **HIJAU (Green)**.
 4. Pastikan seluruh tes eksisting lainnya tetap lulus 100% (Zero Regression).
+5. **🚨 THE 3-FIX ESCALATION RULE (CIRCUIT BREAKER ANTI-WHACK-A-MOLE):**
+   Jika setelah **3 kali percobaan perbaikan berturut-turut** bug tetap gagal diselesaikan atau setiap perbaikan justru memicu error baru di tempat lain:
+   - AI **WAJIB BERHENTI TOTAL (STOP)** dan dilarang keras mencoba tambalan ke-4 secara membabi-buta!
+   - AI wajib menyampaikan dengan jujur dan ramah kepada developer bahwa gejala ini menandakan **cacat desain/arsitektur yang lebih dalam**, bukan bug sintaks biasa, lalu mengajak developer berdiskusi ulang (atau mundur ke `/plan` / `/grill-me`) sebelum menyentuh kode lagi.
 
 ---
 

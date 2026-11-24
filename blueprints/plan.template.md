@@ -14,6 +14,7 @@ project_name: "{{PROJECT_NAME}}"
 | :--- | :--- | :--- |
 | Perencanaan Fitur (`/plan`) | Dokumen Rencana Permanen | `.docs/plan/issue-<nomor:2digit>-<prefix>-<kebab-case-slug>.md` |
 | Sinkronisasi Scratchpad IDE | Active Working Scratchpad | `implementation_plan.md` (root proyek) |
+| Kontrak API *(Khusus Proyek BE / REST API)* | Spesifikasi Kontrak OpenAPI | `docs/api/openapi.json` |
 
 ## ⚡ PROACTIVE TRIGGERS (EVENT-DRIVEN INVARIANTS)
 ### Lapisan 1: Universal Process Triggers (Statis — Berlaku untuk 100% Tech Stack)
@@ -28,13 +29,14 @@ project_name: "{{PROJECT_NAME}}"
 <!-- GENERATION_DIRECTIVE: PLAN_PROACTIVE_TRIGGERS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 INSTRUKSI UNTUK AI TAHAP 5 (INJEKSI FISIK):
-Sintesis 2-3 Event-Driven Proactive Triggers khusus fase perencanaan (/plan)
+Sintesis 2-4 Event-Driven Proactive Triggers khusus fase perencanaan (/plan)
 sesuai tech stack di `.agents/forge_manifest.json` (format: WHEN ... => ALWAYS ... => BEFORE ...).
-DILARANG memasukkan trigger Database/SQL jika proyek adalah Frontend Statis tanpa DB!
-- Contoh Stack BE/DB:
-  * WHEN merancang endpoint/mutasi baru => ALWAYS tetapkan skema validasi input & status code error => BEFORE mengesahkan plan.
-  * WHEN merancang relasi tabel Foreign Key => ALWAYS tentukan klausul ON DELETE (CASCADE/RESTRICT) => BEFORE menyusun DDL.
-- Contoh Stack FE/UI:
+DILARANG memasukkan trigger Database/SQL atau OpenAPI jika proyek adalah Frontend Statis tanpa DB/API!
+- JIKA PROYEK MEMILIKI DATABASE (SQL/NoSQL/ORM):
+  * WHEN rencana menyentuh pembuatan tabel baru, relasi Foreign Key, index, atau migrasi skema => ALWAYS baca rujukan on-demand `references/database_design_checklist.md` (normalisasi, eksplisit ON DELETE, index, & panduan proporsionalitas RLS/Partial Index/Expand-Contract) => BEFORE menyusun DDL atau langkah migrasi.
+- JIKA PROYEK MEMILIKI BACKEND / REST API:
+  * WHEN merancang endpoint baru atau mengubah payload/response API => ALWAYS tetapkan skema validasi input, status code error, serta draf/perbarui kontrak resmi di `docs/api/openapi.json` (Contract-First) => BEFORE mengesahkan plan.
+- JIKA PROYEK MEMILIKI FRONTEND / UI:
   * WHEN merancang komponen interaktif/halaman baru => ALWAYS tentukan batas hidrasi (Static vs Client Island), Empty/Error State, & kontrak responsivitas mobile/desktop => BEFORE mengesahkan plan.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -->

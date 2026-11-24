@@ -37,9 +37,17 @@ description: >-
 | `references/anti_patterns.md` | `.agents/skills/project-edeate/references/anti_patterns.md` |
 | `grill-me.template.md` | `.agents/skills/project-grill-me/SKILL.md` |
 | `plan.template.md` | `.agents/skills/project-plan/SKILL.md` |
+| `references/database_design_checklist.md` | `.agents/skills/project-plan/references/database_design_checklist.md` *(Khusus Proyek dengan DB)* |
 | `tdd.template.md` | `.agents/skills/project-tdd/SKILL.md` |
 | `execute.template.md` | `.agents/skills/project-execute/SKILL.md` |
 | `audit.template.md` | `.agents/skills/project-audit/SKILL.md` |
+| `references/audit_handoff_package.md` | `.agents/skills/project-audit/references/audit_handoff_package.md` |
+| `references/audit_visual_gate.md` | `.agents/skills/project-audit/references/audit_visual_gate.md` *(Khusus Proyek FE/Fullstack)* |
+| `references/audit_api_checklist.md` | `.agents/skills/project-audit/references/audit_api_checklist.md` *(Khusus Proyek BE/Fullstack)* |
+| `scripts/classify_blast_radius.py` | `.agents/skills/project-audit/scripts/classify_blast_radius.py` |
+| `scripts/api_linter.py` | `.agents/skills/project-audit/scripts/api_linter.py` *(Khusus Proyek BE/Fullstack)* |
+| `scripts/breaking_change_detector.py` | `.agents/skills/project-audit/scripts/breaking_change_detector.py` *(Khusus Proyek BE/Fullstack)* |
+| `scripts/api_scorecard.py` | `.agents/skills/project-audit/scripts/api_scorecard.py` *(Khusus Proyek BE/Fullstack)* |
 | `debug.template.md` | `.agents/skills/project-debug/SKILL.md` |
 | `epic_persistence.template.md` | `.agents/skills/project-epic-persistence/SKILL.md` |
 
