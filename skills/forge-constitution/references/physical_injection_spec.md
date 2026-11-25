@@ -12,7 +12,7 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   Format wajib `.agents/forge_manifest.json`:
   ```json
   {
-    "forge_version": "1.2.0",
+    "forge_version": "2.0.0",
     "forged_at": "YYYY-MM-DD",
     "project_name": "{{PROJECT_NAME}}",
     "dna": {
@@ -104,24 +104,25 @@ Jika otorisasi Tahap 4.4 diberikan, AI bertransformasi menjadi "Injector".
   1. Cetak `DEVELOPMENT_ROADMAP.md` (di *root* proyek). Tunggu izin.
   2. Cetak `.agents/rules/00-router.md` (Router Induk Penangkal Attention Dilution). Tunggu izin.
   3. Cetak `.agents/rules/MASTER_RULES.md`. Tunggu izin.
+  3b. Cetak `.agents/rules/PERSONA_MENTOR.md` (Identitas Jiwa *Kakak Tingkat Senior* — *WHO*, Always-On dari `blueprints/persona_mentor.template.md`). Tunggu izin.
   4. Cetak `.agents/rules/META_RULES.md` (Kendali Kognitif & Protokol Tool-First). Tunggu izin.
   5. Cetak `.agents/rules/ARCHITECTURE.md`. Tunggu izin.
   5b. *(Khusus Proyek FE / Fullstack; lewati untuk proyek Pure Backend)* Cetak `.agents/rules/DESIGN.md` (Konstitusi Visual 7 Pilar Draft v0 dari `blueprints/design.template.md` — dikalibrasi final di Epik 0). Tunggu izin.
   6. Cetak `.agents/rules/GIT_WORKFLOW.md`. Tunggu izin.
   7. Cetak `.agents/mcp_config.json`. Tunggu izin.
-  8. Cetak `ONBOARDING.md` (di *root* proyek — wajib memuat verifikasi Python 3.8+ stdlib di semua proyek). Tunggu izin.
-  9. Cetak file `.agents/skills/project-edeate/SKILL.md` beserta 3 berkas rujukan on-demand (salin utuh dari `blueprints/references/` ke `.agents/skills/project-edeate/references/`: `dual_track_protocol.md`, `ticket_variants.md`, `anti_patterns.md`). Tunggu izin.
-  10. Cetak file `.agents/skills/project-grill-me/SKILL.md`. Tunggu izin.
-  11. Cetak file `.agents/skills/project-plan/SKILL.md` *(Khusus proyek yang memiliki Database: salin utuh `blueprints/references/database_design_checklist.md` ke `.agents/skills/project-plan/references/database_design_checklist.md`; lewati untuk proyek Frontend statis tanpa DB)*. Tunggu izin.
+  8. Cetak `ONBOARDING.md` (di *root* proyek — wajib memuat verifikasi Python 3.8+ stdlib & catatan literasi *Adversarial Reviewer Sub-Agent* di semua proyek). Tunggu izin.
+  9. Cetak file `.agents/skills/project-edeate/SKILL.md` beserta 3 berkas rujukan on-demand (salin bit-for-bit via `copy_static_assets.py`: `dual_track_protocol.md`, `ticket_variants.md`, `anti_patterns.md`). Tunggu izin.
+  10. Cetak file `.agents/skills/project-grill-me/SKILL.md` beserta rujukan on-demand `references/grill_cards_and_guards.md` (disalin bit-for-bit via `copy_static_assets.py`). Tunggu izin.
+  11. Cetak file `.agents/skills/project-plan/SKILL.md` beserta rujukan on-demand `references/adversarial_review_lens.md` (semua proyek) *(dan khusus proyek dengan Database: `references/database_design_checklist.md`; seluruhnya disalin via `copy_static_assets.py`)*. Tunggu izin.
   12. Cetak file `.agents/skills/project-tdd/SKILL.md`. Tunggu izin.
   13. Cetak file `.agents/skills/project-execute/SKILL.md`. Tunggu izin.
-  14. Cetak file `.agents/skills/project-audit/SKILL.md` beserta skrip & rujukan kondisionalnya:
-      - **Wajib di Semua Proyek:** Salin `skills/forge-constitution/scripts/classify_blast_radius.py` ke `.agents/skills/project-audit/scripts/classify_blast_radius.py` dan salin utuh `blueprints/references/audit_handoff_package.md` ke `.agents/skills/project-audit/references/audit_handoff_package.md`.
-      - **Khusus Proyek FE / Fullstack:** Salin utuh `blueprints/references/audit_visual_gate.md` ke `.agents/skills/project-audit/references/audit_visual_gate.md` serta 2 skrip QA UI (`finish_lint.py`, `state_matrix_checker.py`) ke `.agents/skills/project-audit/scripts/`.
-      - **Khusus Proyek BE / Fullstack:** Salin utuh `blueprints/references/audit_api_checklist.md` ke `.agents/skills/project-audit/references/audit_api_checklist.md` serta 3 skrip OpenAPI (`api_linter.py`, `breaking_change_detector.py`, `api_scorecard.py`) dari `skills/forge-constitution/scripts/` ke `.agents/skills/project-audit/scripts/`.
+  14. Cetak file `.agents/skills/project-audit/SKILL.md` beserta skrip & rujukan kondisionalnya (seluruhnya disalin bit-for-bit via `copy_static_assets.py`):
+      - **Wajib di Semua Proyek:** `scripts/classify_blast_radius.py`, `references/audit_handoff_package.md`, dan `references/adversarial_review_lens.md`.
+      - **Khusus Proyek FE / Fullstack:** `references/audit_visual_gate.md` serta 2 skrip QA UI (`finish_lint.py`, `state_matrix_checker.py`).
+      - **Khusus Proyek BE / Fullstack:** `references/audit_api_checklist.md` serta 3 skrip OpenAPI (`api_linter.py`, `breaking_change_detector.py`, `api_scorecard.py`).
       Tunggu izin.
   15. Cetak file `.agents/skills/project-debug/SKILL.md`. Tunggu izin.
   16. Cetak file `.agents/skills/project-epic-persistence/SKILL.md`. Tunggu izin.
   17. Cetak file `.agents/skills/project-explore/SKILL.md` (Gerbang Tur Pedagogi Codebase 1x di hari pertama). Tunggu izin.
-  18. Cetak file `.agents/skills/project-ship/SKILL.md` beserta salinan skrip `skills/forge-constitution/scripts/changelog_generator.py` ke `.agents/skills/project-ship/scripts/changelog_generator.py` (Gerbang Kesiapan Rilis & Demo UAS). Tunggu izin.
-  19. *(Khusus Proyek FE / Fullstack; lewati untuk proyek Pure Backend)* Cetak file `.agents/skills/project-prototype/SKILL.md` beserta rujukan `blueprints/references/anti_slop_design_guide.md` ke `.agents/skills/project-prototype/references/anti_slop_design_guide.md` dan 3 skrip UI (`design_token_generator.py`, `finish_lint.py`, `state_matrix_checker.py`) ke `.agents/skills/project-prototype/scripts/`. Tunggu izin.
+  18. Cetak file `.agents/skills/project-ship/SKILL.md` beserta salinan skrip `scripts/changelog_generator.py` via `copy_static_assets.py` (Gerbang Kesiapan Rilis & Demo UAS). Tunggu izin.
+  19. *(Khusus Proyek FE / Fullstack; lewati untuk proyek Pure Backend)* Cetak file `.agents/skills/project-prototype/SKILL.md` beserta rujukan `references/anti_slop_design_guide.md`, 3 berkas upstream lossless (`references/upstream/*`), dan 3 skrip UI (`design_token_generator.py`, `finish_lint.py`, `state_matrix_checker.py`) via `copy_static_assets.py`. Tunggu izin.

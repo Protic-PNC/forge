@@ -41,6 +41,7 @@ sesuai tech stack di `.agents/forge_manifest.json` (format: WHEN ... => ALWAYS .
 > 📚 **REFERENSI ON-DEMAND (WAJIB BACA SAAT RELEVAN):**
 > - **Detail Tri-Track Routing, 4 Pilar Visual Playwright, Fallback, & Pelaporan Tier 4:** `references/audit_visual_gate.md` *(WAJIB dibaca saat tiket menyentuh Jalur 2 atau Jalur 3 UI).*
 > - **Gerbang Audit OpenAPI & 3 Skrip Python REST API:** `references/audit_api_checklist.md` *(WAJIB dibaca khusus proyek Backend / Fullstack yang menyentuh endpoint API).*
+> - **Adversarial Review 3-Lensa (Sub-Agent Read-Only + Translasi Mentor):** `references/adversarial_review_lens.md` *(WAJIB dijalankan secara selektif saat tiket menyentuh Risiko Medium/High — Auth, DB Mutation, API/Payment, State Kompleks, Blast Radius $\ge 4$ berkas — atau dipicu `--adversarial` untuk memecah Self-Review Trap sebelum PR).*
 > - **Format Lengkap Handoff Package & Draf PR (`Closes #<id>`, MCP GitHub PR):** `references/audit_handoff_package.md` *(WAJIB dibaca sebelum merender Bagian 3 laporan audit).*
 
 ---
@@ -62,6 +63,7 @@ Saat perintah `/audit` dikirim:
    - **Tier 3 (Production Bundler Sanity):** Build produksi (`npm run build` / `vite build` / `astro check`) tuntas dengan Exit Code 0 tanpa broken imports.
    - **Tier 4 (Visual Smoke & Runtime Actionability Gate via Playwright MCP):** Ikuti 4 Pilar & Protokol Graceful Degradation di `references/audit_visual_gate.md`.
    - **Gerbang OpenAPI Deterministik *(Khusus Proyek BE / Fullstack)*:** Jalankan 3 skrip OpenAPI (`api_linter.py`, `api_scorecard.py --min-grade B`, `breaking_change_detector.py` vs baseline `main`) sesuai `references/audit_api_checklist.md`.
+   - **Adversarial Review Gate *(Selektif — Risiko Medium/High atau `--adversarial`)*:** Baca `references/adversarial_review_lens.md` dan jalankan review 3 lensa (*Saboteur*, *New Hire*, *Security Auditor*) melalui Sub-Agent Read-Only (`invoke_subagent(TypeName="research")`, dengan *Graceful Fallback* sekuensial di IDE tanpa sub-agent) terhadap berkas terdampak utuh, lalu sajikan temuannya melalui **Filter Translasi Mentor** (`🟢/🟡/🔴`). Bypass otomatis untuk perubahan kosmetik/ringan.
 4. **Poin Evaluasi Kritis:**
    <!-- GENERATION_DIRECTIVE: AUDIT_EVALUATION_POINTS
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

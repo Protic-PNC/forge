@@ -9,11 +9,12 @@ project_name: "{{PROJECT_NAME}}"
 Dokumen ini adalah hukum utama sistem bagi Agen AI di repositori ini. AI wajib mematuhi seluruh aturan di bawah ini secara pasif dan aktif pada setiap sesi percakapan.
 
 Dokumen Konstitusi Resmi yang saling mengikat:
-1. `.agents/rules/MASTER_RULES.md` (Hukum Arsitektur, Gating System, & Output Format)
-2. `.agents/rules/ARCHITECTURE.md` (Fakta DNA & Keputusan Arsitektur Kunci)
-3. `.agents/rules/GIT_WORKFLOW.md` (Hukum Version Control, Branch Isolasi, & SOP Kolaborasi Tim)
-4. `.agents/rules/META_RULES.md` (Kendali Kognitif, State-Machine Deterministik, & Tool-First Audit)
-5. `.agents/rules/DESIGN.md` *(Khusus Proyek FE / Fullstack — Konstitusi Visual 7 Pilar & DDR Log)*
+1. `.agents/rules/MASTER_RULES.md` (Hukum Arsitektur, Gating System, & Output Format — *HOW*)
+2. `.agents/rules/PERSONA_MENTOR.md` (Identitas Jiwa *Kakak Tingkat Senior*, 8 Hukum Pedagogi, & Kode Etik Mentor — *WHO*, Always-On)
+3. `.agents/rules/ARCHITECTURE.md` (Fakta DNA & Keputusan Arsitektur Kunci)
+4. `.agents/rules/GIT_WORKFLOW.md` (Hukum Version Control, Branch Isolasi, & SOP Kolaborasi Tim)
+5. `.agents/rules/META_RULES.md` (Kendali Kognitif, State-Machine Deterministik, & Tool-First Audit)
+6. `.agents/rules/DESIGN.md` *(Khusus Proyek FE / Fullstack — Konstitusi Visual 7 Pilar & DDR Log)*
 
 ---
 

@@ -28,6 +28,7 @@ description: >-
 |:---|:---|
 | `00-router.template.md` | `.agents/rules/00-router.md` |
 | `master_rules.template.md` | `.agents/rules/MASTER_RULES.md` |
+| `persona_mentor.template.md` | `.agents/rules/PERSONA_MENTOR.md` |
 | `meta_rules.template.md` | `.agents/rules/META_RULES.md` |
 | `architecture.template.md` | `.agents/rules/ARCHITECTURE.md` |
 | `design.template.md` | `.agents/rules/DESIGN.md` *(Khusus Proyek FE/Fullstack)* |
@@ -37,7 +38,9 @@ description: >-
 | `references/ticket_variants.md` | `.agents/skills/project-edeate/references/ticket_variants.md` |
 | `references/anti_patterns.md` | `.agents/skills/project-edeate/references/anti_patterns.md` |
 | `grill-me.template.md` | `.agents/skills/project-grill-me/SKILL.md` |
+| `references/grill_cards_and_guards.md` | `.agents/skills/project-grill-me/references/grill_cards_and_guards.md` |
 | `plan.template.md` | `.agents/skills/project-plan/SKILL.md` |
+| `references/adversarial_review_lens.md` | `.agents/skills/project-plan/references/adversarial_review_lens.md` & `.agents/skills/project-audit/references/adversarial_review_lens.md` |
 | `references/database_design_checklist.md` | `.agents/skills/project-plan/references/database_design_checklist.md` *(Khusus Proyek dengan DB)* |
 | `prototype.template.md` | `.agents/skills/project-prototype/SKILL.md` *(Khusus Proyek FE/Fullstack)* |
 | `references/anti_slop_design_guide.md` | `.agents/skills/project-prototype/references/anti_slop_design_guide.md` *(Khusus Proyek FE/Fullstack)* |

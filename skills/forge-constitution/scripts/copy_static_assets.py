@@ -36,11 +36,16 @@ ASSET_MANIFEST = [
     ("blueprints/references/ticket_variants.md", ".agents/skills/project-edeate/references/ticket_variants.md", "all"),
     ("blueprints/references/anti_patterns.md", ".agents/skills/project-edeate/references/anti_patterns.md", "all"),
 
-    # /plan references (Khusus proyek dengan DB)
+    # /grill-me references (Wajib semua proyek)
+    ("blueprints/references/grill_cards_and_guards.md", ".agents/skills/project-grill-me/references/grill_cards_and_guards.md", "all"),
+
+    # /plan references
+    ("blueprints/references/adversarial_review_lens.md", ".agents/skills/project-plan/references/adversarial_review_lens.md", "all"),
     ("blueprints/references/database_design_checklist.md", ".agents/skills/project-plan/references/database_design_checklist.md", "db"),
 
     # /audit references & scripts (Wajib semua proyek)
     ("blueprints/references/audit_handoff_package.md", ".agents/skills/project-audit/references/audit_handoff_package.md", "all"),
+    ("blueprints/references/adversarial_review_lens.md", ".agents/skills/project-audit/references/adversarial_review_lens.md", "all"),
     ("skills/forge-constitution/scripts/classify_blast_radius.py", ".agents/skills/project-audit/scripts/classify_blast_radius.py", "all"),
 
     # /audit FE/Fullstack assets

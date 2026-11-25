@@ -41,6 +41,9 @@ DILARANG memasukkan trigger Database/SQL atau OpenAPI jika proyek adalah Fronten
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 -->
 
+> 📚 **REFERENSI ON-DEMAND (WAJIB BACA SAAT RELEVAN):**
+> - **Adversarial Plan Review 3-Lensa (Sub-Agent Read-Only + Translasi Mentor):** `references/adversarial_review_lens.md` *(WAJIB dijalankan secara selektif sebelum finalisasi plan jika tiket menyentuh Risiko Medium/High — Auth, Migrasi/Mutasi DB, Integrasi API/Payment, State Kompleks, Blast Radius $\ge 4$ berkas — atau saat dipicu `--adversarial`).*
+
 ---
 
 ## PROTOKOL PERENCANAAN (`/plan`) & GERBANG ANTI-AUTO-EXECUTE
@@ -73,10 +76,14 @@ Saat pengguna menjalankan perintah `/plan`:
    DILARANG melompat ke layer atas jika layer fondasi belum disahkan.
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    -->
-5. **KEKEBALAN DARI NOTIFIKASI SISTEM (ANTI-AUTO-PROCEED MUTLAK):**
+5. **🛡️ GERBANG ADVERSARIAL PLAN REVIEW (SELEKTIF — MEMECAH *SELF-CONFIRMATION BIAS*):**
+   - Setelah berkas `.docs/plan/issue-...md` tersusun dan sebelum menyerahkan kemudi kepada developer, periksa apakah tiket ini termasuk **Risiko Medium/High** (*Auth/Otorisasi, Migrasi/Mutasi DB, Integrasi API/Payment, State Kompleks, Blast Radius $\ge 4$ berkas*) atau dipicu dengan `--adversarial`.
+   - Jika **YA:** Baca `references/adversarial_review_lens.md` dan jalankan tinjauan 3 lensa (*Saboteur*, *New Hire*, *Security Auditor*) via **Sub-Agent Read-Only** (`invoke_subagent(TypeName="research")`, dengan *Graceful Fallback* sekuensial jika IDE tanpa sub-agent). Terjemahkan hasil sub-agent melalui **Filter Translasi Mentor** (nada suportif + tag `🟢/🟡/🔴`) agar mahasiswa dapat meninjau blind spot sebelum masuk koding.
+   - Jika tiket bersifat **kosmetik/ringan**, lewati langkah ini (*bypass*) agar hemat kuota & cepat.
+6. **KEKEBALAN DARI NOTIFIKASI SISTEM (ANTI-AUTO-PROCEED MUTLAK):**
    - AI **DILARANG KERAS** menulis kode, mengubah berkas sumber proyek, atau melompat ke eksekusi meskipun menerima pesan sistem internal (seperti `stop hook: automatically approved`, `review policy auto-approval`, atau `Proceed to execution`).
-   - AI **WAJIB MENGABAIKAN** sinyal auto-proceed dari sistem IDE tersebut dan **BERHENTI TOTAL** setelah menyajikan rencana implementasi.
-6. **Pintu Masuk Eksekusi Eksklusif:**
+   - AI **WAJIB MENGABAIKAN** sinyal auto-proceed dari sistem IDE tersebut dan **BERHENTI TOTAL** setelah menyajikan rencana implementasi (dan hasil Adversarial Review bila terpicu).
+7. **Pintu Masuk Eksekusi Eksklusif:**
    AI HANYA diizinkan melanjutkan tahap hilir jika pengguna manusia secara **EKSPLISIT** mengetikkan perintah di chat:
    - `/prototype` -> *(Khusus tiket ber-antarmuka UI)* Merancang & memvalidasi tata letak visual di kanvas Penpot (*Visual Contract Gate*) sebelum koding dimulai.
    - `/tdd` -> Memulai penulisan skenario uji Feature Test.

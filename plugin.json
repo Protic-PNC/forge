@@ -1,12 +1,51 @@
 {
   "name": "forge-constitution",
   "description": "Enterprise Constitution Scaffolder Plugin",
-  "version": "1.3.6",
+  "version": "2.0.0",
   "skills": [
     "forge-constitution",
     "forge-update"
   ],
   "releases": {
+    "2.0.0": {
+      "updated_blueprints": [
+        "00-router.template.md",
+        "master_rules.template.md",
+        "persona_mentor.template.md",
+        "meta_rules.template.md",
+        "design.template.md",
+        "edeate.template.md",
+        "references/dual_track_protocol.md",
+        "references/ticket_variants.md",
+        "references/anti_patterns.md",
+        "grill-me.template.md",
+        "references/grill_cards_and_guards.md",
+        "plan.template.md",
+        "references/database_design_checklist.md",
+        "references/adversarial_review_lens.md",
+        "prototype.template.md",
+        "references/anti_slop_design_guide.md",
+        "references/upstream/*",
+        "scripts/design_token_generator.py",
+        "scripts/finish_lint.py",
+        "scripts/state_matrix_checker.py",
+        "tdd.template.md",
+        "execute.template.md",
+        "audit.template.md",
+        "references/audit_handoff_package.md",
+        "references/audit_visual_gate.md",
+        "references/audit_api_checklist.md",
+        "scripts/classify_blast_radius.py",
+        "scripts/api_linter.py",
+        "scripts/breaking_change_detector.py",
+        "scripts/api_scorecard.py",
+        "debug.template.md",
+        "explore.template.md",
+        "ship.template.md",
+        "scripts/changelog_generator.py"
+      ],
+      "summary": "Rilis Mayor FORGE v2.0.0 (Asimilasi Enterprise 4 Tahap — 100% Lossless & Stack-Aware): (1) Fondasi Modular & Deterministik — memecah monolit /edeate, /audit, /grill-me, dan /forge-constitution secara 100% verbatim ke references/ on-demand, menanamkan Hukum 7 (Bottom Line First) & Hukum 8 (Confidence Tagging 🟢/🟡/🔴), OUTPUT ARTIFACTS MAPPING, 2-Layer Hybrid Proactive Triggers bebas bias stack, serta skrip pure-stdlib Python (0 pip install) termasuk copy_static_assets.py berverifikasi SHA-256 & validate_manifest.py; (2) Perkakas 5 Stasiun — Silent Inspection ARCHITECTURE.md + ADR Log di /edeate, Checklist Database 2-Tier di /plan, OpenAPI Contract Governance (api_linter, api_scorecard, breaking_change_detector) di /plan-/execute-/audit, Tier 0 Forensics Anti-Stale/Anti-Pipe di /audit, serta The Iron Law of Diagnosis & 3-Fix Escalation Rule di /debug; (3) Ekspansi 3 Gerbang Baru & Epik 0 Bootstrap — /explore (Tur Pedagogi 4-Lapis Active Recall read-only), /ship (Release Hygiene, changelog_generator.py, Demo UAS Cheat Sheet), /prototype (Penpot MCP + Visual Contract Gate + 3 referensi upstream raw lossless Bahasa Inggris + finish_lint & state_matrix_checker), Konstitusi Visual 7 Pilar .agents/rules/DESIGN.md + DDR Log, serta Epik 0 Pra-Sprint Bootstrap (bypass SOP) & prasyarat Python 3.8+ di ONBOARDING.md; (4) Modularitas Persona WHO vs HOW & Multi-Agent — pemisahan 100% verbatim Pasal 6 ke .agents/rules/PERSONA_MENTOR.md (Always-On terlindungi saat /forge-update), injeksi selektif Adversarial Review 3-Lensa (Sub-Agent Read-Only + Filter Translasi Mentor + Graceful Fallback) di /plan & /audit, serta Ringkasan Handoff Sesi Padat di /audit."
+    },
     "1.3.6": {
       "updated_blueprints": [
         "audit.template.md",
